@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentacion.login">
+    tools:context=".presentacion.NuevoUsuarioActivity">
 
     <LinearLayout
-        android:layout_width="400dp"
-        android:layout_height="581dp"
+        android:layout_width="375dp"
+        android:layout_height="441dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -18,51 +18,55 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.313">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/action_sign_in_short"
-            android:textSize="30sp"
+            android:layout_margin="10px"
+            android:hint="@string/txtCreaTuCuenta"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
         <EditText
             android:id="@+id/txtEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10px"
             android:ems="10"
-            android:hint="@string/prompt_email"
+            android:hint="@string/txtEmail"
             android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/txtContraseña"
+            android:id="@+id/txtPass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10px"
             android:ems="10"
-            android:hint="@string/prompt_password"
+            android:hint="@string/txtContraseña"
             android:inputType="textPersonName" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/button"
             android:layout_width="match_parent"
-            android:layout_height="66dp"
-            android:hint="@string/action_sign_in_short" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="58dp"
             android:layout_height="wrap_content"
-            android:text="o" />
+            android:layout_margin="10px"
+            android:text="@string/txtContinuar" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:background="?android:attr/listDivider" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/button2"
             android:layout_width="match_parent"
-            android:layout_height="66dp"
-            android:hint="@string/action_sing_in_new"
-            android:onClick="crearNuevaCuenta" />
-
+            android:layout_height="wrap_content"
+            tools:text="@string/txtIniciarSesion" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
