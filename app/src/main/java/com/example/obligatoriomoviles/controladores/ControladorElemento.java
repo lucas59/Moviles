@@ -2,13 +2,13 @@ package com.example.obligatoriomoviles.controladores;
 
 import com.example.obligatoriomoviles.interfaces.IElemento;
 
-public class ControladorElemento implements IElemento {
+public class ControladorElemento{
     private static final ControladorElemento ourInstance = new ControladorElemento();
 
     public static ControladorElemento getInstance() {
         return ourInstance;
     }
 
-    private ControladorElemento() {
+    public ControladorElemento() {
     }
 }

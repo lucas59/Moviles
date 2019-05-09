@@ -19,8 +19,9 @@ public class fabrica {
         IUsuario controladorUsuario = ControladorUsuario.getInstance();
         return controladorUsuario;
     }
-    public IElemento getElemento_Interface(){
-        IElemento controladorElemento = ControladorElemento.getInstance();
-        return controladorElemento;
+    public IElemento getElemento_Interface() {
+        // IElemento controladorElemento = ControladorElemento.getInstance();
+    // return controladorElemento;
+        return null;
     }
 }
