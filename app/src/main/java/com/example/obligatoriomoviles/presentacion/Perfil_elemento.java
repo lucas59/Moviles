@@ -30,12 +30,15 @@ public class Perfil_elemento extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_elemento);
-        APIInterface apiService = APICliente.getClient().create(APIInterface.class);
-        Call<Peliculas> call = apiService.getImagen("tt4154796","0d81ceeb977ab515fd9f844377688c5a");
+        //Llamado de la API para que retorne el json de la consulta
+        APIInterface apiService = APICliente.getPelicula().create(APIInterface.class);
+        Call<Peliculas> call = apiService.getPelicula(getIntent().getExtras().getString("id"),"0d81ceeb977ab515fd9f844377688c5a");
+        //Menu
         BottomNavigationView navigationView = (BottomNavigationView) findViewById(R.id.nav_view);
+        //Setear el focus a la opcion correspondiente (del 0 al numero de botones)
         navigationView.getMenu().getItem(1).setChecked(true);
+        //setear el menu de navegación de abajo
         BottomNavigationView navView = findViewById(R.id.nav_view);
-        navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         call.enqueue(new Callback<Peliculas>() {
             @Override
             public void onResponse(Call<Peliculas> call, Response<Peliculas> response) {
@@ -46,7 +49,6 @@ public class Perfil_elemento extends AppCompatActivity {
                             .subtype()
                             .equals("json")) {
                         APIError apiError = APIError.fromResponseBody(response.errorBody());
-
                         error = apiError.getMessage();
                         Log.d("LoginActivity", apiError.getDeveloperMessage());
                     } else {
@@ -62,15 +64,16 @@ public class Perfil_elemento extends AppCompatActivity {
                     return;
                 }
 
-                String fondo;
-                String poster;
-                fondo = "https://image.tmdb.org/t/p/w500" + response.body().getBackdrop_path();
-                poster = "https://image.tmdb.org/t/p/w500" + response.body().getPoster_path();
 
+                //Setear fondo y poster del elemento
+                String fondo = "https://image.tmdb.org/t/p/w500" + response.body().getBackdrop_path();
+                String poster = "https://image.tmdb.org/t/p/w500" + response.body().getPoster_path();
 
+                //traer el ImageView y el textview del layout
                  ImageView fondo_view = (ImageView) findViewById(R.id.imagen_fondo);
                  ImageView poster_view = (ImageView) findViewById(R.id.imagen_poster);
                 TextView titulo = (TextView) findViewById(R.id.titulo);
+                //Setear información en los elementos
                 titulo.setText(response.body().getOriginal_title());
                 Picasso.get().load(fondo).fit().centerCrop().into(fondo_view);
                 Picasso.get().load(poster).into(poster_view);

@@ -28,10 +28,12 @@ public class Menu_principal extends AppCompatActivity {
                     startActivity(i);
                     return true;
                 case R.id.navigation_buscar:
-                   i = new Intent(Menu_principal.this, Perfil_elemento.class);
-                    startActivity(i);
+              //     i = new Intent(Menu_principal.this, Perfil_elemento.class);
+               //     startActivity(i);
                     return true;
                 case R.id.navigation_perfil:
+                    i = new Intent(Menu_principal.this, Calendario_elementos.class);
+                    startActivity(i);
                     return true;
                 case R.id.navigation_sesion:
                     i = new Intent(Menu_principal.this, login.class);
@@ -41,6 +43,7 @@ public class Menu_principal extends AppCompatActivity {
                     i = new Intent(Menu_principal.this, NuevoUsuarioActivity.class);
                     startActivity(i);
                     return true;
+
             }
             return false;
         }
