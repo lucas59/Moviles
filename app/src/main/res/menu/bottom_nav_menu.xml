@@ -12,7 +12,7 @@
     <item
         android:id="@+id/navigation_perfil"
         android:icon="@drawable/ic_perfil"
-        android:title="@string/title_notifications" />
+        android:title="@string/title_calendario" />
     <item
         android:id="@+id/navigation_sesion"
         android:icon="@drawable/ic_perfil"
