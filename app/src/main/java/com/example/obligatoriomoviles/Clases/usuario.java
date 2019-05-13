@@ -2,6 +2,8 @@ package com.example.obligatoriomoviles.Clases;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class usuario {
 
     @SerializedName("id")
@@ -18,6 +20,9 @@ public class usuario {
 
     @SerializedName("edad")
     private int edad;
+
+    @SerializedName("notificaciones")
+    private List<Notificaciones> notificaciones;
 
     @SerializedName("contrasenia")
     private String contrasenia;
@@ -68,5 +73,13 @@ public class usuario {
 
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
+    }
+
+    public List<Notificaciones> getNotificaciones() {
+        return notificaciones;
+    }
+
+    public void setNotificaciones(List<Notificaciones> notificaciones) {
+        this.notificaciones = notificaciones;
     }
 }

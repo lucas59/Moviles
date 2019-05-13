@@ -1,11 +1,16 @@
 package com.example.obligatoriomoviles.Clases;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
 public class Notificaciones {
 
+    @SerializedName("fechaN")
     private Date fechaN;
+    @SerializedName("asunto")
     private String asunto;
+    @SerializedName("direccion")
     private String direccion;
 
 
