@@ -1,9 +1,11 @@
 package com.example.obligatoriomoviles.API;
 
 import com.example.obligatoriomoviles.Clases.Peliculas;
+import com.example.obligatoriomoviles.Clases.usuario;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -13,6 +15,10 @@ public interface APIInterface {
 
     @GET("{id}")
     Call<Peliculas> getPelicula(@Path("id") String id,@Query("api_key") String api_key);
+
+    @POST('')
+    Call <> getUsuario(@Path("correo") String correo);
+
 
 
 }
