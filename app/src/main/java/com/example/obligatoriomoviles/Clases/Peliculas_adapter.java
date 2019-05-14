@@ -54,6 +54,7 @@ public class Peliculas_adapter extends RecyclerView.Adapter<Peliculas_adapter.Pr
         holder.textViewTitulo.setText(product.getOriginal_title());
         holder.textViewPuntaje.setText(product.getNota());
         holder.textViewID.setText(product.getId());
+
         Picasso.get().load(fondo).fit().centerCrop().into(holder.imageView);
 
     }
@@ -78,7 +79,7 @@ public class Peliculas_adapter extends RecyclerView.Adapter<Peliculas_adapter.Pr
 
     class ProductViewHolder extends RecyclerView.ViewHolder {
 
-        TextView textViewTitulo, textViewPuntaje, textViewID;
+        TextView textViewTitulo, textViewPuntaje, textViewID, textViewFecha;
         ImageView imageView;
 
         public ProductViewHolder(View itemView) {
@@ -87,6 +88,7 @@ public class Peliculas_adapter extends RecyclerView.Adapter<Peliculas_adapter.Pr
             textViewPuntaje = itemView.findViewById(R.id.Puntaje);
             imageView = itemView.findViewById(R.id.Poster);
             textViewID = itemView.findViewById(R.id.id);
+            textViewID.setVisibility(View.INVISIBLE);
         }
     }
 }

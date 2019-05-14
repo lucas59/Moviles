@@ -24,6 +24,18 @@ public class Peliculas {
     @SerializedName("id")
     private String id;
 
+
+    public String getProfile_path() {
+        return profile_path;
+    }
+
+    @SerializedName("profile_path")
+    private String profile_path;
+
+    private List<usuario> seguidores;
+
+
+
     public String getSinopsis() {
         return sinopsis;
     }
@@ -64,5 +76,31 @@ public class Peliculas {
 
     public String getId() {
         return id;
+    }
+
+    public class Actores{
+        public class Actores_info{
+            @SerializedName("results")
+            private List<Peliculas> lista_elementos;
+            @SerializedName("name")
+            private String nombre;
+
+            public List<Peliculas> getLista_elementos() {
+                return lista_elementos;
+            }
+
+            public String getNombre() {
+                return nombre;
+            }
+
+            public String getPerfil() {
+                return perfil;
+            }
+
+            @SerializedName("profile_path")
+            private String perfil;
+
+
+        }
     }
 }
