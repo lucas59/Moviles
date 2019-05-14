@@ -16,8 +16,8 @@ public interface APIInterface {
     @GET("{id}")
     Call<Peliculas> getPelicula(@Path("id") String id,@Query("api_key") String api_key);
 
-    @POST('')
-    Call <> getUsuario(@Path("correo") String correo);
+    @POST("/Usuario/nuevo")
+    Call <Boolean> getUsuario(@Path("correo") String correo,@Path("pass") String pass);
 
 
 
