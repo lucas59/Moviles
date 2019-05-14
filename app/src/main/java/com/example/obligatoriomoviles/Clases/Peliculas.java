@@ -24,6 +24,8 @@ public class Peliculas {
     @SerializedName("id")
     private String id;
 
+    private List<usuario> seguidores;
+
     public String getSinopsis() {
         return sinopsis;
     }

@@ -1,6 +1,6 @@
 package com.example.obligatoriomoviles.controladores;
 
-import com.example.obligatoriomoviles.interfaces.IElemento;
+import com.example.obligatoriomoviles.Clases.Peliculas;
 
 public class ControladorElemento{
     private static final ControladorElemento ourInstance = new ControladorElemento();
@@ -10,5 +10,10 @@ public class ControladorElemento{
     }
 
     public ControladorElemento() {
+    }
+       
+    public void enviarNotificaciones(Peliculas pelicula) {
+
+
     }
 }
