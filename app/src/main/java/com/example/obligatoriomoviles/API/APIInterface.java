@@ -14,10 +14,10 @@ public interface APIInterface {
     Call<Peliculas> getImagen(@Query("sort_by") String sort_by,@Query("year") Integer año,@Query("language") String lenguaje,@Query("api_key") String key);
 
     @GET("{id}")
-    Call<Peliculas> getPelicula(@Path("id") String id,@Query("api_key") String api_key);
+    Call<Peliculas> getPelicula(@Path("id") String id,@Query("api_key") String api_key,@Query("append_to_response") String filtro,@Query("language") String idioma);
 
-    @POST('')
-    Call <> getUsuario(@Path("correo") String correo);
+   // @POST('')
+  //  Call <> getUsuario(@Path("correo") String correo);
 
 
 
