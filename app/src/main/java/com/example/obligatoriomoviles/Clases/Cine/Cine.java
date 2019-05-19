@@ -1,11 +1,13 @@
-package com.example.obligatoriomoviles.Clases;
+package com.example.obligatoriomoviles.Clases.Cine;
 
 
+import com.example.obligatoriomoviles.Clases.usuario;
+import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Peliculas {
+public class Cine {
 
     @SerializedName("original_title")
     private String original_title;
@@ -14,7 +16,7 @@ public class Peliculas {
     @SerializedName("poster_path")
     private String poster_path;
     @SerializedName("results")
-    private List<Peliculas> lista_elementos;
+    private List<Cine> lista_elementos;
     @SerializedName("vote_average")
     private String nota;
     @SerializedName("overview")
@@ -23,14 +25,27 @@ public class Peliculas {
     private String fecha;
     @SerializedName("id")
     private String id;
+    @SerializedName("credits")
+    private JsonObject creditos;
+    @SerializedName("profile_path")
+    private String profile_path;
+
+    public JsonObject getCreditos() {
+        return creditos;
+    }
+
+    public void setCreditos(JsonObject creditos) {
+        this.creditos = creditos;
+    }
+
+
 
 
     public String getProfile_path() {
         return profile_path;
     }
 
-    @SerializedName("profile_path")
-    private String profile_path;
+
 
     private List<usuario> seguidores;
 
@@ -48,11 +63,11 @@ public class Peliculas {
         return nota;
     }
 
-    public List<Peliculas> getData(){
+    public List<Cine> getData(){
         return lista_elementos;
     }
 
-    public Peliculas(String original_title, String nota, String poster_path, String id) {
+    public Cine(String original_title, String nota, String poster_path, String id) {
         this.original_title = original_title;
         this.nota = nota;
         this.poster_path = poster_path;
@@ -78,29 +93,5 @@ public class Peliculas {
         return id;
     }
 
-    public class Actores{
-        public class Actores_info{
-            @SerializedName("results")
-            private List<Peliculas> lista_elementos;
-            @SerializedName("name")
-            private String nombre;
 
-            public List<Peliculas> getLista_elementos() {
-                return lista_elementos;
-            }
-
-            public String getNombre() {
-                return nombre;
-            }
-
-            public String getPerfil() {
-                return perfil;
-            }
-
-            @SerializedName("profile_path")
-            private String perfil;
-
-
-        }
-    }
 }
