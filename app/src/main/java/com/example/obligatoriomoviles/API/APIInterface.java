@@ -1,6 +1,4 @@
 package com.example.obligatoriomoviles.API;
-
-import com.example.obligatoriomoviles.Clases.Peliculas;
 import com.example.obligatoriomoviles.Clases.retorno;
 
 import com.example.obligatoriomoviles.Clases.Cine.Cine;
@@ -28,6 +26,12 @@ public interface APIInterface {
 
     @GET("validacion/{token}")
     Call <retorno> validarCuenta(@Path("token") String codigo);
+
+    @POST("usuario/login")
+    @FormUrlEncoded
+    Call <retorno> login(@Field("correo") String correo, @Field("pass") String pass);
+
+
 
 
 }
