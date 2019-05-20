@@ -13,15 +13,16 @@
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/Lista"
-            android:layout_width="418dp"
-            android:layout_height="668dp"
-            tools:layout_editor_absoluteX="-7dp">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/content">
 
         </android.support.v7.widget.RecyclerView>
 
         <android.support.design.widget.BottomNavigationView
             android:id="@+id/nav_view"
-            android:layout_width="418dp"
+            android:layout_width="match_parent"
             android:layout_height="61dp"
             android:background="?android:attr/windowBackground"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -34,8 +35,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="16dp">
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="-16dp">
 
         </FrameLayout>
     </android.support.constraint.ConstraintLayout>
