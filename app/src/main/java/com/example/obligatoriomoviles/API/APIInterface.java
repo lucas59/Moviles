@@ -31,6 +31,8 @@ public interface APIInterface {
     @FormUrlEncoded
     Call <retorno> login(@Field("correo") String correo, @Field("pass") String pass);
 
+    @GET("validacion/{correo}")
+    Call<usuario> getDatosUsuario(@Path("correo") String email);
 
 
 

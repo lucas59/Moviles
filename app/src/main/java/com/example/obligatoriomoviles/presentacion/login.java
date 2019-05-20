@@ -1,6 +1,8 @@
 package com.example.obligatoriomoviles.presentacion;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 import com.example.obligatoriomoviles.API.APICliente;
 import com.example.obligatoriomoviles.API.APIInterface;
 import com.example.obligatoriomoviles.Clases.retorno;
+import com.example.obligatoriomoviles.Clases.usuario;
 import com.example.obligatoriomoviles.R;
 
 import retrofit2.Call;
@@ -32,7 +35,11 @@ public class login extends AppCompatActivity {
         navigationView.getMenu().getItem(3).setChecked(true);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         etEmail=findViewById(R.id.txtEmail);
-        etPass=findViewById(R.id.txtPass);
+        etPass=findViewById(R.id.txtContraseña);
+
+//creo la variable session
+        SharedPreferences preferences = getSharedPreferences("session", Context.MODE_PRIVATE);
+        String user = preferences.getString("user", "");
 
     }
 
@@ -41,21 +48,44 @@ public class login extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void login(){
-        String email = etEmail.getText().toString();
+    public void login(View view){
+        final String email = etEmail.getText().toString();
         String pass = etPass.getText().toString();
         if(email.equals("") || pass.equals("")){
             return;
         }
 
-        APIInterface apiService = APICliente.getServidor().create(APIInterface.class);
+        final APIInterface apiService = APICliente.getServidor().create(APIInterface.class);
         Call<retorno> call = apiService.login(email,pass);
 
-        call.enqueue(new Callback<retorno>() {
+        call.enqueue(new Callback<retorno>() {//verifico que los datos sean correctos
             @Override
             public void onResponse(Call<retorno> call, Response<retorno> response) {
                 if(response.body().getRetorno()){
-                    Toast.makeText(getApplicationContext(),"Bienvenido!", Toast.LENGTH_SHORT).show();
+                    Call<usuario> callUsuario = apiService.getDatosUsuario(email);//Si los datos son correctos entonces traigo el array con los datos y lo pongo en session
+                    callUsuario.enqueue(new Callback<usuario>() {
+                        @Override
+                        public void onResponse(Call<usuario> call, Response<usuario> response) {
+                            if (response.body()!=null){
+                                SharedPreferences preferences = getSharedPreferences("session", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = preferences.edit();
+                                editor.putString("sessionCorreo",response.body().getCorreo());
+                                editor.putString("sessionNombre",response.body().getNombre());
+                                editor.putString("sessionApellido",response.body().getApellido());
+                                editor.putInt("sessionEdad",response.body().getEdad());
+                                editor.commit();
+                                Toast.makeText(getApplicationContext(),"Bienvenido!", Toast.LENGTH_SHORT).show();
+                                Intent intento = new Intent(getBaseContext(),Calendario_elementos.class);
+                                startActivity(intento);
+                            }
+                        }
+                        @Override
+                        public void onFailure(Call<usuario> call, Throwable t) {
+
+                        }
+                    });
+
+
 
                 }else {
                     Toast.makeText(getApplicationContext(),"Verifique sus datos!", Toast.LENGTH_LONG).show();

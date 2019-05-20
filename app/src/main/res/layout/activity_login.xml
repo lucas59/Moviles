@@ -59,7 +59,8 @@
             android:id="@+id/button3"
             android:layout_width="match_parent"
             android:layout_height="66dp"
-            android:hint="@string/action_sign_in_short" />
+            android:hint="@string/action_sign_in_short"
+            android:onClick="login" />
 
         <TextView
             android:id="@+id/textView3"
