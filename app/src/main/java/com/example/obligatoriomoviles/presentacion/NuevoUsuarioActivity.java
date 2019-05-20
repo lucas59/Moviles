@@ -14,8 +14,6 @@ import android.widget.Toast;
 import com.example.obligatoriomoviles.API.APICliente;
 import com.example.obligatoriomoviles.API.APIError;
 import com.example.obligatoriomoviles.API.APIInterface;
-import com.example.obligatoriomoviles.Clases.Peliculas;
-import com.example.obligatoriomoviles.Clases.Peliculas_adapter;
 import com.example.obligatoriomoviles.Clases.retorno;
 import com.example.obligatoriomoviles.R;
 
