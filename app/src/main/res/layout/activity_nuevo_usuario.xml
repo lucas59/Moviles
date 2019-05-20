@@ -7,10 +7,9 @@
     tools:context=".presentacion.NuevoUsuarioActivity">
 
 
-
     <LinearLayout
-        android:layout_width="375dp"
-        android:layout_height="441dp"
+        android:layout_width="287dp"
+        android:layout_height="442dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -38,50 +37,50 @@
             android:id="@+id/txtEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10px"
             android:ems="10"
-            android:hint="@string/txtEmail"
-            android:inputType="textPersonName" />
+            android:inputType="textEmailAddress|textEmailSubject" />
 
         <EditText
             android:id="@+id/txtPass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10px"
             android:ems="10"
-            android:hint="@string/txtContraseña"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName|textEmailAddress" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:onClick="irAValidar"
+            android:text="Validar Cuenta" />
 
         <Button
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10px"
+            android:onClick="NuevoUsuario"
             android:text="@string/txtContinuar" />
 
-        <View
-            android:id="@+id/divider"
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:background="?android:attr/listDivider" />
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="@string/txtIniciarSesion" />
-
-        <android.support.design.widget.BottomNavigationView
-            android:id="@+id/nav_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="0dp"
-            android:layout_marginEnd="0dp"
-            android:background="?android:attr/windowBackground"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:menu="@menu/bottom_nav_menu" />
-
     </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/content"
+        android:layout_width="485dp"
+        android:layout_height="138dp"
+        android:onClick="NuevoUsuario"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="-31dp"
+        tools:layout_editor_absoluteY="593dp">
+
+    </FrameLayout>
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="409dp"
+        android:layout_height="59dp"
+        android:background="?android:attr/windowBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/bottom_nav_menu" />
 </android.support.constraint.ConstraintLayout>

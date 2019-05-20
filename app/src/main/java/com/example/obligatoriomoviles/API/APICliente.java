@@ -9,8 +9,9 @@ public class APICliente {
     public static final String BASE_URL = "https://api.themoviedb.org/3/discover/movie/";
     private static Retrofit retrofit = null;
     private static Retrofit retrofit_peliculas = null;
+    private static Retrofit retrofit_servidor = null;
     public static final String BASE_URL2 = "http://api.themoviedb.org/3/movie/";
-
+    public static final String base_servidor = "http://192.168.1.55/ServidorMovil/public/";
     public static Retrofit getCalendario() {
         if (retrofit==null) {
             retrofit = new Retrofit.Builder()
@@ -29,5 +30,14 @@ public class APICliente {
                     .build();
         }
         return retrofit_peliculas;
+    }
+    public static Retrofit getServidor() {
+        if (retrofit_servidor==null) {
+            retrofit_servidor = new Retrofit.Builder()
+                    .baseUrl(base_servidor)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+        }
+        return retrofit_servidor;
     }
 }

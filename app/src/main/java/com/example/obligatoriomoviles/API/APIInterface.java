@@ -1,9 +1,14 @@
 package com.example.obligatoriomoviles.API;
 
+import com.example.obligatoriomoviles.Clases.Peliculas;
+import com.example.obligatoriomoviles.Clases.retorno;
+
 import com.example.obligatoriomoviles.Clases.Cine.Cine;
 import com.example.obligatoriomoviles.Clases.usuario;
 
 import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -17,9 +22,12 @@ public interface APIInterface {
     Call<Cine> getPelicula(@Path("id") String id,@Query("api_key") String api_key,@Query("append_to_response") String filtro,@Query("language") String idioma);
 
 
-   // @POST('')
-  //  Call <> getUsuario(@Path("correo") String correo);
+    @POST("usuario/nuevo")
+    @FormUrlEncoded
+    Call <retorno> altaUsuario(@Field("correo") String correo, @Field("pass") String pass);
 
+    @GET("validacion/{token}")
+    Call <retorno> validarCuenta(@Path("token") String codigo);
 
 
 }
