@@ -97,6 +97,9 @@ public class Calendario_elementos extends AppCompatActivity {
                        //Enviar al la actividad de perfil elemento el ID
                       Intent i = new Intent(Calendario_elementos.this, Perfil_elemento.class);
                        i.putExtra("id", lista_peliculas.get(recyclerView.getChildAdapterPosition(v)).getId());
+                       i.putExtra("fecha", lista_peliculas.get(recyclerView.getChildAdapterPosition(v)).getFecha());
+                       i.putExtra("genero", lista_peliculas.get(recyclerView.getChildAdapterPosition(v)).getPoster_path());
+                       i.putExtra("titulo_elemento", lista_peliculas.get(recyclerView.getChildAdapterPosition(v)).getOriginal_title());
                        startActivity(i);
                    }
                });

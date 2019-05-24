@@ -1,17 +1,25 @@
 package com.example.obligatoriomoviles.presentacion;
 
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.obligatoriomoviles.API.APICliente;
 import com.example.obligatoriomoviles.API.APIError;
@@ -19,12 +27,11 @@ import com.example.obligatoriomoviles.API.APIInterface;
 import com.example.obligatoriomoviles.Clases.Cine.Actor;
 import com.example.obligatoriomoviles.Clases.Cine.Actor_adapter;
 import com.example.obligatoriomoviles.Clases.Cine.Cine;
+import com.example.obligatoriomoviles.Clases.retorno;
 import com.example.obligatoriomoviles.R;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
-
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -48,12 +55,11 @@ public class Perfil_elemento extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         //Menu
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-
-        navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
+        BottomNavigationView navigationView = (BottomNavigationView) findViewById(R.id.nav_view);
+        navigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         //Setear el focus a la opcion correspondiente (del 0 al numero de botones)
-        navView.getMenu().getItem(2).setChecked(true);
+        navigationView.getMenu().getItem(2).setChecked(true);
+        //setear el menu de navegación de abajo
         call.enqueue(new Callback<Cine>() {
             @Override
             public void onResponse(Call<Cine> call, Response<Cine> response) {
@@ -126,6 +132,65 @@ public class Perfil_elemento extends AppCompatActivity {
 
         });
 
+    }
+
+ public void Comentar(View view){
+     AlertDialog.Builder builder = new AlertDialog.Builder(this);
+     final View mView = getLayoutInflater().inflate(R.layout.comentar_mensaje,null);
+     final EditText txtcomentario = (EditText) mView.findViewById(R.id.Comentario);
+     final EditText txttitulo = (EditText) mView.findViewById(R.id.Titulo_comentario);
+     builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+         @Override
+         public void onClick(DialogInterface dialog, int which) {
+            if(!txtcomentario.getText().toString().isEmpty() && !txttitulo.getText().toString().isEmpty()) {
+                SharedPreferences prefs = getSharedPreferences("session", Context.MODE_PRIVATE);
+                String email = prefs.getString("sessionCorreo", null);
+                if (email != null) {
+                    final APIInterface apiService_2 = APICliente.getServidor().create(APIInterface.class);
+                    String comentario = txtcomentario.getText().toString();
+                    String titulo = txttitulo.getText().toString();
+                    Integer id = Integer.parseInt(getIntent().getExtras().getString("id"));
+                    String fecha = getIntent().getExtras().getString("fecha");
+                    String genero = getIntent().getExtras().getString("genero");
+                    String titulo_ele = getIntent().getExtras().getString("titulo_elemento");
+                    Call<retorno> call = apiService_2.SetComentario(comentario,titulo,null,id,email,fecha,genero,titulo_ele);
+                    call.enqueue(new Callback<retorno>() {
+                        @Override
+                        public void onResponse(Call<retorno> call, Response<retorno> response) {
+                            if(response.body().getRetorno()) {
+                                Toast.makeText(Perfil_elemento.this, "Comentario agregado", Toast.LENGTH_SHORT).show();
+                            }
+                            else{
+                                Toast.makeText(Perfil_elemento.this, "Error al comentar", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<retorno> call, Throwable t) {
+
+                        }
+
+
+
+
+                    });
+
+
+
+
+                } else {
+                    Toast.makeText(Perfil_elemento.this, "No existe una sesión en el sistema", Toast.LENGTH_SHORT).show();
+                }
+            }
+            else{
+                Toast.makeText(Perfil_elemento.this, "Complete los campos", Toast.LENGTH_SHORT).show();
+            }
+         }
+     });
+     builder.setNegativeButton(android.R.string.cancel,null);
+     builder.setView(mView);
+     Dialog dialog = builder.create();
+    dialog.show();
     }
 
 
