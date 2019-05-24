@@ -1,6 +1,6 @@
 package com.example.obligatoriomoviles.Clases;
 
-public class Series extends Cine {
+public class Series extends Contenido {
 
 
     @Override

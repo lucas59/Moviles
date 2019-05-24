@@ -1,4 +1,4 @@
-package com.example.obligatoriomoviles.Clases;
+package com.example.obligatoriomoviles.Clases.Cine;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -19,7 +19,7 @@ import java.util.List;
  */
 
 
-public class Peliculas_adapter extends RecyclerView.Adapter<Peliculas_adapter.ProductViewHolder> implements View.OnClickListener {
+public class Cine_adapter extends RecyclerView.Adapter<Cine_adapter.ProductViewHolder> implements View.OnClickListener {
 
 
     //this context we will use to inflate the layout
@@ -27,10 +27,10 @@ public class Peliculas_adapter extends RecyclerView.Adapter<Peliculas_adapter.Pr
     private View.OnClickListener listener;
 
     //we are storing all the products in a list
-    private List<Peliculas> productList;
+    private List<Cine> productList;
 
     //getting the context and product list with constructor
-    public Peliculas_adapter(Context mCtx, List<Peliculas> productList) {
+    public Cine_adapter(Context mCtx, List<Cine> productList) {
         this.mCtx = mCtx;
         this.productList = productList;
     }
@@ -47,13 +47,14 @@ public class Peliculas_adapter extends RecyclerView.Adapter<Peliculas_adapter.Pr
     @Override
     public void onBindViewHolder(ProductViewHolder holder, int position) {
         //getting the product of the specified position
-        Peliculas product = productList.get(position);
+        Cine product = productList.get(position);
 
         //binding the data with the viewholder views
         String fondo = "https://image.tmdb.org/t/p/w500" + product.getPoster_path();
         holder.textViewTitulo.setText(product.getOriginal_title());
         holder.textViewPuntaje.setText(product.getNota());
         holder.textViewID.setText(product.getId());
+
         Picasso.get().load(fondo).fit().centerCrop().into(holder.imageView);
 
     }
@@ -78,7 +79,7 @@ public class Peliculas_adapter extends RecyclerView.Adapter<Peliculas_adapter.Pr
 
     class ProductViewHolder extends RecyclerView.ViewHolder {
 
-        TextView textViewTitulo, textViewPuntaje, textViewID;
+        TextView textViewTitulo, textViewPuntaje, textViewID, textViewFecha;
         ImageView imageView;
 
         public ProductViewHolder(View itemView) {
@@ -87,6 +88,7 @@ public class Peliculas_adapter extends RecyclerView.Adapter<Peliculas_adapter.Pr
             textViewPuntaje = itemView.findViewById(R.id.Puntaje);
             imageView = itemView.findViewById(R.id.Poster);
             textViewID = itemView.findViewById(R.id.id);
+            textViewID.setVisibility(View.INVISIBLE);
         }
     }
 }

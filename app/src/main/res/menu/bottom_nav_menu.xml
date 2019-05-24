@@ -11,7 +11,7 @@
         android:title="@string/title_dashboard" />
     <item
         android:id="@+id/navigation_perfil"
-        android:icon="@drawable/ic_perfil"
+        android:icon="@drawable/baseline_calendar_today_black_48"
         android:title="@string/title_calendario" />
     <item
         android:id="@+id/navigation_sesion"
