@@ -37,5 +37,9 @@ public class ControladorElemento{
 
     }
 
+    public boolean Comentar(String comentario, String titulo, Integer capitulo, Integer contenido,String correo){
+
+    return true;
+    }
 
 }

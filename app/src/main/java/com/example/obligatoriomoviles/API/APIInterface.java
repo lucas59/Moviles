@@ -31,9 +31,12 @@ public interface APIInterface {
     @FormUrlEncoded
     Call <retorno> login(@Field("correo") String correo, @Field("pass") String pass);
 
-    @GET("validacion/{correo}")
+    @GET("usuario/{correo}")
     Call<usuario> getDatosUsuario(@Path("correo") String email);
 
 
+    @POST("contenido/comentario")
+    @FormUrlEncoded
+    Call<retorno> Comentario(@Field("comentario") String comentario, @Field("titulo") String titulo, @Field("capitulo_id") Integer capitulo, @Field("contenido_id") Integer contenido, @Field("usuario") String usuario, @Field("fecha") String fecha, @Field("genero") String genero, @Field("titulo_elemento") String titulo_elemento);
 
 }
