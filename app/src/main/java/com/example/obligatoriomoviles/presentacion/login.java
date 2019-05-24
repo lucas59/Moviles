@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -31,15 +32,22 @@ public class login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         BottomNavigationView navView = findViewById(R.id.nav_view);
-        BottomNavigationView navigationView = (BottomNavigationView) findViewById(R.id.nav_view);
-        navigationView.getMenu().getItem(3).setChecked(true);
+
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        //Setear el focus a la opcion correspondiente (del 0 al numero de botones)
+        navView.getMenu().getItem(2).setChecked(true);
+
         etEmail=findViewById(R.id.txtEmail);
         etPass=findViewById(R.id.txtContraseña);
 
 //creo la variable session
         SharedPreferences preferences = getSharedPreferences("session", Context.MODE_PRIVATE);
-        String user = preferences.getString("user", "");
+        boolean session =  preferences.contains("sessionCorreo");
+        if(session==true){
+            Intent i = new Intent(this,Perfil_usuario.class);
+            startActivity(i);
+        }
 
     }
 
@@ -77,6 +85,8 @@ public class login extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(),"Bienvenido!", Toast.LENGTH_SHORT).show();
                                 Intent intento = new Intent(getBaseContext(),Calendario_elementos.class);
                                 startActivity(intento);
+                            }else {
+                                Toast.makeText(getApplicationContext(),"Verifique sus datos!", Toast.LENGTH_SHORT).show();
                             }
                         }
                         @Override
@@ -84,8 +94,6 @@ public class login extends AppCompatActivity {
 
                         }
                     });
-
-
 
                 }else {
                     Toast.makeText(getApplicationContext(),"Verifique sus datos!", Toast.LENGTH_LONG).show();
@@ -105,30 +113,32 @@ public class login extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    Intent i = new Intent(login.this, Menu_principal.class);
+                    Intent i = new Intent(getApplicationContext(), Menu_principal.class);
                     startActivity(i);
                     overridePendingTransition(R.anim.infade,R.anim.outfade);
                     return true;
                 case R.id.navigation_buscar:
-                    i = new Intent(login.this, Perfil_elemento.class);
-                    startActivity(i);
-                    overridePendingTransition(R.anim.infade,R.anim.outfade);
+                    //     i = new Intent(Menu_principal.this, Perfil_elemento.class);
+                    //     startActivity(i);
                     return true;
                 case R.id.navigation_perfil:
-                    return true;
-                case R.id.navigation_sesion:
-                    i = new Intent(login.this, login.class);
-                    startActivity(i);
-                   overridePendingTransition(R.anim.infade,R.anim.outfade);
-                    return true;
-                case R.id.navigation_registrarse:
-                    i = new Intent(login.this, NuevoUsuarioActivity.class);
+                    i = new Intent(getApplicationContext(), Calendario_elementos.class);
                     startActivity(i);
                     overridePendingTransition(R.anim.infade,R.anim.outfade);
                     return true;
+                case R.id.navigation_sesion:
+                    i = new Intent(getApplicationContext(), login.class);
+                    startActivity(i);
+                    overridePendingTransition(R.anim.infade,R.anim.outfade);
+                    return true;
+                case R.id.navigation_registrarse:
+                    i = new Intent(getApplicationContext(), NuevoUsuarioActivity.class);
+                    startActivity(i);
+                    overridePendingTransition(R.anim.infade,R.anim.outfade);
+                    return true;
+
             }
             return false;
         }

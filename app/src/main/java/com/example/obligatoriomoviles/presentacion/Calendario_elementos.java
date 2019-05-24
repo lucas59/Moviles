@@ -52,11 +52,12 @@ public class Calendario_elementos extends AppCompatActivity {
         APIInterface apiService = APICliente.getCalendario().create(APIInterface.class);
         Call<Cine> call = apiService.getImagen("popularity.desc",2019,"en-US","0d81ceeb977ab515fd9f844377688c5a");
         //Menu
-          BottomNavigationView navigationView = (BottomNavigationView) findViewById(R.id.nav_view);
-        //Setear el focus a la opcion correspondiente (del 0 al numero de botones)
-           navigationView.getMenu().getItem(2).setChecked(true);
-        //setear el menu de navegación de abajo
         BottomNavigationView navView = findViewById(R.id.nav_view);
+
+        navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        //Setear el focus a la opcion correspondiente (del 0 al numero de botones)
+           navView.getMenu().getItem(2).setChecked(true);
         call.enqueue(new Callback<Cine>() {
             @Override
             public void onResponse(Call<Cine> call, Response<Cine> response) {
@@ -119,38 +120,35 @@ public class Calendario_elementos extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    Intent i = new Intent(Calendario_elementos.this, Menu_principal.class);
+                    Intent i = new Intent(getApplicationContext(), Menu_principal.class);
                     startActivity(i);
                     overridePendingTransition(R.anim.infade,R.anim.outfade);
                     return true;
                 case R.id.navigation_buscar:
-                    i = new Intent(Calendario_elementos.this, Perfil_elemento.class);
-                    startActivity(i);
-                    overridePendingTransition(R.anim.infade,R.anim.outfade);
+                    //     i = new Intent(Menu_principal.this, Perfil_elemento.class);
+                    //     startActivity(i);
                     return true;
                 case R.id.navigation_perfil:
-                    i = new Intent(Calendario_elementos.this, Calendario_elementos.class);
+                    i = new Intent(getApplicationContext(), Calendario_elementos.class);
                     startActivity(i);
                     overridePendingTransition(R.anim.infade,R.anim.outfade);
                     return true;
                 case R.id.navigation_sesion:
-                    i = new Intent(Calendario_elementos.this, login.class);
+                    i = new Intent(getApplicationContext(), login.class);
                     startActivity(i);
                     overridePendingTransition(R.anim.infade,R.anim.outfade);
                     return true;
                 case R.id.navigation_registrarse:
-                    i = new Intent(Calendario_elementos.this, NuevoUsuarioActivity.class);
+                    i = new Intent(getApplicationContext(), NuevoUsuarioActivity.class);
                     startActivity(i);
                     overridePendingTransition(R.anim.infade,R.anim.outfade);
                     return true;
+
             }
             return false;
         }
     };
-
-
 
 }

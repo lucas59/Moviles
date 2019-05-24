@@ -20,7 +20,7 @@ public class Menu_principal extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    Intent i = new Intent(Menu_principal.this, Menu_principal.class);
+                    Intent i = new Intent(getApplicationContext(), Menu_principal.class);
                     startActivity(i);
                     overridePendingTransition(R.anim.infade,R.anim.outfade);
                     return true;
@@ -29,17 +29,17 @@ public class Menu_principal extends AppCompatActivity {
                //     startActivity(i);
                     return true;
                 case R.id.navigation_perfil:
-                    i = new Intent(Menu_principal.this, Calendario_elementos.class);
+                    i = new Intent(getApplicationContext(), Calendario_elementos.class);
                     startActivity(i);
                     overridePendingTransition(R.anim.infade,R.anim.outfade);
                     return true;
                 case R.id.navigation_sesion:
-                    i = new Intent(Menu_principal.this, login.class);
+                    i = new Intent(getApplicationContext(), login.class);
                     startActivity(i);
                     overridePendingTransition(R.anim.infade,R.anim.outfade);
                     return true;
                 case R.id.navigation_registrarse:
-                    i = new Intent(Menu_principal.this, NuevoUsuarioActivity.class);
+                    i = new Intent(getApplicationContext(), NuevoUsuarioActivity.class);
                     startActivity(i);
                     overridePendingTransition(R.anim.infade,R.anim.outfade);
                     return true;
