@@ -37,6 +37,6 @@ public interface APIInterface {
 
     @POST("contenido/comentario")
     @FormUrlEncoded
-    Call<retorno> Comentario(@Field("comentario") String comentario, @Field("titulo") String titulo, @Field("capitulo_id") Integer capitulo, @Field("contenido_id") Integer contenido, @Field("usuario") String usuario, @Field("fecha") String fecha, @Field("genero") String genero, @Field("titulo_elemento") String titulo_elemento);
+    Call<retorno> SetComentario(@Field("comentario") String comentario, @Field("titulo") String titulo, @Field("capitulo_id") Integer capitulo, @Field("contenido_id") Integer contenido, @Field("usuario") String usuario, @Field("fecha") String fecha, @Field("genero") String genero, @Field("titulo_elemento") String titulo_elemento);
 
 }

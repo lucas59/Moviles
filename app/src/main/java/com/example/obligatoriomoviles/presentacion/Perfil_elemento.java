@@ -142,12 +142,18 @@ public class Perfil_elemento extends AppCompatActivity {
      builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
          @Override
          public void onClick(DialogInterface dialog, int which) {
-            if(!txtcomentario.getText().toString().isEmpty() || !txttitulo.getText().toString().isEmpty()) {
+            if(!txtcomentario.getText().toString().isEmpty() && !txttitulo.getText().toString().isEmpty()) {
                 SharedPreferences prefs = getSharedPreferences("session", Context.MODE_PRIVATE);
                 String email = prefs.getString("sessionCorreo", null);
                 if (email != null) {
                     final APIInterface apiService_2 = APICliente.getServidor().create(APIInterface.class);
-                    Call<retorno> call = apiService_2.Comentario(txtcomentario.getText().toString(),txttitulo.getText().toString() ,null,Integer.parseInt(getIntent().getExtras().getString("id")),email,getIntent().getExtras().getString("fecha"),getIntent().getExtras().getString("genero"),getIntent().getExtras().getString("titulo_elemento"));
+                    String comentario = txtcomentario.getText().toString();
+                    String titulo = txttitulo.getText().toString();
+                    Integer id = Integer.parseInt(getIntent().getExtras().getString("id"));
+                    String fecha = getIntent().getExtras().getString("fecha");
+                    String genero = getIntent().getExtras().getString("genero");
+                    String titulo_ele = getIntent().getExtras().getString("titulo_elemento");
+                    Call<retorno> call = apiService_2.SetComentario(comentario,titulo,null,id,email,fecha,genero,titulo_ele);
                     call.enqueue(new Callback<retorno>() {
                         @Override
                         public void onResponse(Call<retorno> call, Response<retorno> response) {
