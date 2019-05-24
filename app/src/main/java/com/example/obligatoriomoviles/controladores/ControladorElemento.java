@@ -31,11 +31,10 @@ public class ControladorElemento{
 
     public ControladorElemento() {
     }
-       
+
     public void enviarNotificaciones(Cine pelicula) {
+	}
 
-
-    }
 
     public boolean Comentar(String comentario, String titulo, Integer capitulo, Integer contenido,String correo){
 
