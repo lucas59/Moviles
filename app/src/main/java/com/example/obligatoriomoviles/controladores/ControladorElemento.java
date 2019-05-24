@@ -11,7 +11,7 @@ public class ControladorElemento{
 
     public ControladorElemento() {
     }
-       
+
     public void enviarNotificaciones(Peliculas pelicula) {
 
 
