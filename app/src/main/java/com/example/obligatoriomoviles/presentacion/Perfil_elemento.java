@@ -159,7 +159,7 @@ public class Perfil_elemento extends AppCompatActivity {
                         public void onResponse(Call<retorno> call, Response<retorno> response) {
                             if(response.body().getRetorno()) {
                                 Toast.makeText(Perfil_elemento.this, "Comentario agregado", Toast.LENGTH_SHORT).show();
-                            }
+System.out.println("llego");                            }
                             else{
                                 Toast.makeText(Perfil_elemento.this, "Error al comentar", Toast.LENGTH_SHORT).show();
                             }
@@ -169,15 +169,7 @@ public class Perfil_elemento extends AppCompatActivity {
                         public void onFailure(Call<retorno> call, Throwable t) {
 
                         }
-
-
-
-
                     });
-
-
-
-
                 } else {
                     Toast.makeText(Perfil_elemento.this, "No existe una sesión en el sistema", Toast.LENGTH_SHORT).show();
                 }
