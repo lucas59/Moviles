@@ -1,5 +1,6 @@
 package com.example.obligatoriomoviles.presentacion;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -10,15 +11,15 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import com.example.obligatoriomoviles.API.APICliente;
-import com.example.obligatoriomoviles.API.APIError;
 import com.example.obligatoriomoviles.API.APIInterface;
 import com.example.obligatoriomoviles.Clases.Cine.Cine;
 import com.example.obligatoriomoviles.Clases.Cine.Cine_adapter;
 import com.example.obligatoriomoviles.R;
 
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +42,7 @@ public class Calendario_elementos extends AppCompatActivity {
         setContentView(R.layout.activity_calendario_elementos);
 
         //obtener recyclerview de xml
-        recyclerView = (RecyclerView) findViewById(R.id.Lista);
+        recyclerView = findViewById(R.id.Lista);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -53,42 +54,19 @@ public class Calendario_elementos extends AppCompatActivity {
         Call<Cine> call = apiService.getImagen("popularity.desc",2019,"en-US","0d81ceeb977ab515fd9f844377688c5a");
         //Menu
         BottomNavigationView navView = findViewById(R.id.nav_view);
-
+        final ProgressBar spinner;
+        spinner = findViewById(R.id.progressBar1);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
         //Setear el focus a la opcion correspondiente (del 0 al numero de botones)
            navView.getMenu().getItem(2).setChecked(true);
         call.enqueue(new Callback<Cine>() {
-            @Override
             public void onResponse(Call<Cine> call, Response<Cine> response) {
-                if (!response.isSuccessful()) {
-                    String error = "Ha ocurrido un error. Contacte al administrador";
-                    if (response.errorBody()
-                            .contentType()
-                            .subtype()
-                            .equals("json")) {
-                        APIError apiError = APIError.fromResponseBody(response.errorBody());
-                        error = apiError.getMessage();
-                        Log.d("LoginActivity", apiError.getDeveloperMessage());
-                    } else {
-                        try {
-                            // Reportar causas de error no relacionado con la API
-                            Log.d("LoginActivity", response.errorBody().string());
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-
-                    return;
-                }
-
+                spinner.setVisibility(View.VISIBLE);
                 for (Cine post : response.body().getData()) {
                     lista_peliculas.add(new Cine(
                             post.getOriginal_title(), post.getNota(), post.getPoster_path(), post.getId()
                     ));
                 }
-
                 //creando adapter recyclerview
                 Cine_adapter adapter = new Cine_adapter(Calendario_elementos.this, lista_peliculas);
                adapter.setOnClickListener(new View.OnClickListener() {
@@ -106,7 +84,7 @@ public class Calendario_elementos extends AppCompatActivity {
 
                 //setear adapter al recyclerview
                 recyclerView.setAdapter(adapter);
-
+                spinner.setVisibility(View.GONE);
             }
             @Override
             public void onFailure(Call<Cine> call, Throwable t) {

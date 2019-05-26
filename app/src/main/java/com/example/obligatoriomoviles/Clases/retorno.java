@@ -1,6 +1,9 @@
 package com.example.obligatoriomoviles.Clases;
 
+import com.example.obligatoriomoviles.Clases.Cine.Cine;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 public class retorno {
     @SerializedName("correo")
@@ -10,10 +13,15 @@ public class retorno {
     @SerializedName("retorno")
     private boolean retorno;
 
+    @SerializedName("Comentarios")
+    private List<Comentario> lista_comentarios;
+
     public Boolean getRetorno() {
         return retorno;
     }
-
+    public List<Comentario> getLista_comentarios() {
+        return lista_comentarios;
+    }
     public retorno(String correo, String pass) {
         this.correo = correo;
         this.pass = pass;

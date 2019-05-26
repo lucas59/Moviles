@@ -1,4 +1,5 @@
 package com.example.obligatoriomoviles.API;
+import com.example.obligatoriomoviles.Clases.Comentario;
 import com.example.obligatoriomoviles.Clases.retorno;
 
 import com.example.obligatoriomoviles.Clases.Cine.Cine;
@@ -38,8 +39,10 @@ public interface APIInterface {
     Call<retorno> desactivarUsuario(@Path("correo") String email);
 
 
-    @POST("contenido/comentario")
-    @FormUrlEncoded
-    Call<retorno> SetComentario(@Field("comentario") String comentario, @Field("titulo") String titulo, @Field("capitulo_id") Integer capitulo, @Field("contenido_id") Integer contenido, @Field("usuario") String usuario, @Field("fecha") String fecha, @Field("genero") String genero, @Field("titulo_elemento") String titulo_elemento);
+    @GET("contenido/comentario")
+    Call<retorno> SetComentario(@Query("comentario") String comentario,  @Query("capitulo_id") Integer capitulo, @Query("contenido_id") Integer contenido, @Query("usuario") String usuario, @Query("fecha") String fecha, @Query("genero") String genero, @Query("titulo_elemento") String titulo_elemento);
+
+    @GET("contenido/lista_comentario")
+    Call<retorno> getComentario( @Query("id") String id);
 
 }
