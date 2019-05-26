@@ -14,13 +14,12 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.example.obligatoriomoviles.API.APICliente;
-import com.example.obligatoriomoviles.API.APIError;
 import com.example.obligatoriomoviles.API.APIInterface;
 import com.example.obligatoriomoviles.Clases.Cine.Cine;
 import com.example.obligatoriomoviles.Clases.Cine.Cine_adapter;
 import com.example.obligatoriomoviles.R;
 
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +42,7 @@ public class Calendario_elementos extends AppCompatActivity {
         setContentView(R.layout.activity_calendario_elementos);
 
         //obtener recyclerview de xml
-        recyclerView = (RecyclerView) findViewById(R.id.Lista);
+        recyclerView = findViewById(R.id.Lista);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -56,43 +55,18 @@ public class Calendario_elementos extends AppCompatActivity {
         //Menu
         BottomNavigationView navView = findViewById(R.id.nav_view);
         final ProgressBar spinner;
-        spinner = (ProgressBar)findViewById(R.id.progressBar1);
+        spinner = findViewById(R.id.progressBar1);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        final ProgressDialog progressDialog = new ProgressDialog(this);
         //Setear el focus a la opcion correspondiente (del 0 al numero de botones)
            navView.getMenu().getItem(2).setChecked(true);
         call.enqueue(new Callback<Cine>() {
-            @Override
             public void onResponse(Call<Cine> call, Response<Cine> response) {
                 spinner.setVisibility(View.VISIBLE);
-                if (!response.isSuccessful()) {
-                    String error = "Ha ocurrido un error. Contacte al administrador";
-                    if (response.errorBody()
-                            .contentType()
-                            .subtype()
-                            .equals("json")) {
-                        APIError apiError = APIError.fromResponseBody(response.errorBody());
-                        error = apiError.getMessage();
-                        Log.d("LoginActivity", apiError.getDeveloperMessage());
-                    } else {
-                        try {
-                            // Reportar causas de error no relacionado con la API
-                            Log.d("LoginActivity", response.errorBody().string());
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-
-                    return;
-                }
-
                 for (Cine post : response.body().getData()) {
                     lista_peliculas.add(new Cine(
                             post.getOriginal_title(), post.getNota(), post.getPoster_path(), post.getId()
                     ));
                 }
-
                 //creando adapter recyclerview
                 Cine_adapter adapter = new Cine_adapter(Calendario_elementos.this, lista_peliculas);
                adapter.setOnClickListener(new View.OnClickListener() {

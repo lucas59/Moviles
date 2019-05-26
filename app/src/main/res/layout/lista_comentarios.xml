@@ -8,7 +8,7 @@
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/Comentario_fondo"
-        android:layout_width="343dp"
+        android:layout_width="match_parent"
         android:layout_height="248dp"
         android:layout_marginTop="8dp"
         android:background="@color/terjeta"

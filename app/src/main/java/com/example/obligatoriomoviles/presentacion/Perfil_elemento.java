@@ -46,13 +46,17 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Perfil_elemento extends AppCompatActivity {
+    //lista de actores
     RecyclerView recyclerView;
+    //boton de comentarios
     private Button dialogBtn;
+    //lista de comentarios
     RecyclerView recyclerView_comentarios;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_elemento);
+        //animación de carga
         final ProgressBar spinner;
         spinner = (ProgressBar)findViewById(R.id.barra);
 
@@ -60,6 +64,7 @@ public class Perfil_elemento extends AppCompatActivity {
         APIInterface apiService = APICliente.getPelicula().create(APIInterface.class);
         Call<Cine> call = apiService.getPelicula( getIntent().getExtras().getString("id"),"0d81ceeb977ab515fd9f844377688c5a","credits","es");
 
+        //mostraar la lista de actores
         recyclerView = (RecyclerView) findViewById(R.id.Actores);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -110,6 +115,7 @@ public class Perfil_elemento extends AppCompatActivity {
                 votos.setProgress((int) Float.parseFloat(response.body().getNota()));
                 valor.setText(response.body().getNota());
 
+                //quitar animación de carga
                 spinner.setVisibility(View.GONE);
             }
 
@@ -121,8 +127,8 @@ public class Perfil_elemento extends AppCompatActivity {
 
 
         });
+        //llamar función dialog de comentarios
         dialogBtn = findViewById(R.id.boton_comentarios);
-
         dialogBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
