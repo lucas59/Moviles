@@ -6,20 +6,16 @@
         android:icon="@drawable/ic_principal"
         android:title="@string/title_home" />
     <item
-        android:id="@+id/navigation_buscar"
-        android:icon="@drawable/ic_buscar"
-        android:title="@string/title_dashboard" />
-    <item
-        android:id="@+id/navigation_perfil"
+        android:id="@+id/navigation_calendario"
         android:icon="@drawable/baseline_calendar_today_black_48"
         android:title="@string/title_calendario" />
+    <item
+        android:id="@+id/navigation_notificacion"
+        android:icon="@drawable/notificacion"
+        android:title="@string/title_notifications" />
     <item
         android:id="@+id/navigation_sesion"
         android:icon="@drawable/ic_perfil"
         android:title="@string/title_sesion" />
-    <item
-        android:id="@+id/navigation_registrarse"
-        android:icon="@drawable/ic_perfil"
-        android:title="@string/title_registrarse" />
 
 </menu>

@@ -1,4 +1,4 @@
-package com.example.obligatoriomoviles.Clases.Cine;
+package com.example.obligatoriomoviles.Clases;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,10 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-import com.example.obligatoriomoviles.Clases.Cine.Cine;
-import com.example.obligatoriomoviles.Clases.Comentario;
 import com.example.obligatoriomoviles.R;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 

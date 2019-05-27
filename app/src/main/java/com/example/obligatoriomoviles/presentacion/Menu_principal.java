@@ -24,26 +24,20 @@ public class Menu_principal extends AppCompatActivity {
                     startActivity(i);
                     overridePendingTransition(R.anim.infade,R.anim.outfade);
                     return true;
-                case R.id.navigation_buscar:
+                case R.id.navigation_notificacion:
               //     i = new Intent(Menu_principal.this, Perfil_elemento.class);
                //     startActivity(i);
                     return true;
-                case R.id.navigation_perfil:
+                case R.id.navigation_calendario:
                     i = new Intent(getApplicationContext(), Calendario_elementos.class);
                     startActivity(i);
                     overridePendingTransition(R.anim.infade,R.anim.outfade);
                     return true;
                 case R.id.navigation_sesion:
-                    i = new Intent(getApplicationContext(), login.class);
+                    i = new Intent(getApplicationContext(), Perfil_usuario.class);
                     startActivity(i);
                     overridePendingTransition(R.anim.infade,R.anim.outfade);
                     return true;
-                case R.id.navigation_registrarse:
-                    i = new Intent(getApplicationContext(), NuevoUsuarioActivity.class);
-                    startActivity(i);
-                    overridePendingTransition(R.anim.infade,R.anim.outfade);
-                    return true;
-
             }
             return false;
         }

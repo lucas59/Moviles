@@ -12,21 +12,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".presentacion.ValidarCuentaActivity"></activity>
+        <activity android:name=".presentacion.Slider">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".presentacion.ValidarCuentaActivity" />
         <activity android:name=".presentacion.Calendario_elementos" />
         <activity android:name=".presentacion.Perfil_usuario" />
         <activity android:name=".presentacion.Perfil_elemento" />
         <activity
             android:name=".presentacion.Menu_principal"
-            android:label="@string/title_activity_menu_principal">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:label="@string/title_activity_menu_principal"/>
         <activity android:name=".presentacion.NuevoUsuarioActivity" />
-        <activity android:name=".presentacion.login" />
+        <activity android:name=".presentacion.login"/>
     </application>
 
 </manifest>
