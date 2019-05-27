@@ -29,10 +29,6 @@ public class NuevoUsuarioActivity extends AppCompatActivity {
         setContentView(R.layout.activity_nuevo_usuario);
         this.txtEmail=findViewById(R.id.txtEmail);
         this.txtPass=findViewById(R.id.txtPass);
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        BottomNavigationView navigationView = (BottomNavigationView) findViewById(R.id.nav_view);
-        navigationView.getMenu().getItem(0).setChecked(true);
-        navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
     public void iniciar(View view){
@@ -80,32 +76,5 @@ public class NuevoUsuarioActivity extends AppCompatActivity {
         Intent intento = new Intent(this,ValidarCuentaActivity.class);
         startActivity(intento);
         }
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    Intent i = new Intent(NuevoUsuarioActivity.this, Menu_principal.class);
-                    startActivity(i);
-                    return true;
-                case R.id.navigation_notificacion:
-                 //   i = new Intent(NuevoUsuarioActivity.this, Perfil_elemento.class);
-                 //   startActivity(i);
-                    return true;
-                case R.id.navigation_calendario:
-                    i = new Intent(NuevoUsuarioActivity.this, Calendario_elementos.class);
-                    startActivity(i);
-                    return true;
-                case R.id.navigation_sesion:
-                    i = new Intent(NuevoUsuarioActivity.this, Perfil_usuario.class);
-                    startActivity(i);
-                    return true;
-            }
-            return false;
-        }
-    };
 
 }
