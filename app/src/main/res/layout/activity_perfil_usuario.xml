@@ -17,7 +17,7 @@
         app:menu="@menu/bottom_nav_menu" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/btn_desactivar"
         android:layout_width="292dp"
         android:layout_height="42dp"
         android:layout_marginStart="63dp"
