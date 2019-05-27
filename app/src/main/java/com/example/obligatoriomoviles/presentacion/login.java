@@ -5,12 +5,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.obligatoriomoviles.API.APICliente;
@@ -24,23 +23,19 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class login extends AppCompatActivity {
-    private EditText etEmail;
-    private EditText etPass;
+    private TextInputLayout etEmail;
+    private TextInputLayout etPass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        BottomNavigationView navView = findViewById(R.id.nav_view);
 
-        navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        //Setear el focus a la opcion correspondiente (del 0 al numero de botones)
-        navView.getMenu().getItem(2).setChecked(true);
 
-        etEmail=findViewById(R.id.txtEmail);
+
+        etEmail=findViewById(R.id.Email);
         etPass=findViewById(R.id.txtContraseña);
-
 //creo la variable session
         SharedPreferences preferences = getSharedPreferences("session", Context.MODE_PRIVATE);
         boolean session =  preferences.contains("sessionCorreo");
@@ -57,8 +52,8 @@ public class login extends AppCompatActivity {
     }
 
     public void login(View view){
-        final String email = etEmail.getText().toString();
-        String pass = etPass.getText().toString();
+        final String email = etEmail.getEditText().getText().toString();
+        String pass = etPass.getEditText().getText().toString();
         if(email.equals("") || pass.equals("")){
             return;
         }
@@ -108,39 +103,5 @@ public class login extends AppCompatActivity {
     }
 
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    Intent i = new Intent(getApplicationContext(), Menu_principal.class);
-                    startActivity(i);
-                    overridePendingTransition(R.anim.infade,R.anim.outfade);
-                    return true;
-                case R.id.navigation_buscar:
-                    //     i = new Intent(Menu_principal.this, Perfil_elemento.class);
-                    //     startActivity(i);
-                    return true;
-                case R.id.navigation_perfil:
-                    i = new Intent(getApplicationContext(), Calendario_elementos.class);
-                    startActivity(i);
-                    overridePendingTransition(R.anim.infade,R.anim.outfade);
-                    return true;
-                case R.id.navigation_sesion:
-                    i = new Intent(getApplicationContext(), login.class);
-                    startActivity(i);
-                    overridePendingTransition(R.anim.infade,R.anim.outfade);
-                    return true;
-                case R.id.navigation_registrarse:
-                    i = new Intent(getApplicationContext(), NuevoUsuarioActivity.class);
-                    startActivity(i);
-                    overridePendingTransition(R.anim.infade,R.anim.outfade);
-                    return true;
-
-            }
-            return false;
-        }
-    };
 }

@@ -1,5 +1,4 @@
 package com.example.obligatoriomoviles.API;
-import com.example.obligatoriomoviles.Clases.Comentario;
 import com.example.obligatoriomoviles.Clases.retorno;
 
 import com.example.obligatoriomoviles.Clases.Cine.Cine;

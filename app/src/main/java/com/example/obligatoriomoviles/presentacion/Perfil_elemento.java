@@ -24,12 +24,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.obligatoriomoviles.API.APICliente;
-import com.example.obligatoriomoviles.API.APIError;
 import com.example.obligatoriomoviles.API.APIInterface;
 import com.example.obligatoriomoviles.Clases.Cine.Actor;
 import com.example.obligatoriomoviles.Clases.Cine.Actor_adapter;
 import com.example.obligatoriomoviles.Clases.Cine.Cine;
-import com.example.obligatoriomoviles.Clases.Cine.Comentarios_adapter;
+import com.example.obligatoriomoviles.Clases.Comentarios_adapter;
 import com.example.obligatoriomoviles.Clases.Comentario;
 import com.example.obligatoriomoviles.Clases.retorno;
 import com.example.obligatoriomoviles.R;
@@ -37,7 +36,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -153,9 +151,6 @@ public class Perfil_elemento extends AppCompatActivity {
         recyclerView_comentarios = (RecyclerView) dialog.findViewById(R.id.comentario_lista);
         recyclerView_comentarios.setHasFixedSize(true);
         recyclerView_comentarios.setLayoutManager(new LinearLayoutManager(this));
-
-        SharedPreferences prefs = getSharedPreferences("session", Context.MODE_PRIVATE);
-        String email = prefs.getString("sessionCorreo", null);
         APIInterface apiService_2 = APICliente.getServidor().create(APIInterface.class);
         Call<retorno> call_2 = apiService_2.getComentario(getIntent().getExtras().getString("id"));
 
@@ -251,26 +246,20 @@ System.out.println("llego");                            }
                     startActivity(i);
                     overridePendingTransition(R.anim.infade,R.anim.outfade);
                     return true;
-                case R.id.navigation_buscar:
+                case R.id.navigation_notificacion:
                     //     i = new Intent(Menu_principal.this, Perfil_elemento.class);
                     //     startActivity(i);
                     return true;
-                case R.id.navigation_perfil:
+                case R.id.navigation_calendario:
                     i = new Intent(getApplicationContext(), Calendario_elementos.class);
                     startActivity(i);
                     overridePendingTransition(R.anim.infade,R.anim.outfade);
                     return true;
                 case R.id.navigation_sesion:
-                    i = new Intent(getApplicationContext(), login.class);
+                    i = new Intent(getApplicationContext(), Perfil_usuario.class);
                     startActivity(i);
                     overridePendingTransition(R.anim.infade,R.anim.outfade);
                     return true;
-                case R.id.navigation_registrarse:
-                    i = new Intent(getApplicationContext(), NuevoUsuarioActivity.class);
-                    startActivity(i);
-                    overridePendingTransition(R.anim.infade,R.anim.outfade);
-                    return true;
-
             }
             return false;
         }

@@ -16,10 +16,11 @@
     <string name="title_activity_menu_principal">Menu_principal</string>
     <string name="title_home">Inicio</string>
     <string name="title_dashboard">Buscar</string>
-    <string name="title_notifications">Perfil</string>
-    <string name="title_sesion">Iniciar sesion</string>
+    <string name="title_notifications">Notificación</string>
+    <string name="title_sesion">Perfil</string>
     <string name="title_registrarse">Registrarse</string>
     <string name="title_calendario">Calendario</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
