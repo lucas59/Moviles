@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.obligatoriomoviles.API.APICliente;
@@ -34,16 +35,23 @@ public class Perfil_usuario extends AppCompatActivity {
 
 
         SharedPreferences preferences = getSharedPreferences("session", Context.MODE_PRIVATE);
-        if(preferences.getString("sessionCorreo","").equals("")){
-           Intent intento = new Intent(this,login.class);
+        if (preferences.getString("sessionCorreo", "").equals("")) {
+            Intent intento = new Intent(this, login.class);
+        } else {
+            final String nombre = preferences.getString("sessionNombre", null);
+            final int comentarios = preferences.getInt("sessionNComentarios", 0);
+            TextView nombre_t = (TextView) findViewById(R.id.Nombre);
+            TextView comentarios_t = (TextView) findViewById(R.id.NComentarios);
+            nombre_t.setText(nombre);
+            comentarios_t.setText(String.valueOf(comentarios));
         }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Moviles");
-}
+    }
 
-    public void desactivarCuenta(View view){
-    SharedPreferences preferences = getSharedPreferences("session", Context.MODE_PRIVATE);
-    String correo = preferences.getString("sessionCorreo", "");
+    public void desactivarCuenta(View view) {
+        SharedPreferences preferences = getSharedPreferences("session", Context.MODE_PRIVATE);
+        String correo = preferences.getString("sessionCorreo", "");
 
         final APIInterface apiService = APICliente.getServidor().create(APIInterface.class);
         Call<retorno> call = apiService.desactivarUsuario(correo);
@@ -51,19 +59,20 @@ public class Perfil_usuario extends AppCompatActivity {
         call.enqueue(new Callback<retorno>() {//verifico que los datos sean correctos
             @Override
             public void onResponse(Call<retorno> call, Response<retorno> response) {
-                if(response.body().getRetorno()){
+                if (response.body().getRetorno()) {
                     SharedPreferences session = getSharedPreferences("session", Context.MODE_PRIVATE);
-                   SharedPreferences.Editor editor = session.edit();
+                    SharedPreferences.Editor editor = session.edit();
                     editor.clear();
                     editor.commit();
-                    Intent intento = new Intent(getApplicationContext(),login.class);
-                    Toast.makeText(getApplicationContext(),"Session cerrada!", Toast.LENGTH_LONG).show();
+                    Intent intento = new Intent(getApplicationContext(), login.class);
+                    Toast.makeText(getApplicationContext(), "Session cerrada!", Toast.LENGTH_LONG).show();
 
 
-                }else {
-                    Toast.makeText(getApplicationContext(),"No se puede desactivar!", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "No se puede desactivar!", Toast.LENGTH_LONG).show();
                 }
             }
+
             @Override
             public void onFailure(Call<retorno> call, Throwable t) {
 
@@ -71,13 +80,13 @@ public class Perfil_usuario extends AppCompatActivity {
         });
     }
 
-    public void Cerrar_sesion(View view){
+    public void Cerrar_sesion(View view) {
         SharedPreferences preferences = getSharedPreferences("session", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("sessionCorreo",null);
-        editor.putString("sessionNombre",null);
-        editor.putString("sessionApellido",null);
-        editor.putInt("sessionEdad",0);
+        editor.putString("sessionCorreo", null);
+        editor.putString("sessionNombre", null);
+        editor.putString("sessionApellido", null);
+        editor.putInt("sessionEdad", 0);
         editor.commit();
         Intent i = new Intent(getApplicationContext(), login.class);
         startActivity(i);
@@ -92,7 +101,7 @@ public class Perfil_usuario extends AppCompatActivity {
                 case R.id.navigation_home:
                     Intent i = new Intent(getApplicationContext(), Menu_principal.class);
                     startActivity(i);
-                    overridePendingTransition(R.anim.infade,R.anim.outfade);
+                    overridePendingTransition(R.anim.infade, R.anim.outfade);
                     return true;
                 case R.id.navigation_notificacion:
                     //     i = new Intent(Menu_principal.this, Perfil_elemento.class);
@@ -101,7 +110,7 @@ public class Perfil_usuario extends AppCompatActivity {
                 case R.id.navigation_calendario:
                     i = new Intent(getApplicationContext(), Calendario_elementos.class);
                     startActivity(i);
-                    overridePendingTransition(R.anim.infade,R.anim.outfade);
+                    overridePendingTransition(R.anim.infade, R.anim.outfade);
                     return true;
 
 
@@ -109,6 +118,7 @@ public class Perfil_usuario extends AppCompatActivity {
             return false;
         }
     };
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         return true;
@@ -125,7 +135,6 @@ public class Perfil_usuario extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 
 
 }

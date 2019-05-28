@@ -250,11 +250,13 @@ if(getIntent().getExtras().getString("tipo").toString().compareTo("serie") != 0)
      final EditText txtcomentario = (EditText) mView.findViewById(R.id.Comentario);
      SharedPreferences prefs = getSharedPreferences("session", Context.MODE_PRIVATE);
      final String email = prefs.getString("sessionCorreo", null);
+
      builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
          @Override
          public void onClick(DialogInterface dialog, int which) {
             if(!txtcomentario.getText().toString().isEmpty()) {
                 if (email != null) {
+
                     final APIInterface apiService_2 = APICliente.getServidor().create(APIInterface.class);
                     String comentario = txtcomentario.getText().toString();
                     Integer id = Integer.parseInt(getIntent().getExtras().getString("id"));

@@ -75,6 +75,7 @@ public class login extends AppCompatActivity {
                                 editor.putString("sessionNombre",response.body().getNombre());
                                 editor.putString("sessionApellido",response.body().getApellido());
                                 editor.putInt("sessionEdad",response.body().getEdad());
+                                editor.putInt("sessionNComentarios",response.body().getNumero_comentario());
                                 editor.commit();
                                 Toast.makeText(getApplicationContext(),"Bienvenido!", Toast.LENGTH_SHORT).show();
                                 Intent intento = new Intent(getBaseContext(),Calendario_elementos.class);
