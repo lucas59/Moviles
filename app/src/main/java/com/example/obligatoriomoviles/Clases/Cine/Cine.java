@@ -11,6 +11,8 @@ public class Cine {
 
     @SerializedName("original_title")
     private String original_title;
+    @SerializedName("original_name")
+    private String original_name;
     @SerializedName("backdrop_path")
     private String backdrop_path;
     @SerializedName("poster_path")
@@ -87,6 +89,11 @@ public class Cine {
     public String getPoster_path() {
 
         return poster_path;
+    }
+
+
+    public String getOriginal_name() {
+        return original_name;
     }
 
     public String getId() {

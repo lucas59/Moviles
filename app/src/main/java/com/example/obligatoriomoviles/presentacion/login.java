@@ -8,6 +8,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -39,13 +40,15 @@ public class login extends AppCompatActivity {
             Intent i = new Intent(this,Perfil_usuario.class);
             startActivity(i);
         }
-
     }
 
     public void crearNuevaCuenta(View view){
         Intent intent = new Intent(this, NuevoUsuarioActivity.class);
         startActivity(intent);
     }
+
+
+
 
     public void login(View view){
         final String email = etEmail.getEditText().getText().toString();

@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -31,13 +32,13 @@ public class Perfil_usuario extends AppCompatActivity {
 
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        //Setear el focus a la opcion correspondiente (del 0 al numero de botones)
-        navView.getMenu().getItem(2).setChecked(true);
 
         SharedPreferences preferences = getSharedPreferences("session", Context.MODE_PRIVATE);
         if(preferences.getString("sessionCorreo","").equals("")){
            Intent intento = new Intent(this,login.class);
         }
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Moviles");
 }
 
     public void desactivarCuenta(View view){
@@ -102,16 +103,28 @@ public class Perfil_usuario extends AppCompatActivity {
                     startActivity(i);
                     overridePendingTransition(R.anim.infade,R.anim.outfade);
                     return true;
-                case R.id.navigation_sesion:
-                    i = new Intent(getApplicationContext(), Perfil_usuario.class);
-                    startActivity(i);
-                    overridePendingTransition(R.anim.infade,R.anim.outfade);
-                    return true;
+
 
             }
             return false;
         }
     };
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
 
 

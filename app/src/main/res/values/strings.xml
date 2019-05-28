@@ -21,6 +21,11 @@
     <string name="title_registrarse">Registrarse</string>
     <string name="title_calendario">Calendario</string>
 
+    <string-array name="entretenimiento">
+        <item>Peliculas</item>
+        <item>Series</item>
+    </string-array>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

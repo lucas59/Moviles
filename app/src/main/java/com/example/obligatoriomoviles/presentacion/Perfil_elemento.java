@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -60,7 +61,10 @@ public class Perfil_elemento extends AppCompatActivity {
 
         //Llamado de la API para que retorne el json de la consulta
         APIInterface apiService = APICliente.getPelicula().create(APIInterface.class);
-        Call<Cine> call = apiService.getPelicula( getIntent().getExtras().getString("id"),"0d81ceeb977ab515fd9f844377688c5a","credits","es");
+        Call<Cine> call = apiService.getPelicula(getIntent().getExtras().getString("id"),"0d81ceeb977ab515fd9f844377688c5a","credits","es");
+
+        APIInterface apiService_serie = APICliente.getPelicula().create(APIInterface.class);
+        Call<Cine> call_serie = apiService_serie.getSerie_unica(getIntent().getExtras().getString("id"),"0d81ceeb977ab515fd9f844377688c5a","credits","es");
 
         //mostraar la lista de actores
         recyclerView = (RecyclerView) findViewById(R.id.Actores);
@@ -74,57 +78,110 @@ public class Perfil_elemento extends AppCompatActivity {
         //Setear el focus a la opcion correspondiente (del 0 al numero de botones)
         navigationView.getMenu().getItem(2).setChecked(true);
         //setear el menu de navegación de abajo
-
-        call.enqueue(new Callback<Cine>() {
-            @Override
-            public void onResponse(Call<Cine> call, Response<Cine> response) {
-                spinner.setVisibility(View.VISIBLE);
-                JsonObject creditos=response.body().getCreditos();
-                JsonArray casts=creditos.get("cast").getAsJsonArray();
-                List<Actor> actores = new ArrayList<>();
-                if (casts != null) {
-                    int len = casts.size();
-                    for (int i=0;i<len;i++){
-                        actores.add(new Actor(casts.get(i).getAsJsonObject().get("name").toString(),casts.get(i).getAsJsonObject().get("character").toString(),casts.get(i).getAsJsonObject().get("profile_path").toString() ));
-                    }
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Moviles");
+if(getIntent().getExtras().getString("tipo").toString().compareTo("serie") != 0) {
+    call.enqueue(new Callback<Cine>() {
+        @Override
+        public void onResponse(Call<Cine> call, Response<Cine> response) {
+            spinner.setVisibility(View.VISIBLE);
+            JsonObject creditos = response.body().getCreditos();
+            JsonArray casts = creditos.get("cast").getAsJsonArray();
+            List<Actor> actores = new ArrayList<>();
+            if (casts != null) {
+                int len = casts.size();
+                for (int i = 0; i < len; i++) {
+                    actores.add(new Actor(casts.get(i).getAsJsonObject().get("name").toString(), casts.get(i).getAsJsonObject().get("character").toString(), casts.get(i).getAsJsonObject().get("profile_path").toString()));
                 }
-                Actor_adapter adapter = new Actor_adapter(Perfil_elemento.this,actores);
-                recyclerView.setAdapter(adapter);
-                //Setear fondo y poster del elemento
-                String fondo = "https://image.tmdb.org/t/p/w500" + response.body().getBackdrop_path();
-                String poster = "https://image.tmdb.org/t/p/w500" + response.body().getPoster_path();
-                LinearLayoutManager layoutManager = new LinearLayoutManager(Perfil_elemento.this, LinearLayoutManager.HORIZONTAL, false);
-                RecyclerView myList = (RecyclerView) findViewById(R.id.Actores);
-                myList.setLayoutManager(layoutManager);
-                //traer el ImageView y el textview del layout
-                 ImageView fondo_view = (ImageView) findViewById(R.id.imagen_fondo);
-                 ImageView poster_view = (ImageView) findViewById(R.id.imagen_poster);
-                 TextView fecha = (TextView) findViewById(R.id.fecha);
-                TextView titulo = (TextView) findViewById(R.id.titulo);
-                TextView sinopsis = (TextView) findViewById(R.id.sinopsis);
-                TextView valor = (TextView) findViewById(R.id.valor);
-                ProgressBar votos = (ProgressBar) findViewById(R.id.votos);
-                //Setear información en los elementos
-                titulo.setText(response.body().getOriginal_title());
-                Picasso.get().load(fondo).fit().centerCrop().into(fondo_view);
-                Picasso.get().load(poster).into(poster_view);
-                fecha.setText("Estreno: " + response.body().getFecha());
-                sinopsis.setText(response.body().getSinopsis());
-                votos.setProgress((int) Float.parseFloat(response.body().getNota()));
-                valor.setText(response.body().getNota());
-
-                //quitar animación de carga
-                spinner.setVisibility(View.GONE);
             }
+            Actor_adapter adapter = new Actor_adapter(Perfil_elemento.this, actores);
+            recyclerView.setAdapter(adapter);
+            //Setear fondo y poster del elemento
+            String fondo = "https://image.tmdb.org/t/p/w500" + response.body().getBackdrop_path();
+            String poster = "https://image.tmdb.org/t/p/w500" + response.body().getPoster_path();
+            LinearLayoutManager layoutManager = new LinearLayoutManager(Perfil_elemento.this, LinearLayoutManager.HORIZONTAL, false);
+            RecyclerView myList = (RecyclerView) findViewById(R.id.Actores);
+            myList.setLayoutManager(layoutManager);
+            //traer el ImageView y el textview del layout
+            ImageView fondo_view = (ImageView) findViewById(R.id.imagen_fondo);
+            ImageView poster_view = (ImageView) findViewById(R.id.imagen_poster);
+            TextView fecha = (TextView) findViewById(R.id.fecha);
+            TextView titulo = (TextView) findViewById(R.id.titulo);
+            TextView sinopsis = (TextView) findViewById(R.id.sinopsis);
+            TextView valor = (TextView) findViewById(R.id.valor);
+            ProgressBar votos = (ProgressBar) findViewById(R.id.votos);
+            //Setear información en los elementos
+            titulo.setText(response.body().getOriginal_title());
+            Picasso.get().load(fondo).fit().centerCrop().into(fondo_view);
+            Picasso.get().load(poster).into(poster_view);
+            fecha.setText("Estreno: " + response.body().getFecha());
+            sinopsis.setText(response.body().getSinopsis());
+            votos.setProgress((int) Float.parseFloat(response.body().getNota()));
+            valor.setText(response.body().getNota());
 
-            @Override
-            public void onFailure(Call<Cine> call, Throwable t) {
+            //quitar animación de carga
+            spinner.setVisibility(View.GONE);
+        }
 
+        @Override
+        public void onFailure(Call<Cine> call, Throwable t) {
+
+        }
+
+
+    });
+} else{
+    call_serie.enqueue(new Callback<Cine>() {
+        @Override
+        public void onResponse(Call<Cine> call, Response<Cine> response) {
+            spinner.setVisibility(View.VISIBLE);
+            JsonObject creditos=response.body().getCreditos();
+            JsonArray casts=creditos.get("cast").getAsJsonArray();
+            List<Actor> actores = new ArrayList<>();
+            if (casts != null) {
+                int len = casts.size();
+                for (int i=0;i<len;i++){
+                    actores.add(new Actor(casts.get(i).getAsJsonObject().get("name").toString(),casts.get(i).getAsJsonObject().get("character").toString(),casts.get(i).getAsJsonObject().get("profile_path").toString() ));
+                }
             }
+            Actor_adapter adapter = new Actor_adapter(Perfil_elemento.this,actores);
+            recyclerView.setAdapter(adapter);
+            //Setear fondo y poster del elemento
+            String fondo = "https://image.tmdb.org/t/p/w500" + response.body().getBackdrop_path();
+            String poster = "https://image.tmdb.org/t/p/w500" + response.body().getPoster_path();
+            LinearLayoutManager layoutManager = new LinearLayoutManager(Perfil_elemento.this, LinearLayoutManager.HORIZONTAL, false);
+            RecyclerView myList = (RecyclerView) findViewById(R.id.Actores);
+            myList.setLayoutManager(layoutManager);
+            //traer el ImageView y el textview del layout
+            ImageView fondo_view = (ImageView) findViewById(R.id.imagen_fondo);
+            ImageView poster_view = (ImageView) findViewById(R.id.imagen_poster);
+            TextView fecha = (TextView) findViewById(R.id.fecha);
+            TextView titulo = (TextView) findViewById(R.id.titulo);
+            TextView sinopsis = (TextView) findViewById(R.id.sinopsis);
+            TextView valor = (TextView) findViewById(R.id.valor);
+            ProgressBar votos = (ProgressBar) findViewById(R.id.votos);
+            //Setear información en los elementos
+            titulo.setText(response.body().getOriginal_title());
+            Picasso.get().load(fondo).fit().centerCrop().into(fondo_view);
+            Picasso.get().load(poster).into(poster_view);
+            fecha.setText("Estreno: " + response.body().getFecha());
+            sinopsis.setText(response.body().getSinopsis());
+            votos.setProgress((int) Float.parseFloat(response.body().getNota()));
+            valor.setText(response.body().getNota());
+
+            //quitar animación de carga
+            spinner.setVisibility(View.GONE);
+        }
+
+        @Override
+        public void onFailure(Call<Cine> call, Throwable t) {
+
+        }
 
 
 
-        });
+    });
+}
         //llamar función dialog de comentarios
         dialogBtn = findViewById(R.id.boton_comentarios);
         dialogBtn.setOnClickListener(new View.OnClickListener() {
@@ -255,13 +312,40 @@ System.out.println("llego");                            }
                     startActivity(i);
                     overridePendingTransition(R.anim.infade,R.anim.outfade);
                     return true;
-                case R.id.navigation_sesion:
-                    i = new Intent(getApplicationContext(), Perfil_usuario.class);
-                    startActivity(i);
-                    overridePendingTransition(R.anim.infade,R.anim.outfade);
-                    return true;
+
             }
             return false;
         }
     };
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_principal, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+
+        switch (item.getItemId()) {
+            case R.id.perfil:
+                Intent i = new Intent(getApplicationContext(), Perfil_usuario.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.infade,R.anim.outfade);
+                return true;
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
+
+    }
 }
