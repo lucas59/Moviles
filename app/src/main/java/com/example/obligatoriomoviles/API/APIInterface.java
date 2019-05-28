@@ -24,6 +24,12 @@ public interface APIInterface {
     @FormUrlEncoded
     Call <retorno> altaUsuario(@Field("correo") String correo, @Field("pass") String pass);
 
+
+    @POST("usuario/nuevo2")
+    @FormUrlEncoded
+    Call <retorno> altaUsuario2(@Field("nombre") String nombre, @Field("apellido") String apellido, @Field("edad") int edad, @Field("foto") String img,@Field("token") String token);
+
+
     @GET("validacion/{token}")
     Call <retorno> validarCuenta(@Path("token") String codigo);
 

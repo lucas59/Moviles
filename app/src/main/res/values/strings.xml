@@ -19,7 +19,11 @@
     <string name="title_notifications">Notificación</string>
     <string name="title_sesion">Perfil</string>
     <string name="title_registrarse">Registrarse</string>
+    <string name="txtNombre">Nombre</string>
+    <string name="txtApellido">Apellido</string>
+    <string name="txtEdad">Edad</string>
     <string name="title_calendario">Calendario</string>
+
 
 
     <!-- TODO: Remove or change this placeholder text -->

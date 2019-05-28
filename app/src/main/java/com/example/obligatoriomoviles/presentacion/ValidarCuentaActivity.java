@@ -1,6 +1,8 @@
 package com.example.obligatoriomoviles.presentacion;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -33,7 +35,7 @@ public class ValidarCuentaActivity extends AppCompatActivity {
     }
 
     public  void validarCuenta(View view){
-        String codigo = et1.getText().toString();
+        final String codigo = et1.getText().toString();
 
         if(codigo.equals("")){
             return;
@@ -47,8 +49,13 @@ public class ValidarCuentaActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<retorno> call, Response<retorno> response) {
                 if(response.body().getRetorno()){
+                    SharedPreferences preferences = getSharedPreferences("temporales", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("tokenActual",codigo);
+                    editor.commit();
+
                     Toast.makeText(getApplicationContext(),"Usuario activado",Toast.LENGTH_SHORT).show();
-                    Intent intento = new Intent(getBaseContext(),login.class);
+                    Intent intento = new Intent(getBaseContext(),nuevo_usuario2.class);
                     startActivity(intento);
                 }else {
                     Toast.makeText(getApplicationContext(),"Codigo invalido", Toast.LENGTH_LONG).show();
