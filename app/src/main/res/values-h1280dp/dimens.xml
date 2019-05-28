@@ -2,7 +2,7 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="button_margen">5dp</dimen>
+    <dimen name="button_margen">64dp</dimen>
     <dimen name="slider_botones_margen">656dp</dimen>
-    <dimen name="slider_control_margen">400dp</dimen>
+    <dimen name="slider_control_margen">580dp</dimen>
 </resources>
