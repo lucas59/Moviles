@@ -32,8 +32,13 @@ public class Perfil_usuario extends AppCompatActivity {
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         //Setear el focus a la opcion correspondiente (del 0 al numero de botones)
-        navView.getMenu().getItem(3).setChecked(true);
-    }
+        navView.getMenu().getItem(2).setChecked(true);
+
+        SharedPreferences preferences = getSharedPreferences("session", Context.MODE_PRIVATE);
+        if(preferences.getString("sessionCorreo","").equals("")){
+           Intent intento = new Intent(this,login.class);
+        }
+}
 
     public void desactivarCuenta(View view){
     SharedPreferences preferences = getSharedPreferences("session", Context.MODE_PRIVATE);
@@ -47,10 +52,12 @@ public class Perfil_usuario extends AppCompatActivity {
             public void onResponse(Call<retorno> call, Response<retorno> response) {
                 if(response.body().getRetorno()){
                     SharedPreferences session = getSharedPreferences("session", Context.MODE_PRIVATE);
-                   // SharedPreferences.Editor editor = preferences.edit();
-                    session.edit().clear().commit();
+                   SharedPreferences.Editor editor = session.edit();
+                    editor.clear();
+                    editor.commit();
                     Intent intento = new Intent(getApplicationContext(),login.class);
                     Toast.makeText(getApplicationContext(),"Session cerrada!", Toast.LENGTH_LONG).show();
+
 
                 }else {
                     Toast.makeText(getApplicationContext(),"No se puede desactivar!", Toast.LENGTH_LONG).show();
@@ -71,7 +78,7 @@ public class Perfil_usuario extends AppCompatActivity {
         editor.putString("sessionApellido",null);
         editor.putInt("sessionEdad",0);
         editor.commit();
-        Intent i = new Intent(getApplicationContext(), Slider.class);
+        Intent i = new Intent(getApplicationContext(), login.class);
         startActivity(i);
     }
 

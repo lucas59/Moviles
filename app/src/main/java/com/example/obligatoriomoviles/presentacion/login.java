@@ -30,10 +30,6 @@ public class login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-
-
-
         etEmail=findViewById(R.id.Email);
         etPass=findViewById(R.id.txtContraseña);
 //creo la variable session

@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class APICliente {
 
 
-    private static final String BASE_URL = "https://api.themoviedb.org/3/discover/movie/";
+    public static final String BASE_URL = "https://api.themoviedb.org/3/discover/movie/";
     private static Retrofit retrofit = null;
     private static Retrofit retrofit_peliculas = null;
     private static Retrofit retrofit_servidor = null;
