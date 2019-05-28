@@ -47,7 +47,7 @@ public class Perfil_usuario extends AppCompatActivity {
         } else {
             final APIInterface apiService = APICliente.getServidor().create(APIInterface.class);
             Call<usuario> call = apiService.getDatosUsuario(preferences.getString("sessionCorreo", ""));
-            call.enqueue(new Callback<usuario>() {//verifico que los datos sean correctos
+            call.enqueue(new Callback<usuario>() {
                 @Override
                 public void onResponse(Call<usuario> call, Response<usuario> response) {
                     final String nombre = preferences.getString("sessionNombre", null);
