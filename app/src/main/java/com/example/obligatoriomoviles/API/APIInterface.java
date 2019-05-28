@@ -13,12 +13,17 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface APIInterface {
-    @GET(".")
+    @GET("movie/")
     Call<Cine> getImagen(@Query("sort_by") String sort_by, @Query("year") Integer año, @Query("language") String lenguaje, @Query("api_key") String key);
 
-    @GET("{id}")
+    @GET("tv/")
+    Call<Cine> getSerie(@Query("sort_by") String sort_by, @Query("year") Integer año, @Query("language") String lenguaje, @Query("api_key") String key);
+
+    @GET("movie/{id}")
     Call<Cine> getPelicula(@Path("id") String id,@Query("api_key") String api_key,@Query("append_to_response") String filtro,@Query("language") String idioma);
 
+    @GET("tv/{id}")
+    Call<Cine> getSerie_unica(@Path("id") String id,@Query("api_key") String api_key,@Query("append_to_response") String filtro,@Query("language") String idioma);
 
     @POST("usuario/nuevo")
     @FormUrlEncoded

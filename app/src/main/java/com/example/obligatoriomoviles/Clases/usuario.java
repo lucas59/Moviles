@@ -21,6 +21,11 @@ public class usuario {
     @SerializedName("edad")
     private int edad;
 
+
+
+    @SerializedName("Numero_comentario")
+    private int Numero_comentario;
+
     @SerializedName("notificaciones")
     private List<Notificaciones> notificaciones;
 
@@ -65,6 +70,9 @@ public class usuario {
 
     public void setEdad(int edad) {
         this.edad = edad;
+    }
+    public int getNumero_comentario() {
+        return Numero_comentario;
     }
 
     public String getContrasenia() {

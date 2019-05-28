@@ -24,6 +24,11 @@
     <string name="txtEdad">Edad</string>
     <string name="title_calendario">Calendario</string>
 
+    <string-array name="entretenimiento">
+        <item>Peliculas</item>
+        <item>Series</item>
+    </string-array>
+
 
 
     <!-- TODO: Remove or change this placeholder text -->
