@@ -78,7 +78,7 @@ public class Perfil_usuario extends AppCompatActivity {
         editor.putString("sessionApellido",null);
         editor.putInt("sessionEdad",0);
         editor.commit();
-        Intent i = new Intent(getApplicationContext(), Slider.class);
+        Intent i = new Intent(getApplicationContext(), login.class);
         startActivity(i);
     }
 

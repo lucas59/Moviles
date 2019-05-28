@@ -13,7 +13,7 @@
         android:layout_height="58dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="656dp"
+        android:layout_marginTop="556dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="72dp"
@@ -26,7 +26,7 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/nav_view"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.065"
+        app:layout_constraintHorizontal_bias="0.099"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,7 +36,7 @@
         android:layout_height="58dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="656dp"
+        android:layout_marginTop="552dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="72dp"
@@ -55,7 +55,7 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/slide_view"
         android:layout_width="411dp"
-        android:layout_height="645dp"
+        android:layout_height="534dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
@@ -76,7 +76,8 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.565"
+        app:layout_constraintHorizontal_bias="0.559"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/slide_view"></LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/slide_view"
+        app:layout_constraintVertical_bias="0.155"></LinearLayout>
 </android.support.constraint.ConstraintLayout>
