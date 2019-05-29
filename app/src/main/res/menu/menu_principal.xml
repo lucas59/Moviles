@@ -5,7 +5,7 @@
     <item
         android:id="@+id/perfil"
         android:icon="@drawable/user"
-        android:title="Text to be seen by user"
+        android:title="Usuario"
         app:showAsAction="always"
         android:orderInCategory="0"/>
 

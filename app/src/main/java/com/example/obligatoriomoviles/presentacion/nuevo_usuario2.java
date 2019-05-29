@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -31,9 +32,9 @@ import retrofit2.Response;
 
 public class nuevo_usuario2 extends AppCompatActivity {
     private FloatingActionButton btnSubirFoto;
-    private EditText txtNombre;
-    private EditText txtApellido;
-    private EditText txtEdad;
+    private TextInputLayout txtNombre;
+    private TextInputLayout txtApellido;
+    private TextInputLayout txtEdad;
     private ImageView img;
     private Uri foto;
     @Override
@@ -64,9 +65,9 @@ public class nuevo_usuario2 extends AppCompatActivity {
     }
 
     public void subirDatos(View view) throws IOException {
-        String nombre = this.txtNombre.getText().toString();
-        String apellido = this.txtApellido.getText().toString();
-        int edad = Integer.valueOf(this.txtEdad.getText().toString());
+        String nombre = this.txtNombre.getEditText().getText().toString();
+        String apellido = this.txtApellido.getEditText().getText().toString();
+        int edad = Integer.valueOf(this.txtEdad.getEditText().getText().toString());
         if(nombre.equals("") ||apellido.equals("")){
             return;
         }

@@ -74,6 +74,7 @@ public class login extends AppCompatActivity {
                                 editor.putString("sessionCorreo",response.body().getCorreo());
                                 editor.putString("sessionNombre",response.body().getNombre());
                                 editor.putString("sessionApellido",response.body().getApellido());
+                                editor.putString("sessionFoto",response.body().getFoto());
                                 editor.putInt("sessionEdad",response.body().getEdad());
                                 editor.putInt("sessionNComentarios",response.body().getNumero_comentario());
                                 editor.commit();
