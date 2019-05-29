@@ -31,7 +31,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Calendario_elementos extends AppCompatActivity  implements AdapterView.OnItemSelectedListener {
+public class Calendario_elementos extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     //lista de peliculas
     List<Cine> lista_peliculas;
@@ -40,6 +40,7 @@ public class Calendario_elementos extends AppCompatActivity  implements AdapterV
     RecyclerView recyclerView;
     Call<Cine> call;
     Call<Cine> call_series;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,10 +53,10 @@ public class Calendario_elementos extends AppCompatActivity  implements AdapterV
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
-       lista_peliculas = new ArrayList<>();
+        lista_peliculas = new ArrayList<>();
 
         Spinner spinner_2 = findViewById(R.id.spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.entretenimiento,R.layout.spinner_color);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.entretenimiento, R.layout.spinner_color);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_2.setAdapter(adapter);
         spinner_2.setOnItemSelectedListener(this);
@@ -63,14 +64,11 @@ public class Calendario_elementos extends AppCompatActivity  implements AdapterV
         //Llamado de la API para que retorne el json de la consulta
 
 
-
-
         //Menu
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navView.getMenu().getItem(1).setChecked(true);
         getSupportActionBar().setTitle("Moviles");
-
 
     }
 
@@ -83,7 +81,7 @@ public class Calendario_elementos extends AppCompatActivity  implements AdapterV
                 case R.id.navigation_home:
                     Intent i = new Intent(getApplicationContext(), Menu_principal.class);
                     startActivity(i);
-                    overridePendingTransition(R.anim.infade,R.anim.outfade);
+                    overridePendingTransition(R.anim.infade, R.anim.outfade);
                     return true;
                 case R.id.navigation_notificacion:
                     //     i = new Intent(Menu_principal.this, Perfil_elemento.class);
@@ -92,7 +90,7 @@ public class Calendario_elementos extends AppCompatActivity  implements AdapterV
                 case R.id.navigation_calendario:
                     i = new Intent(getApplicationContext(), Calendario_elementos.class);
                     startActivity(i);
-                    overridePendingTransition(R.anim.infade,R.anim.outfade);
+                    overridePendingTransition(R.anim.infade, R.anim.outfade);
                     return true;
 
             }
@@ -101,14 +99,12 @@ public class Calendario_elementos extends AppCompatActivity  implements AdapterV
     };
 
 
-
-
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        if(parent.getId() == R.id.spinner) {
+        if (parent.getId() == R.id.spinner) {
             if (position == 0) {
                 APIInterface apiService = APICliente.getCalendario().create(APIInterface.class);
-                call = apiService.getImagen("popularity.desc",2019,"en-US","0d81ceeb977ab515fd9f844377688c5a");
+                call = apiService.getImagen("popularity.desc", 2019, "en-US", "0d81ceeb977ab515fd9f844377688c5a");
                 lista_peliculas = new ArrayList<>();
                 final ProgressBar spinner;
                 spinner = findViewById(R.id.progressBar1);
@@ -149,7 +145,7 @@ public class Calendario_elementos extends AppCompatActivity  implements AdapterV
                 });
             } else {
                 APIInterface apiService_series = APICliente.getCalendario().create(APIInterface.class);
-                call_series = apiService_series.getSerie("popularity.desc",2019,"en-US","0d81ceeb977ab515fd9f844377688c5a");
+                call_series = apiService_series.getSerie("popularity.desc", 2019, "en-US", "0d81ceeb977ab515fd9f844377688c5a");
                 lista_peliculas = new ArrayList<>();
                 final ProgressBar spinner;
                 spinner = findViewById(R.id.progressBar1);
@@ -191,6 +187,7 @@ public class Calendario_elementos extends AppCompatActivity  implements AdapterV
                         Log.d("LoginActivity", t.getMessage() + t.getStackTrace().toString());
                     }
                 });
+
             }
         }
     }
@@ -220,7 +217,7 @@ public class Calendario_elementos extends AppCompatActivity  implements AdapterV
             case R.id.perfil:
                 Intent i = new Intent(getApplicationContext(), Perfil_usuario.class);
                 startActivity(i);
-                overridePendingTransition(R.anim.infade,R.anim.outfade);
+                overridePendingTransition(R.anim.infade, R.anim.outfade);
                 return true;
             default:
                 // If we got here, the user's action was not recognized.
