@@ -13,7 +13,6 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 import com.example.obligatoriomoviles.API.APICliente;
@@ -23,7 +22,6 @@ import com.example.obligatoriomoviles.Clases.retorno;
 import com.example.obligatoriomoviles.R;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 
 import retrofit2.Call;
