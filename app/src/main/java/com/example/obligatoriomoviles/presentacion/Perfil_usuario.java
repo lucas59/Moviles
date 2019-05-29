@@ -3,20 +3,26 @@ package com.example.obligatoriomoviles.presentacion;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.obligatoriomoviles.API.APICliente;
 import com.example.obligatoriomoviles.API.APIInterface;
 import com.example.obligatoriomoviles.Clases.retorno;
+import com.example.obligatoriomoviles.Clases.usuario;
 import com.example.obligatoriomoviles.R;
+import com.squareup.picasso.Picasso;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,16 +40,36 @@ public class Perfil_usuario extends AppCompatActivity {
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 
-        SharedPreferences preferences = getSharedPreferences("session", Context.MODE_PRIVATE);
+        final SharedPreferences preferences = getSharedPreferences("session", Context.MODE_PRIVATE);
+
         if (preferences.getString("sessionCorreo", "").equals("")) {
             Intent intento = new Intent(this, login.class);
         } else {
-            final String nombre = preferences.getString("sessionNombre", null);
-            final int comentarios = preferences.getInt("sessionNComentarios", 0);
-            TextView nombre_t = (TextView) findViewById(R.id.Nombre);
-            TextView comentarios_t = (TextView) findViewById(R.id.NComentarios);
-            nombre_t.setText(nombre);
-            comentarios_t.setText(String.valueOf(comentarios));
+            final APIInterface apiService = APICliente.getServidor().create(APIInterface.class);
+            Call<usuario> call = apiService.getDatosUsuario(preferences.getString("sessionCorreo", ""));
+            call.enqueue(new Callback<usuario>() {
+                @Override
+                public void onResponse(Call<usuario> call, Response<usuario> response) {
+                    final String nombre = preferences.getString("sessionNombre", null);
+                    final int comentarios = response.body().getNumero_comentario();
+                    TextView nombre_t = (TextView) findViewById(R.id.Nombre);
+                    TextView comentarios_t = (TextView) findViewById(R.id.NComentarios);
+                    nombre_t.setText(nombre);
+                    comentarios_t.setText(String.valueOf(comentarios));
+                    String foto = preferences.getString("sessionFoto", null);
+                    final byte[] decodedBytes = Base64.decode(foto, Base64.DEFAULT);
+                    ImageView perfil = findViewById(R.id.foto);
+                    Bitmap decodedBitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
+                    perfil.setImageBitmap(decodedBitmap);
+                }
+
+                @Override
+                public void onFailure(Call<usuario> call, Throwable t) {
+
+                }
+
+            });
+
         }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Moviles");

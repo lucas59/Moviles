@@ -9,6 +9,10 @@ public class usuario {
     @SerializedName("id")
     private int id;
 
+
+    @SerializedName("foto")
+    private String foto;
+
     @SerializedName("nombre")
     private String nombre;
 
@@ -90,4 +94,9 @@ public class usuario {
     public void setNotificaciones(List<Notificaciones> notificaciones) {
         this.notificaciones = notificaciones;
     }
+
+    public String getFoto() {
+        return foto;
+    }
+
 }
