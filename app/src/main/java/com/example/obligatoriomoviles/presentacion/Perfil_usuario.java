@@ -22,7 +22,6 @@ import com.example.obligatoriomoviles.API.APIInterface;
 import com.example.obligatoriomoviles.Clases.retorno;
 import com.example.obligatoriomoviles.Clases.usuario;
 import com.example.obligatoriomoviles.R;
-import com.squareup.picasso.Picasso;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -58,7 +57,7 @@ public class Perfil_usuario extends AppCompatActivity {
                     comentarios_t.setText(String.valueOf(comentarios));
                     String foto = preferences.getString("sessionFoto", null);
                     final byte[] decodedBytes = Base64.decode(foto, Base64.DEFAULT);
-                    ImageView perfil = findViewById(R.id.foto);
+                    ImageView perfil = findViewById(R.id.imgView);
                     Bitmap decodedBitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
                     perfil.setImageBitmap(decodedBitmap);
                 }

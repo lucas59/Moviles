@@ -12,8 +12,6 @@ import android.widget.TextView;
 import com.example.obligatoriomoviles.R;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
-
 import java.util.List;
 
 /**
@@ -87,7 +85,7 @@ public class Actor_adapter extends RecyclerView.Adapter<Actor_adapter.ProductVie
             super(itemView);
             textViewTitulo = itemView.findViewById(R.id.nombre);
             textViewPuntaje = itemView.findViewById(R.id.personaje);
-            imageView = itemView.findViewById(R.id.foto);
+            imageView = itemView.findViewById(R.id.imgView);
         }
     }
 }
