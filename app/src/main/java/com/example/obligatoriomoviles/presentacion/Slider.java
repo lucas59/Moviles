@@ -34,6 +34,7 @@ public class Slider extends AppCompatActivity {
         if (email != null) {
             Intent i = new Intent(getApplicationContext(), Menu_principal.class);
             startActivity(i);
+            finish();
             overridePendingTransition(R.anim.infade, R.anim.outfade);
         } else {
             mSlideViewPager = (ViewPager) findViewById(R.id.slide_view);
@@ -51,6 +52,7 @@ public class Slider extends AppCompatActivity {
                     if (contador_botones == 3) {
                         Intent i = new Intent(getApplicationContext(), login.class);
                         startActivity(i);
+                        finish();
                         contador_botones = 0;
 
                     } else {

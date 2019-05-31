@@ -38,7 +38,6 @@
 
     <Button
         android:id="@+id/cerrar_sesion"
-        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="127dp"
         android:layout_height="54dp"
         android:layout_marginStart="8dp"
@@ -46,6 +45,7 @@
         android:layout_marginTop="116dp"
         android:onClick="Cerrar_sesion"
         android:text="Cerrar Sesión"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:textColorHint="@android:color/white"
         android:textSize="14sp"
         android:textStyle="bold"

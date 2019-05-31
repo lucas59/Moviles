@@ -43,6 +43,8 @@ public class Perfil_usuario extends AppCompatActivity {
 
         if (preferences.getString("sessionCorreo", "").equals("")) {
             Intent intento = new Intent(this, login.class);
+            startActivity(intento);
+            finish();
         } else {
             final APIInterface apiService = APICliente.getServidor().create(APIInterface.class);
             Call<usuario> call = apiService.getDatosUsuario(preferences.getString("sessionCorreo", ""));
@@ -74,6 +76,14 @@ public class Perfil_usuario extends AppCompatActivity {
         getSupportActionBar().setTitle("Moviles");
     }
 
+    @Override
+    public void onBackPressed() {
+        // do something on back.
+        Intent intento = new Intent(getApplicationContext(), Menu_principal.class);
+        startActivity(intento);
+        finish();
+    }
+
     public void desactivarCuenta(View view) {
         SharedPreferences preferences = getSharedPreferences("session", Context.MODE_PRIVATE);
         String correo = preferences.getString("sessionCorreo", "");
@@ -90,6 +100,8 @@ public class Perfil_usuario extends AppCompatActivity {
                     editor.clear();
                     editor.commit();
                     Intent intento = new Intent(getApplicationContext(), login.class);
+                    startActivity(intento);
+                    finish();
                     Toast.makeText(getApplicationContext(), "Session cerrada!", Toast.LENGTH_LONG).show();
 
 
@@ -114,7 +126,9 @@ public class Perfil_usuario extends AppCompatActivity {
         editor.putInt("sessionEdad", 0);
         editor.commit();
         Intent i = new Intent(getApplicationContext(), login.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
+        finish();
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -127,15 +141,18 @@ public class Perfil_usuario extends AppCompatActivity {
                     Intent i = new Intent(getApplicationContext(), Menu_principal.class);
                     startActivity(i);
                     overridePendingTransition(R.anim.infade, R.anim.outfade);
+                    finish();
                     return true;
                 case R.id.navigation_notificacion:
                     //     i = new Intent(Menu_principal.this, Perfil_elemento.class);
                     //     startActivity(i);
+                    //finish();
                     return true;
                 case R.id.navigation_calendario:
                     i = new Intent(getApplicationContext(), Calendario_elementos.class);
                     startActivity(i);
                     overridePendingTransition(R.anim.infade, R.anim.outfade);
+                    finish();
                     return true;
 
 

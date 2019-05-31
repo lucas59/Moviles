@@ -33,20 +33,12 @@ public class login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         etEmail=findViewById(R.id.Email);
         etPass=findViewById(R.id.txtContraseña);
-//creo la variable session
-        SharedPreferences preferences = getSharedPreferences("session", Context.MODE_PRIVATE);
-        boolean session =  preferences.contains("sessionCorreo");
-        if(session==true){
-            Intent i = new Intent(this,Perfil_usuario.class);
-            startActivity(i);
-        }
     }
 
     public void crearNuevaCuenta(View view){
         Intent intent = new Intent(this, NuevoUsuarioActivity.class);
         startActivity(intent);
     }
-
 
 
 
@@ -80,7 +72,9 @@ public class login extends AppCompatActivity {
                                 editor.commit();
                                 Toast.makeText(getApplicationContext(),"Bienvenido!", Toast.LENGTH_SHORT).show();
                                 Intent intento = new Intent(getBaseContext(),Calendario_elementos.class);
+                                intento.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intento);
+                                finish();
                             }else {
                                 Toast.makeText(getApplicationContext(),"Verifique sus datos!", Toast.LENGTH_SHORT).show();
                             }
@@ -101,6 +95,7 @@ public class login extends AppCompatActivity {
 
             }
         });
+
     }
 
 

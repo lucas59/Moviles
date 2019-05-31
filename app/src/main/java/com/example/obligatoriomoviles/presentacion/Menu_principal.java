@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.obligatoriomoviles.R;
 
@@ -24,6 +25,7 @@ public class Menu_principal extends AppCompatActivity {
                     Intent i = new Intent(getApplicationContext(), Menu_principal.class);
                     startActivity(i);
                     overridePendingTransition(R.anim.infade,R.anim.outfade);
+                    finish();
                     return true;
                 case R.id.navigation_notificacion:
               //     i = new Intent(Menu_principal.this, Perfil_elemento.class);
@@ -33,12 +35,31 @@ public class Menu_principal extends AppCompatActivity {
                     i = new Intent(getApplicationContext(), Calendario_elementos.class);
                     startActivity(i);
                     overridePendingTransition(R.anim.infade,R.anim.outfade);
+                    finish();
                     return true;
 
             }
             return false;
         }
     };
+
+    private long backPressedTime;
+    private Toast toastsalir;
+
+    @Override
+    public void onBackPressed() {
+
+
+        if(backPressedTime + 2000 > System.currentTimeMillis()){
+            toastsalir.cancel();
+            super.onBackPressed();
+            return;
+        } else {
+        toastsalir = Toast.makeText(getBaseContext(),"Vuelve a presionar el botón atrás para salir",Toast.LENGTH_SHORT);
+       toastsalir.show();
+        }
+        backPressedTime = System.currentTimeMillis();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +94,7 @@ public class Menu_principal extends AppCompatActivity {
             case R.id.perfil:
                 Intent i = new Intent(getApplicationContext(), Perfil_usuario.class);
                 startActivity(i);
+                finish();
                 overridePendingTransition(R.anim.infade,R.anim.outfade);
                 return true;
             default:

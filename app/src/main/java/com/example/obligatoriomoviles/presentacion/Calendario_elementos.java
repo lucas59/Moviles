@@ -81,16 +81,19 @@ public class Calendario_elementos extends AppCompatActivity implements AdapterVi
                 case R.id.navigation_home:
                     Intent i = new Intent(getApplicationContext(), Menu_principal.class);
                     startActivity(i);
+                    finish();
                     overridePendingTransition(R.anim.infade, R.anim.outfade);
                     return true;
                 case R.id.navigation_notificacion:
                     //     i = new Intent(Menu_principal.this, Perfil_elemento.class);
                     //     startActivity(i);
+                    //finish();
                     return true;
                 case R.id.navigation_calendario:
                     i = new Intent(getApplicationContext(), Calendario_elementos.class);
                     startActivity(i);
                     overridePendingTransition(R.anim.infade, R.anim.outfade);
+                    finish();
                     return true;
 
             }
@@ -217,6 +220,7 @@ public class Calendario_elementos extends AppCompatActivity implements AdapterVi
             case R.id.perfil:
                 Intent i = new Intent(getApplicationContext(), Perfil_usuario.class);
                 startActivity(i);
+                finish();
                 overridePendingTransition(R.anim.infade, R.anim.outfade);
                 return true;
             default:

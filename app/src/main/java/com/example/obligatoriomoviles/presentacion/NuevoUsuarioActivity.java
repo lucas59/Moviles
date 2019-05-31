@@ -34,6 +34,7 @@ public class NuevoUsuarioActivity extends AppCompatActivity {
 
     public void iniciar(View view){
         Intent intent = new Intent(this, login.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
