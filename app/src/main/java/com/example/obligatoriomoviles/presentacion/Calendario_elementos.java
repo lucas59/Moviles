@@ -1,10 +1,10 @@
 package com.example.obligatoriomoviles.presentacion;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -15,7 +15,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.example.obligatoriomoviles.API.APICliente;
 import com.example.obligatoriomoviles.API.APIInterface;
@@ -23,8 +22,12 @@ import com.example.obligatoriomoviles.Clases.Cine.Cine;
 import com.example.obligatoriomoviles.Clases.Cine.Cine_adapter;
 import com.example.obligatoriomoviles.R;
 
-
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import retrofit2.Call;
@@ -55,7 +58,7 @@ public class Calendario_elementos extends AppCompatActivity implements AdapterVi
 
         lista_peliculas = new ArrayList<>();
 
-        Spinner spinner_2 = findViewById(R.id.spinner);
+        Spinner spinner_2 = findViewById(R.id.lista_contenido);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.entretenimiento, R.layout.spinner_color);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_2.setAdapter(adapter);
@@ -104,19 +107,20 @@ public class Calendario_elementos extends AppCompatActivity implements AdapterVi
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        if (parent.getId() == R.id.spinner) {
+        if (parent.getId() == R.id.lista_contenido) {
             if (position == 0) {
                 APIInterface apiService = APICliente.getCalendario().create(APIInterface.class);
                 call = apiService.getImagen("popularity.desc", 2019, "en-US", "0d81ceeb977ab515fd9f844377688c5a");
                 lista_peliculas = new ArrayList<>();
                 final ProgressBar spinner;
                 spinner = findViewById(R.id.progressBar1);
+                spinner.setVisibility(View.VISIBLE);
                 call.enqueue(new Callback<Cine>() {
                     public void onResponse(Call<Cine> call, Response<Cine> response) {
-                        spinner.setVisibility(View.VISIBLE);
+
                         for (Cine post : response.body().getData()) {
                             lista_peliculas.add(new Cine(
-                                    post.getOriginal_title(), post.getNota(), post.getPoster_path(), post.getId()
+                                    post.getOriginal_title(), post.getNota(), post.getPoster_path(), post.getId(),post.getFecha()
                             ));
                         }
                         //creando adapter recyclerview
@@ -134,7 +138,19 @@ public class Calendario_elementos extends AppCompatActivity implements AdapterVi
                                 startActivity(i);
                             }
                         });
-
+                        Collections.sort(lista_peliculas, new Comparator<Cine>() {
+                            DateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+                            int res;
+                            @Override
+                            public int compare(Cine o1, Cine o2) {
+                                try {
+                                    res = f.parse(o2.getFecha()).compareTo(f.parse(o1.getFecha()));
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                                return res;
+                            }
+                        });
                         //setear adapter al recyclerview
                         recyclerView.setAdapter(adapter);
                         spinner.setVisibility(View.GONE);
@@ -152,15 +168,15 @@ public class Calendario_elementos extends AppCompatActivity implements AdapterVi
                 lista_peliculas = new ArrayList<>();
                 final ProgressBar spinner;
                 spinner = findViewById(R.id.progressBar1);
-
+                spinner.setVisibility(View.VISIBLE);
                 //Setear el focus a la opcion correspondiente (del 0 al numero de botones)
 
                 call_series.enqueue(new Callback<Cine>() {
                     public void onResponse(Call<Cine> call, Response<Cine> response) {
-                        spinner.setVisibility(View.VISIBLE);
+
                         for (Cine post : response.body().getData()) {
                             lista_peliculas.add(new Cine(
-                                    post.getOriginal_name(), post.getNota(), post.getPoster_path(), post.getId()
+                                    post.getOriginal_name(), post.getNota(), post.getPoster_path(), post.getId(),post.getFecha()
                             ));
                         }
                         //creando adapter recyclerview

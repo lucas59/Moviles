@@ -13,7 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".presentacion.Perfil_serie"></activity>
         <activity android:name=".presentacion.nuevo_usuario2" />
         <activity
             android:name=".presentacion.Slider"

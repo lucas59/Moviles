@@ -20,6 +20,19 @@
             android:padding="8dp">
 
 
+            <TextView
+                android:id="@+id/Fecha"
+                android:layout_width="242dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Titulo"
+                android:layout_marginLeft="19dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/Poster"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:textColor="@color/cardview_light_background"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
             <ImageView
                 android:id="@+id/Poster"
                 android:layout_width="124dp"
@@ -39,20 +52,9 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/Puntaje"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/Titulo"
-                android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@id/Poster"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                android:textColor="@color/cardview_light_background" />
-
-            <TextView
                 android:id="@+id/id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/Puntaje"
                 android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@id/Poster"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
@@ -72,6 +74,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@android:drawable/btn_star_big_off" />
+
             </android.support.constraint.ConstraintLayout>
 
         </RelativeLayout>

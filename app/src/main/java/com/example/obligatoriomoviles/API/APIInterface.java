@@ -1,7 +1,7 @@
 package com.example.obligatoriomoviles.API;
-import com.example.obligatoriomoviles.Clases.retorno;
 
 import com.example.obligatoriomoviles.Clases.Cine.Cine;
+import com.example.obligatoriomoviles.Clases.retorno;
 import com.example.obligatoriomoviles.Clases.usuario;
 
 import retrofit2.Call;
@@ -20,10 +20,10 @@ public interface APIInterface {
     Call<Cine> getSerie(@Query("sort_by") String sort_by, @Query("year") Integer año, @Query("language") String lenguaje, @Query("api_key") String key);
 
     @GET("movie/{id}")
-    Call<Cine> getPelicula(@Path("id") String id,@Query("api_key") String api_key,@Query("append_to_response") String filtro,@Query("language") String idioma);
+    Call<Cine> getPelicula(@Path("id") String id, @Query("api_key") String api_key, @Query("append_to_response") String filtro, @Query("language") String idioma);
 
     @GET("tv/{id}")
-    Call<Cine> getSerie_unica(@Path("id") String id,@Query("api_key") String api_key,@Query("append_to_response") String filtro,@Query("language") String idioma);
+    Call<Cine> getSerie_unica(@Path("id") String id, @Query("api_key") String api_key, @Query("append_to_response") String filtro, @Query("language") String idioma);
 
     @POST("usuario/nuevo")
     @FormUrlEncoded
@@ -32,7 +32,7 @@ public interface APIInterface {
 
     @POST("usuario/nuevo2")
     @FormUrlEncoded
-    Call <retorno> altaUsuario2(@Field("nombre") String nombre, @Field("apellido") String apellido, @Field("edad") int edad, @Field("foto") String img,@Field("token") String token);
+    Call <retorno> altaUsuario2(@Field("nombre") String nombre, @Field("apellido") String apellido, @Field("edad") int edad, @Field("foto") String img, @Field("token") String token);
 
 
     @GET("validacion/{token}")
@@ -50,9 +50,9 @@ public interface APIInterface {
 
 
     @GET("contenido/comentario")
-    Call<retorno> SetComentario(@Query("comentario") String comentario,  @Query("capitulo_id") Integer capitulo, @Query("contenido_id") Integer contenido, @Query("usuario") String usuario, @Query("fecha") String fecha, @Query("genero") String genero, @Query("titulo_elemento") String titulo_elemento);
+    Call<retorno> SetComentario(@Query("comentario") String comentario, @Query("capitulo_id") Integer capitulo, @Query("contenido_id") Integer contenido, @Query("usuario") String usuario, @Query("fecha") String fecha, @Query("genero") String genero, @Query("titulo_elemento") String titulo_elemento);
 
     @GET("contenido/lista_comentario")
-    Call<retorno> getComentario( @Query("id") String id);
+    Call<retorno> getComentario(@Query("id") String id);
 
 }

@@ -48,13 +48,11 @@ public class Cine_adapter extends RecyclerView.Adapter<Cine_adapter.ProductViewH
     public void onBindViewHolder(ProductViewHolder holder, int position) {
         //getting the product of the specified position
         Cine product = productList.get(position);
-
         //binding the data with the viewholder views
         String fondo = "https://image.tmdb.org/t/p/w500" + product.getPoster_path();
         holder.textViewTitulo.setText(product.getOriginal_title());
-        holder.textViewPuntaje.setText(product.getNota());
         holder.textViewID.setText(product.getId());
-
+        holder.textViewFecha.setText(product.getFecha());
         Picasso.get().load(fondo).fit().centerCrop().into(holder.imageView);
 
     }
@@ -85,9 +83,9 @@ public class Cine_adapter extends RecyclerView.Adapter<Cine_adapter.ProductViewH
         public ProductViewHolder(View itemView) {
             super(itemView);
             textViewTitulo = itemView.findViewById(R.id.Titulo);
-            textViewPuntaje = itemView.findViewById(R.id.Puntaje);
             imageView = itemView.findViewById(R.id.Poster);
             textViewID = itemView.findViewById(R.id.id);
+            textViewFecha = itemView.findViewById(R.id.Fecha);
             textViewID.setVisibility(View.INVISIBLE);
         }
     }

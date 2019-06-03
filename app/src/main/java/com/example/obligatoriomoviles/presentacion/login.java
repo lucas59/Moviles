@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.obligatoriomoviles.API.APICliente;
@@ -27,12 +28,14 @@ public class login extends AppCompatActivity {
     private TextInputLayout etEmail;
     private TextInputLayout etPass;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         etEmail=findViewById(R.id.Email);
         etPass=findViewById(R.id.txtContraseña);
+
     }
 
     public void crearNuevaCuenta(View view){
@@ -48,7 +51,6 @@ public class login extends AppCompatActivity {
         if(email.equals("") || pass.equals("")){
             return;
         }
-
         final APIInterface apiService = APICliente.getServidor().create(APIInterface.class);
         Call<retorno> call = apiService.login(email,pass);
 
@@ -95,7 +97,6 @@ public class login extends AppCompatActivity {
 
             }
         });
-
     }
 
 

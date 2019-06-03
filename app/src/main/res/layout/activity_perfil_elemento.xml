@@ -258,7 +258,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/elenco_titulo"
                     android:layout_width="141dp"
                     android:layout_height="17dp"
                     android:layout_marginStart="8dp"

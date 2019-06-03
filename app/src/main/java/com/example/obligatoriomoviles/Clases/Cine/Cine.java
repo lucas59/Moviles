@@ -69,11 +69,12 @@ public class Cine {
         return lista_elementos;
     }
 
-    public Cine(String original_title, String nota, String poster_path, String id) {
+    public Cine(String original_title, String nota, String poster_path, String id,String fecha) {
         this.original_title = original_title;
         this.nota = nota;
         this.poster_path = poster_path;
         this.id = id;
+        this.fecha = fecha;
     }
 
     public String getBackdrop_path() {
