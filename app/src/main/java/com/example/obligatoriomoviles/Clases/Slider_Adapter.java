@@ -29,7 +29,7 @@ public class Slider_Adapter extends PagerAdapter {
 
     public String[] slide_titulos = {
             "“I am the danger”",
-            "“Valar morghulis”",
+            "“You know nothing Jon Snow”",
              "“¡¡Wilsooon!!”"
     };
 
