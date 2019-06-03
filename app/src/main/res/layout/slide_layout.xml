@@ -23,8 +23,8 @@
 
     <TextView
         android:id="@+id/texto_e"
-        android:layout_width="254dp"
-        android:layout_height="45dp"
+        android:layout_width="260dp"
+        android:layout_height="80dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="100dp"
         android:gravity="center"
@@ -41,8 +41,8 @@
 
     <TextView
         android:id="@+id/titulo_e"
-        android:layout_width="360dp"
-        android:layout_height="162dp"
+        android:layout_width="301dp"
+        android:layout_height="160dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="32dp"
