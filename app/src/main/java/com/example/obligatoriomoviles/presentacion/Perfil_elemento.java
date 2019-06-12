@@ -64,6 +64,7 @@ public class Perfil_elemento extends AppCompatActivity {
     private String genero;
     private String tituloelemento;
     private APIInterface apiServidor;
+    private Boolean seguir = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -224,8 +225,12 @@ public class Perfil_elemento extends AppCompatActivity {
                 public void onResponse(Call<retorno> call, Response<retorno> response) {
                     if (response.body().getRetorno()){
                         marcarFavorito(1);//marcar el boton en activo
+                        seguir = true;
+                        favorito.setImageResource(R.drawable.check);
                     }else {
                         marcarFavorito(0);//marcar el boton en desactivado
+                        seguir = false;
+                        favorito.setImageResource(R.drawable.no_check);
                     }
                 }
 
@@ -240,14 +245,18 @@ public class Perfil_elemento extends AppCompatActivity {
     }
 
     private void mostrarFavorito(int i){
-        this.favorito.setVisibility(i);
+        if(i == 1) {
+            favorito.setImageResource(R.drawable.check);
+        } else{
+            favorito.setImageResource(R.drawable.no_check);
+        }
     }
 
     private void marcarFavorito(int i){
-        if(i==1)
-            this.favorito.setBackgroundColor(Color.parseColor("e5be01"));
+        if(i == 1)
+            favorito.setImageResource(R.drawable.check);
         else
-            this.favorito.setBackgroundColor(Color.WHITE);
+            favorito.setImageResource(R.drawable.no_check);
 
     }
 
@@ -381,10 +390,12 @@ public class Perfil_elemento extends AppCompatActivity {
 
 
     public void cambiarEstado(){
-        if (this.favorito.getBackground().isVisible()){
-            this.favorito.setBackgroundColor(Color.WHITE);
+        if (this.seguir){
+            favorito.setImageResource(R.drawable.no_check);
+            this.seguir = false;
         }else{
-            this.favorito.setBackgroundColor(Color.TRANSPARENT);
+            favorito.setImageResource(R.drawable.check);
+            this.seguir = true;
         }
     }
 
