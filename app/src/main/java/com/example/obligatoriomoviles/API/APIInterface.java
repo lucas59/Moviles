@@ -55,4 +55,12 @@ public interface APIInterface {
     @GET("contenido/lista_comentario")
     Call<retorno> getComentario(@Query("id") String id);
 
+
+    @GET("elemento/verificar")
+    Call<retorno> verificarSuscripcion(@Query("email") String email,@Query("id") String id);
+
+
+    @GET("elemento/seguir")
+    Call<retorno>seguirElemento(@Query("email") String email, @Query("id") String contenido, @Query("fecha") String fecha, @Query("genero") String genero, @Query("titulo") String titulo );
+
 }

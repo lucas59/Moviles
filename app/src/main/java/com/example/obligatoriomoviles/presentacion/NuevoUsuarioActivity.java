@@ -60,7 +60,6 @@ public class NuevoUsuarioActivity extends AppCompatActivity {
             public void onResponse(Call<retorno> call, Response<retorno> response) {
             if(response.body().getRetorno()){
                 Toast.makeText(getApplicationContext(),"Bienvenido!", Toast.LENGTH_SHORT).show();
-                System.out.println("llegooo");
                 enviar_a_validar();
                 }else {
                 Toast.makeText(getApplicationContext(),"Verifique sus datos!", Toast.LENGTH_LONG).show();
