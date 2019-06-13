@@ -59,7 +59,7 @@ public class Perfil_elemento extends AppCompatActivity {
     String tituloElemento=null;
     TextView titulo =null;
     ImageButton favorito;
-    private String idElemento;
+    private String identificador;
     private String fechaElemento;
     private String genero;
     private String tituloelemento;
@@ -126,7 +126,7 @@ public class Perfil_elemento extends AppCompatActivity {
                     TextView valor = (TextView) findViewById(R.id.valor);
                     ProgressBar votos = (ProgressBar) findViewById(R.id.votos);
                     //Setear información en los elementos
-                    idElemento=response.body().getId();
+                    identificador =response.body().getId();
                     titulo.setText(response.body().getOriginal_title());
                      tituloelemento=response.body().getOriginal_title();
                     fechaElemento=response.body().getFecha();
@@ -180,8 +180,9 @@ public class Perfil_elemento extends AppCompatActivity {
                     TextView valor = (TextView) findViewById(R.id.valor);
                     ProgressBar votos = (ProgressBar) findViewById(R.id.votos);
                     //Setear información en los elementos
-                    idElemento=response.body().getId();
-                    fechaElemento=response.body().getFecha();
+
+                    identificador=response.body().getId();
+                    fechaElemento =response.body().getFecha();
                     tituloElemento=(response.body().getOriginal_title());
 
                     titulo.setText(response.body().getOriginal_title());
@@ -218,7 +219,7 @@ public class Perfil_elemento extends AppCompatActivity {
         final String email = prefs.getString("sessionCorreo", null);
         if(email!=null){
             mostrarFavorito(1);
-            final Call<retorno> seguido  = apiCliente.verificarSuscripcion(email,this.idElemento);
+            final Call<retorno> seguido  = apiCliente.verificarSuscripcion(email,this.identificador);
             seguido.enqueue(new Callback<retorno>() {
                 @Override
                 public void onResponse(Call<retorno> call, Response<retorno> response) {
@@ -416,7 +417,7 @@ public class Perfil_elemento extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("session", Context.MODE_PRIVATE);
         final String email = prefs.getString("sessionCorreo", null);
 
-        Call<retorno> call = this.apiServidor.seguirElemento(email,this.idElemento,this.fechaElemento,this.genero,this.tituloelemento);
+        Call<retorno> call = this.apiServidor.seguirElemento(email,this.identificador,this.fechaElemento,this.genero,this.tituloelemento);
         call.enqueue(new Callback<retorno>() {
             @Override
             public void onResponse(Call<retorno> call, Response<retorno> response) {
