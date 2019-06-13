@@ -127,7 +127,6 @@ public class Perfil_elemento extends AppCompatActivity {
                     TextView valor = (TextView) findViewById(R.id.valor);
                     ProgressBar votos = (ProgressBar) findViewById(R.id.votos);
                     //Setear información en los elementos
-                    idElemento=response.body().getId();
                     titulo.setText(response.body().getOriginal_title());
                      tituloelemento=response.body().getOriginal_title();
                     fechaElemento=response.body().getFecha();
@@ -181,7 +180,7 @@ public class Perfil_elemento extends AppCompatActivity {
                     TextView valor = (TextView) findViewById(R.id.valor);
                     ProgressBar votos = (ProgressBar) findViewById(R.id.votos);
                     //Setear información en los elementos
-                    idElemento=response.body().getId();
+
                     fechaElemento=response.body().getFecha();
                     tituloElemento=(response.body().getOriginal_title());
 
@@ -218,6 +217,7 @@ public class Perfil_elemento extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("session", Context.MODE_PRIVATE);
         final String email = prefs.getString("sessionCorreo", null);
         if(email!=null){
+            idElemento=getIntent().getExtras().getString("id");
             mostrarFavorito(1);
             final Call<retorno> seguido  = apiCliente.verificarSuscripcion(email,this.idElemento);
             seguido.enqueue(new Callback<retorno>() {
