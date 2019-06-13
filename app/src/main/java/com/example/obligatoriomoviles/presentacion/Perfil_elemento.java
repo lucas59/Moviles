@@ -64,6 +64,7 @@ public class Perfil_elemento extends AppCompatActivity {
     private String genero;
     private String tituloelemento;
     private APIInterface apiServidor;
+    private Boolean seguir = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,7 +127,6 @@ public class Perfil_elemento extends AppCompatActivity {
                     TextView valor = (TextView) findViewById(R.id.valor);
                     ProgressBar votos = (ProgressBar) findViewById(R.id.votos);
                     //Setear información en los elementos
-                    identificador =response.body().getId();
                     titulo.setText(response.body().getOriginal_title());
                      tituloelemento=response.body().getOriginal_title();
                     fechaElemento=response.body().getFecha();
@@ -181,8 +181,7 @@ public class Perfil_elemento extends AppCompatActivity {
                     ProgressBar votos = (ProgressBar) findViewById(R.id.votos);
                     //Setear información en los elementos
 
-                    identificador=response.body().getId();
-                    fechaElemento =response.body().getFecha();
+                    fechaElemento=response.body().getFecha();
                     tituloElemento=(response.body().getOriginal_title());
 
                     titulo.setText(response.body().getOriginal_title());
@@ -218,6 +217,7 @@ public class Perfil_elemento extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("session", Context.MODE_PRIVATE);
         final String email = prefs.getString("sessionCorreo", null);
         if(email!=null){
+            idElemento=getIntent().getExtras().getString("id");
             mostrarFavorito(1);
             final Call<retorno> seguido  = apiCliente.verificarSuscripcion(email,this.identificador);
             seguido.enqueue(new Callback<retorno>() {
@@ -225,8 +225,12 @@ public class Perfil_elemento extends AppCompatActivity {
                 public void onResponse(Call<retorno> call, Response<retorno> response) {
                     if (response.body().getRetorno()){
                         marcarFavorito(1);//marcar el boton en activo
+                        seguir = true;
+                        favorito.setImageResource(R.drawable.check);
                     }else {
                         marcarFavorito(0);//marcar el boton en desactivado
+                        seguir = false;
+                        favorito.setImageResource(R.drawable.no_check);
                     }
                 }
 
@@ -241,14 +245,18 @@ public class Perfil_elemento extends AppCompatActivity {
     }
 
     private void mostrarFavorito(int i){
-        this.favorito.setVisibility(i);
+        if(i == 1) {
+            favorito.setImageResource(R.drawable.check);
+        } else{
+            favorito.setImageResource(R.drawable.no_check);
+        }
     }
 
     private void marcarFavorito(int i){
-        if(i==1)
-            this.favorito.setBackgroundColor(Color.parseColor("e5be01"));
+        if(i == 1)
+            favorito.setImageResource(R.drawable.check);
         else
-            this.favorito.setBackgroundColor(Color.WHITE);
+            favorito.setImageResource(R.drawable.no_check);
 
     }
 
@@ -382,10 +390,12 @@ public class Perfil_elemento extends AppCompatActivity {
 
 
     public void cambiarEstado(){
-        if (this.favorito.getBackground().isVisible()){
-            this.favorito.setBackgroundColor(Color.WHITE);
+        if (this.seguir){
+            favorito.setImageResource(R.drawable.no_check);
+            this.seguir = false;
         }else{
-            this.favorito.setBackgroundColor(Color.TRANSPARENT);
+            favorito.setImageResource(R.drawable.check);
+            this.seguir = true;
         }
     }
 
@@ -435,4 +445,3 @@ public class Perfil_elemento extends AppCompatActivity {
     }
 
 }
-
