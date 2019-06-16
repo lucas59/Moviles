@@ -56,8 +56,8 @@ public class Perfil_elemento extends AppCompatActivity {
     private Button dialogBtn;
     //lista de comentarios
     RecyclerView recyclerView_comentarios;
-    String tituloElemento=null;
-    TextView titulo =null;
+    String tituloElemento = null;
+    TextView titulo = null;
     ImageButton favorito;
     private String identificador;
     private String fechaElemento;
@@ -65,6 +65,7 @@ public class Perfil_elemento extends AppCompatActivity {
     private String tituloelemento;
     private APIInterface apiServidor;
     private Boolean seguir = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,7 +82,7 @@ public class Perfil_elemento extends AppCompatActivity {
         Call<Cine> call_serie = apiService_serie.getSerie_unica(getIntent().getExtras().getString("id"), "0d81ceeb977ab515fd9f844377688c5a", "credits", "es");
 
         APIInterface apiCliente = APICliente.getServidor().create(APIInterface.class);
-        this.apiServidor=apiCliente;
+        this.apiServidor = apiCliente;
         //mostraar la lista de actores
         recyclerView = (RecyclerView) findViewById(R.id.Actores);
         recyclerView.setHasFixedSize(true);
@@ -128,8 +129,8 @@ public class Perfil_elemento extends AppCompatActivity {
                     ProgressBar votos = (ProgressBar) findViewById(R.id.votos);
                     //Setear información en los elementos
                     titulo.setText(response.body().getOriginal_title());
-                     tituloelemento=response.body().getOriginal_title();
-                    fechaElemento=response.body().getFecha();
+                    tituloelemento = response.body().getOriginal_title();
+                    fechaElemento = response.body().getFecha();
 
                     Picasso.get().load(fondo).fit().centerCrop().into(fondo_view);
                     Picasso.get().load(poster).into(poster_view);
@@ -181,8 +182,8 @@ public class Perfil_elemento extends AppCompatActivity {
                     ProgressBar votos = (ProgressBar) findViewById(R.id.votos);
                     //Setear información en los elementos
 
-                    fechaElemento=response.body().getFecha();
-                    tituloElemento=(response.body().getOriginal_title());
+                    fechaElemento = response.body().getFecha();
+                    tituloElemento = (response.body().getOriginal_title());
 
                     titulo.setText(response.body().getOriginal_title());
                     Picasso.get().load(fondo).fit().centerCrop().into(fondo_view);
@@ -216,18 +217,18 @@ public class Perfil_elemento extends AppCompatActivity {
         this.favorito = findViewById(R.id.favorito); ///obtener si es favorita o no
         SharedPreferences prefs = getSharedPreferences("session", Context.MODE_PRIVATE);
         final String email = prefs.getString("sessionCorreo", null);
-        if(email!=null){
-            idElemento=getIntent().getExtras().getString("id");
+        if (email != null) {
+            identificador = getIntent().getExtras().getString("id");
             mostrarFavorito(1);
-            final Call<retorno> seguido  = apiCliente.verificarSuscripcion(email,this.identificador);
+            final Call<retorno> seguido = apiCliente.verificarSuscripcion(email, this.identificador);
             seguido.enqueue(new Callback<retorno>() {
                 @Override
                 public void onResponse(Call<retorno> call, Response<retorno> response) {
-                    if (response.body().getRetorno()){
+                    if (response.body().getRetorno()) {
                         marcarFavorito(1);//marcar el boton en activo
                         seguir = true;
                         favorito.setImageResource(R.drawable.check);
-                    }else {
+                    } else {
                         marcarFavorito(0);//marcar el boton en desactivado
                         seguir = false;
                         favorito.setImageResource(R.drawable.no_check);
@@ -239,21 +240,21 @@ public class Perfil_elemento extends AppCompatActivity {
 
                 }
             });
-        }else{
+        } else {
             mostrarFavorito(0);//no mostrar el boton si no hay session
         }
     }
 
-    private void mostrarFavorito(int i){
-        if(i == 1) {
+    private void mostrarFavorito(int i) {
+        if (i == 1) {
             favorito.setImageResource(R.drawable.check);
-        } else{
+        } else {
             favorito.setImageResource(R.drawable.no_check);
         }
     }
 
-    private void marcarFavorito(int i){
-        if(i == 1)
+    private void marcarFavorito(int i) {
+        if (i == 1)
             favorito.setImageResource(R.drawable.check);
         else
             favorito.setImageResource(R.drawable.no_check);
@@ -389,11 +390,11 @@ public class Perfil_elemento extends AppCompatActivity {
     }
 
 
-    public void cambiarEstado(){
-        if (this.seguir){
+    public void cambiarEstado() {
+        if (this.seguir) {
             favorito.setImageResource(R.drawable.no_check);
             this.seguir = false;
-        }else{
+        } else {
             favorito.setImageResource(R.drawable.check);
             this.seguir = true;
         }
@@ -422,12 +423,12 @@ public class Perfil_elemento extends AppCompatActivity {
 
     }
 
-    public void seguirElemento(View view){
+    public void seguirElemento(View view) {
 
         SharedPreferences prefs = getSharedPreferences("session", Context.MODE_PRIVATE);
         final String email = prefs.getString("sessionCorreo", null);
 
-        Call<retorno> call = this.apiServidor.seguirElemento(email,this.identificador,this.fechaElemento,this.genero,this.tituloelemento);
+        Call<retorno> call = this.apiServidor.seguirElemento(email, this.identificador, this.fechaElemento, this.genero, this.tituloelemento);
         call.enqueue(new Callback<retorno>() {
             @Override
             public void onResponse(Call<retorno> call, Response<retorno> response) {
@@ -436,6 +437,7 @@ public class Perfil_elemento extends AppCompatActivity {
                     //la llamada devuelve verdadero si se dejo de seguir o si se emprezo a seguir
                 }
             }
+
             @Override
             public void onFailure(Call<retorno> call, Throwable t) {
 

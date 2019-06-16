@@ -63,4 +63,9 @@ public interface APIInterface {
     @GET("elemento/seguir")
     Call<retorno>seguirElemento(@Query("email") String email, @Query("id") String contenido, @Query("fecha") String fecha, @Query("genero") String genero, @Query("titulo") String titulo );
 
+    @POST("usuario/editar")
+    @FormUrlEncoded
+    Call<retorno>actualizarPerfil(@Field("correo") String correo,@Field("nombre") String nombre,@Field("apellido") String apellido,@Field("edad") int edad,@Field("foto") String foto);
+
+
 }
