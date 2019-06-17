@@ -52,7 +52,7 @@ public class Comentarios_adapter extends RecyclerView.Adapter<Comentarios_adapte
         holder.textViewComentario.setText(product.getTexto());
         holder.imageView.setImageResource(R.drawable.user);
         holder.textViewNombre.setText(product.getUsuario_correo());
-
+holder.textViewidcomentario.setText(product.getId().toString());
 
     }
 
@@ -76,7 +76,7 @@ public class Comentarios_adapter extends RecyclerView.Adapter<Comentarios_adapte
 
     class ProductViewHolder extends RecyclerView.ViewHolder {
 
-        TextView textViewComentario,textViewNombre;
+        TextView textViewComentario,textViewNombre,textViewidcomentario;
         ImageView imageView;
 
         public ProductViewHolder(View itemView) {
@@ -84,6 +84,7 @@ public class Comentarios_adapter extends RecyclerView.Adapter<Comentarios_adapte
             textViewComentario = itemView.findViewById(R.id.comentario);
             imageView= itemView.findViewById(R.id.perfil);
             textViewNombre = itemView.findViewById(R.id.titulo);
+            textViewidcomentario = itemView.findViewById(R.id.idcomentario);
         }
     }
 }
