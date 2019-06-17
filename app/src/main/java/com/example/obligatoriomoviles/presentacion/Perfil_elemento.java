@@ -25,6 +25,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -291,7 +292,7 @@ public class Perfil_elemento extends AppCompatActivity {
 
                 for (Comentario post : response.body().getLista_comentarios()) {
                     lista_Comentarios.add(new Comentario(
-                            post.getTexto(), post.getUsuario_correo()));
+                            post.getTexto(), post.getUsuario_correo(),post.getId()));
                 }
                 if (!lista_Comentarios.isEmpty()) {
                     Comentarios_adapter adapter = new Comentarios_adapter(Perfil_elemento.this, lista_Comentarios);
@@ -426,6 +427,47 @@ public class Perfil_elemento extends AppCompatActivity {
 
     }
 
+    public void ReportarComentario(View view){
+        setContentView(R.layout.lista_comentarios);
+        TextView idcomentario = findViewById(R.id.idcomentario);
+        String id =  idcomentario.getText().toString();
+        Integer comentario = Integer.parseInt(id);
+        final APIInterface apiService_2 = APICliente.getServidor().create(APIInterface.class);
+        Call<retorno> call = apiService_2.ReportarComentario(comentario);
+        call.enqueue(new Callback<retorno>() {
+            @Override
+            public void onResponse(Call<retorno> call, Response<retorno> response) {
+                if (response.body().getRetorno()) {
+                    Toast.makeText(Perfil_elemento.this, "Comentario reportado", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(Perfil_elemento.this, "Error al reportar comentario", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<retorno> call, Throwable t) {
+            }
+        });
+    }
+
+    public void PuntuarComentario(View view){
+
+        TextView idcomentario = findViewById(R.id.idcomentario);
+        TextView usuario = findViewById(R.id.titulo);
+        RatingBar puntuacion = findViewById(R.id.puntuacion);
+
+        String id =  idcomentario.getText().toString();
+        String Usuario=usuario.getText().toString();
+        Integer comentario = Integer.parseInt(id);
+        final APIInterface apiService_2 = APICliente.getServidor().create(APIInterface.class);
+        Call<retorno> call = apiService_2.ReportarComentario(comentario,Usuario,puntuacion.getRating());
+        call.enqueue(new Callback<retorno>() {
+            @Override
+            public void onResponse(Call<retorno> call, Response<retorno> response) {
+                if (response.body().getRetorno()) {
+                    Toast.makeText(Perfil_elemento.this, "Comentario puntuado", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(Perfil_elemento.this, "Error al puntuar comentario", Toast.LENGTH_SHORT).show();
     public void seguirElemento(View view) {
 
         SharedPreferences prefs = getSharedPreferences("session", Context.MODE_PRIVATE);
@@ -443,10 +485,7 @@ public class Perfil_elemento extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<retorno> call, Throwable t) {
-
             }
         });
-
     }
-
 }

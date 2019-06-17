@@ -17,9 +17,10 @@ public class Comentario {
     @SerializedName("usuario_correo")
     private String usuario_correo;
 
-    public Comentario(String texto, String usuario_correo) {
+    public Comentario(String texto, String usuario_correo, Integer id2) {
         this.texto = texto;
         this.usuario_correo = usuario_correo;
+        this.id=id2;
     }
 
     public Integer getId() {
