@@ -460,7 +460,7 @@ public class Perfil_elemento extends AppCompatActivity {
         String Usuario=usuario.getText().toString();
         Integer comentario = Integer.parseInt(id);
         final APIInterface apiService_2 = APICliente.getServidor().create(APIInterface.class);
-        Call<retorno> call = apiService_2.ReportarComentario(comentario,Usuario,puntuacion.getRating());
+        Call<retorno> call = apiService_2.PuntuarComentario(comentario,Usuario,puntuacion.getRating());
         call.enqueue(new Callback<retorno>() {
             @Override
             public void onResponse(Call<retorno> call, Response<retorno> response) {
@@ -468,6 +468,15 @@ public class Perfil_elemento extends AppCompatActivity {
                     Toast.makeText(Perfil_elemento.this, "Comentario puntuado", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(Perfil_elemento.this, "Error al puntuar comentario", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<retorno> call, Throwable t) {
+
+            }
+        });
+    }
     public void seguirElemento(View view) {
 
         SharedPreferences prefs = getSharedPreferences("session", Context.MODE_PRIVATE);
