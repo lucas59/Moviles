@@ -58,10 +58,13 @@ public class Perfil_usuario extends AppCompatActivity {
                     nombre_t.setText(nombre);
                     comentarios_t.setText(String.valueOf(comentarios));
                     String foto = preferences.getString("sessionFoto", null);
-                    final byte[] decodedBytes = Base64.decode(foto, Base64.DEFAULT);
-                    ImageView perfil = findViewById(R.id.imgView);
-                    Bitmap decodedBitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
-                    perfil.setImageBitmap(decodedBitmap);
+                    if (!foto.equals("")) {
+                        final byte[] decodedBytes = Base64.decode(foto, Base64.DEFAULT);
+                        ImageView perfil = findViewById(R.id.imgView);
+                        Bitmap decodedBitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
+                        perfil.setImageBitmap(decodedBitmap);
+
+                    }
                 }
 
                 @Override
@@ -176,6 +179,11 @@ public class Perfil_usuario extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void editarPerfil(View view) {
+        Intent intento = new Intent(this, modificar_usuario.class);
+        startActivity(intento);
     }
 
 
