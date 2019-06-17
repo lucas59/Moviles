@@ -39,7 +39,7 @@ public class Actor_adapter extends RecyclerView.Adapter<Actor_adapter.ProductVie
     public ProductViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //inflating and returning our view holder
         LayoutInflater inflater = LayoutInflater.from(mCtx);
-        View view = inflater.inflate(R.layout.lista_actores, null);
+        final View view = inflater.inflate(R.layout.lista_actores, parent, false);
         view.setOnClickListener(this);
         return new ProductViewHolder(view);
     }
