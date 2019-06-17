@@ -61,7 +61,7 @@ public interface APIInterface {
 
 
     @GET("elemento/seguir")
-    Call<retorno>seguirElemento(@Query("email") String email, @Query("id") String contenido, @Query("fecha") String fecha, @Query("genero") String genero, @Query("titulo") String titulo );
+    Call<retorno>seguirElemento(@Query("email") String email, @Query("id") String contenido, @Query("fecha") String fecha, @Query("genero") String genero, @Query("titulo") String titulo,@Query("tipo") boolean tipo );
 
     @POST("usuario/editar")
     @FormUrlEncoded

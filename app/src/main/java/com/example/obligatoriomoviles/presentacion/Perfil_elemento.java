@@ -65,6 +65,7 @@ public class Perfil_elemento extends AppCompatActivity {
     private String tituloelemento;
     private APIInterface apiServidor;
     private Boolean seguir = false;
+    boolean tipoElemento= Boolean.parseBoolean(null);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +98,8 @@ public class Perfil_elemento extends AppCompatActivity {
         //setear el menu de navegación de abajo
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Moviles");
-        if (getIntent().getExtras().getString("tipo").toString().compareTo("serie") != 0) {
+        if (getIntent().getExtras().getString("tipo").toString().compareTo("serie") != 0) {//pelicula
+            this.tipoElemento=true;
             call.enqueue(new Callback<Cine>() {
                 @Override
                 public void onResponse(Call<Cine> call, Response<Cine> response) {
@@ -151,6 +153,7 @@ public class Perfil_elemento extends AppCompatActivity {
 
             });
         } else {
+            this.tipoElemento=false;
             call_serie.enqueue(new Callback<Cine>() {
                 @Override
                 public void onResponse(Call<Cine> call, Response<Cine> response) {
@@ -428,7 +431,7 @@ public class Perfil_elemento extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("session", Context.MODE_PRIVATE);
         final String email = prefs.getString("sessionCorreo", null);
 
-        Call<retorno> call = this.apiServidor.seguirElemento(email, this.identificador, this.fechaElemento, this.genero, this.tituloelemento);
+        Call<retorno> call = this.apiServidor.seguirElemento(email, this.identificador, this.fechaElemento, this.genero, this.tituloelemento, this.tipoElemento);
         call.enqueue(new Callback<retorno>() {
             @Override
             public void onResponse(Call<retorno> call, Response<retorno> response) {
