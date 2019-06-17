@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -66,7 +67,7 @@ public class Perfil_elemento extends AppCompatActivity {
     private String tituloelemento;
     private APIInterface apiServidor;
     private Boolean seguir = false;
-    boolean tipoElemento= Boolean.parseBoolean(null);
+    boolean tipoElemento = Boolean.parseBoolean(null);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +101,7 @@ public class Perfil_elemento extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Moviles");
         if (getIntent().getExtras().getString("tipo").toString().compareTo("serie") != 0) {//pelicula
-            this.tipoElemento=true;
+            this.tipoElemento = true;
             call.enqueue(new Callback<Cine>() {
                 @Override
                 public void onResponse(Call<Cine> call, Response<Cine> response) {
@@ -154,7 +155,7 @@ public class Perfil_elemento extends AppCompatActivity {
 
             });
         } else {
-            this.tipoElemento=false;
+            this.tipoElemento = false;
             call_serie.enqueue(new Callback<Cine>() {
                 @Override
                 public void onResponse(Call<Cine> call, Response<Cine> response) {
@@ -292,7 +293,7 @@ public class Perfil_elemento extends AppCompatActivity {
 
                 for (Comentario post : response.body().getLista_comentarios()) {
                     lista_Comentarios.add(new Comentario(
-                            post.getTexto(), post.getUsuario_correo(),post.getId()));
+                            post.getTexto(), post.getUsuario_correo(), post.getId()));
                 }
                 if (!lista_Comentarios.isEmpty()) {
                     Comentarios_adapter adapter = new Comentarios_adapter(Perfil_elemento.this, lista_Comentarios);
@@ -427,10 +428,12 @@ public class Perfil_elemento extends AppCompatActivity {
 
     }
 
-    public void ReportarComentario(View view){
+    public void ReportarComentario(View view) {
         setContentView(R.layout.lista_comentarios);
-        TextView idcomentario = findViewById(R.id.idcomentario);
-        String id =  idcomentario.getText().toString();
+        LayoutInflater li = LayoutInflater.from(this);
+        final View myView = li.inflate(R.layout.lista_comentarios, null);
+        TextView idcomentario = myView.findViewById(R.id.idcomentario);
+        String id = idcomentario.getText().toString();
         Integer comentario = Integer.parseInt(id);
         final APIInterface apiService_2 = APICliente.getServidor().create(APIInterface.class);
         Call<retorno> call = apiService_2.ReportarComentario(comentario);
@@ -450,17 +453,18 @@ public class Perfil_elemento extends AppCompatActivity {
         });
     }
 
-    public void PuntuarComentario(View view){
-
-        TextView idcomentario = findViewById(R.id.idcomentario);
+    public void PuntuarComentario(View view) {
+        LayoutInflater li = LayoutInflater.from(this);
+        final View myView = li.inflate(R.layout.lista_comentarios, null);
+        TextView idcomentario = myView.findViewById(R.id.idcomentario);
         TextView usuario = findViewById(R.id.titulo);
         RatingBar puntuacion = findViewById(R.id.puntuacion);
 
-        String id =  idcomentario.getText().toString();
-        String Usuario=usuario.getText().toString();
+        String id = idcomentario.getText().toString();
+        String Usuario = usuario.getText().toString();
         Integer comentario = Integer.parseInt(id);
         final APIInterface apiService_2 = APICliente.getServidor().create(APIInterface.class);
-        Call<retorno> call = apiService_2.PuntuarComentario(comentario,Usuario,puntuacion.getRating());
+        Call<retorno> call = apiService_2.PuntuarComentario(comentario, Usuario, puntuacion.getRating());
         call.enqueue(new Callback<retorno>() {
             @Override
             public void onResponse(Call<retorno> call, Response<retorno> response) {
@@ -494,6 +498,7 @@ public class Perfil_elemento extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<retorno> call, Throwable t) {
+
             }
         });
     }

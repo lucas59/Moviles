@@ -72,5 +72,6 @@ public interface APIInterface {
     @FormUrlEncoded
     Call<retorno>actualizarPerfil(@Field("correo") String correo,@Field("nombre") String nombre,@Field("apellido") String apellido,@Field("edad") int edad,@Field("foto") String foto);
 
-
+    @GET("contenido/PuntuarComentario")
+    Call<retorno> PuntuarComentario(@Query("comentario") int comentario,@Query("usuario") String usuario,@Query("puntuacion") Float puntuacion);
 }
