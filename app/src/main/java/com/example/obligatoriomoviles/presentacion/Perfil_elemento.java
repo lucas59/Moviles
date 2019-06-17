@@ -6,8 +6,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
@@ -39,6 +43,7 @@ import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -52,6 +57,16 @@ public class Perfil_elemento extends AppCompatActivity {
     private Button dialogBtn;
     //lista de comentarios
     RecyclerView recyclerView_comentarios;
+    String tituloElemento = null;
+    TextView titulo = null;
+    ImageButton favorito;
+    private String identificador;
+    private String fechaElemento;
+    private String genero;
+    private String tituloelemento;
+    private APIInterface apiServidor;
+    private Boolean seguir = false;
+    boolean tipoElemento= Boolean.parseBoolean(null);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +83,8 @@ public class Perfil_elemento extends AppCompatActivity {
         APIInterface apiService_serie = APICliente.getPelicula().create(APIInterface.class);
         Call<Cine> call_serie = apiService_serie.getSerie_unica(getIntent().getExtras().getString("id"), "0d81ceeb977ab515fd9f844377688c5a", "credits", "es");
 
+        APIInterface apiCliente = APICliente.getServidor().create(APIInterface.class);
+        this.apiServidor = apiCliente;
         //mostraar la lista de actores
         recyclerView = (RecyclerView) findViewById(R.id.Actores);
         recyclerView.setHasFixedSize(true);
@@ -82,7 +99,8 @@ public class Perfil_elemento extends AppCompatActivity {
         //setear el menu de navegación de abajo
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Moviles");
-        if (getIntent().getExtras().getString("tipo").toString().compareTo("serie") != 0) {
+        if (getIntent().getExtras().getString("tipo").toString().compareTo("serie") != 0) {//pelicula
+            this.tipoElemento=true;
             call.enqueue(new Callback<Cine>() {
                 @Override
                 public void onResponse(Call<Cine> call, Response<Cine> response) {
@@ -108,12 +126,15 @@ public class Perfil_elemento extends AppCompatActivity {
                     ImageView fondo_view = (ImageView) findViewById(R.id.imagen_fondo);
                     ImageView poster_view = (ImageView) findViewById(R.id.imagen_poster);
                     TextView fecha = (TextView) findViewById(R.id.fecha);
-                    TextView titulo = (TextView) findViewById(R.id.titulo);
+                    titulo = (TextView) findViewById(R.id.titulo);
                     TextView sinopsis = (TextView) findViewById(R.id.sinopsis);
                     TextView valor = (TextView) findViewById(R.id.valor);
                     ProgressBar votos = (ProgressBar) findViewById(R.id.votos);
                     //Setear información en los elementos
                     titulo.setText(response.body().getOriginal_title());
+                    tituloelemento = response.body().getOriginal_title();
+                    fechaElemento = response.body().getFecha();
+
                     Picasso.get().load(fondo).fit().centerCrop().into(fondo_view);
                     Picasso.get().load(poster).into(poster_view);
                     fecha.setText("Estreno: " + response.body().getFecha());
@@ -133,6 +154,7 @@ public class Perfil_elemento extends AppCompatActivity {
 
             });
         } else {
+            this.tipoElemento=false;
             call_serie.enqueue(new Callback<Cine>() {
                 @Override
                 public void onResponse(Call<Cine> call, Response<Cine> response) {
@@ -163,9 +185,14 @@ public class Perfil_elemento extends AppCompatActivity {
                     TextView valor = (TextView) findViewById(R.id.valor);
                     ProgressBar votos = (ProgressBar) findViewById(R.id.votos);
                     //Setear información en los elementos
+
+                    fechaElemento = response.body().getFecha();
+                    tituloElemento = (response.body().getOriginal_title());
+
                     titulo.setText(response.body().getOriginal_title());
                     Picasso.get().load(fondo).fit().centerCrop().into(fondo_view);
                     Picasso.get().load(poster).into(poster_view);
+
                     fecha.setText("Estreno: " + response.body().getFecha());
                     sinopsis.setText(response.body().getSinopsis());
                     votos.setProgress((int) Float.parseFloat(response.body().getNota()));
@@ -191,8 +218,53 @@ public class Perfil_elemento extends AppCompatActivity {
                 showDialog(Perfil_elemento.this);
             }
         });
+        this.favorito = findViewById(R.id.favorito); ///obtener si es favorita o no
+        SharedPreferences prefs = getSharedPreferences("session", Context.MODE_PRIVATE);
+        final String email = prefs.getString("sessionCorreo", null);
+        if (email != null) {
+            identificador = getIntent().getExtras().getString("id");
+            mostrarFavorito(1);
+            final Call<retorno> seguido = apiCliente.verificarSuscripcion(email, this.identificador);
+            seguido.enqueue(new Callback<retorno>() {
+                @Override
+                public void onResponse(Call<retorno> call, Response<retorno> response) {
+                    if (response.body().getRetorno()) {
+                        marcarFavorito(1);//marcar el boton en activo
+                        seguir = true;
+                        favorito.setImageResource(R.drawable.check);
+                    } else {
+                        marcarFavorito(0);//marcar el boton en desactivado
+                        seguir = false;
+                        favorito.setImageResource(R.drawable.no_check);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<retorno> call, Throwable t) {
+
+                }
+            });
+        } else {
+            mostrarFavorito(0);//no mostrar el boton si no hay session
+        }
+    }
+
+    private void mostrarFavorito(int i) {
+        if (i == 1) {
+            favorito.setImageResource(R.drawable.check);
+        } else {
+            favorito.setImageResource(R.drawable.no_check);
+        }
+    }
+
+    private void marcarFavorito(int i) {
+        if (i == 1)
+            favorito.setImageResource(R.drawable.check);
+        else
+            favorito.setImageResource(R.drawable.no_check);
 
     }
+
 
     public void showDialog(Activity activity) {
         final Dialog dialog = new Dialog(activity);
@@ -237,8 +309,6 @@ public class Perfil_elemento extends AppCompatActivity {
                 Log.d("LoginActivity", t.getMessage() + t.getStackTrace().toString());
             }
         });
-
-
     }
 
     public void Comentar(View view) {
@@ -324,6 +394,16 @@ public class Perfil_elemento extends AppCompatActivity {
     }
 
 
+    public void cambiarEstado() {
+        if (this.seguir) {
+            favorito.setImageResource(R.drawable.no_check);
+            this.seguir = false;
+        } else {
+            favorito.setImageResource(R.drawable.check);
+            this.seguir = true;
+        }
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -388,6 +468,18 @@ public class Perfil_elemento extends AppCompatActivity {
                     Toast.makeText(Perfil_elemento.this, "Comentario puntuado", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(Perfil_elemento.this, "Error al puntuar comentario", Toast.LENGTH_SHORT).show();
+    public void seguirElemento(View view) {
+
+        SharedPreferences prefs = getSharedPreferences("session", Context.MODE_PRIVATE);
+        final String email = prefs.getString("sessionCorreo", null);
+
+        Call<retorno> call = this.apiServidor.seguirElemento(email, this.identificador, this.fechaElemento, this.genero, this.tituloelemento, this.tipoElemento);
+        call.enqueue(new Callback<retorno>() {
+            @Override
+            public void onResponse(Call<retorno> call, Response<retorno> response) {
+                if (response.body().getRetorno() == true) {
+                    cambiarEstado();//cambiar el estado de color y mostrar un toast avisando
+                    //la llamada devuelve verdadero si se dejo de seguir o si se emprezo a seguir
                 }
             }
 

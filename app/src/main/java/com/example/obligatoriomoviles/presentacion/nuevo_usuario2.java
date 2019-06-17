@@ -106,10 +106,4 @@ public class nuevo_usuario2 extends AppCompatActivity {
 
     }
 
-    private byte[] getImagen(String path){
-        Bitmap bm = BitmapFactory.decodeFile(path);
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm = Bitmap
-        return baos.toByteArray();
-    }
 }

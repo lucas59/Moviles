@@ -75,6 +75,11 @@ public class usuario {
     public void setEdad(int edad) {
         this.edad = edad;
     }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
     public int getNumero_comentario() {
         return Numero_comentario;
     }
