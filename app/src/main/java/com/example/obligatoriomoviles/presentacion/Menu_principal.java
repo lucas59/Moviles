@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.annotation.NonNull;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,15 +49,13 @@ public class Menu_principal extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
-
         if(backPressedTime + 2000 > System.currentTimeMillis()){
             toastsalir.cancel();
             super.onBackPressed();
             return;
         } else {
-        toastsalir = Toast.makeText(getBaseContext(),"Vuelve a presionar el botón atrás para salir",Toast.LENGTH_SHORT);
        toastsalir.show();
+            Toast.makeText(getApplicationContext(), "Vuelve a presionar el botón atrás para salir", Toast.LENGTH_SHORT).show();
         }
         backPressedTime = System.currentTimeMillis();
     }

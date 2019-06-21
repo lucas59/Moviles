@@ -50,12 +50,11 @@ public class ValidarCuentaActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.putString("tokenActual",codigo);
                     editor.commit();
-
-                    Toast.makeText(getApplicationContext(),"Usuario activado",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Usuario activado", Toast.LENGTH_SHORT).show();
                     Intent intento = new Intent(getBaseContext(),nuevo_usuario2.class);
                     startActivity(intento);
                 }else {
-                    Toast.makeText(getApplicationContext(),"Codigo invalido", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Codigo invalido", Toast.LENGTH_SHORT).show();
                 }
             }
 

@@ -1,6 +1,7 @@
 package com.example.obligatoriomoviles.Clases.Cine;
 
 
+import com.example.obligatoriomoviles.Clases.Series;
 import com.example.obligatoriomoviles.Clases.usuario;
 import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
@@ -19,6 +20,8 @@ public class Cine {
     private String poster_path;
     @SerializedName("results")
     private List<Cine> lista_elementos;
+    @SerializedName("seasons")
+    private List<Series> lista_temporadas;
     @SerializedName("vote_average")
     private String nota;
     @SerializedName("overview")
