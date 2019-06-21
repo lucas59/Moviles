@@ -1,7 +1,8 @@
 package com.example.obligatoriomoviles.Clases;
 
-public class Series extends Contenido {
+import com.google.gson.annotations.SerializedName;
 
+public class Series extends Contenido {
 
     @Override
     public void GenerarNotificaciones() {

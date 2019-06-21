@@ -87,13 +87,13 @@ public class nuevo_usuario2 extends AppCompatActivity {
             @Override
             public void onResponse(Call<retorno> call, Response<retorno> response) {
                 if(response.body().getRetorno()){
-                    Toast.makeText(getApplicationContext(),"Bienvenido!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Bienvenido!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(),login.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     finish();
                     startActivity(intent);
                 }else {
-                    Toast.makeText(getApplicationContext(),"Verifique sus datos!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Verifique sus datos!", Toast.LENGTH_SHORT).show();
                 }
             }
 

@@ -59,10 +59,10 @@ public class NuevoUsuarioActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<retorno> call, Response<retorno> response) {
             if(response.body().getRetorno()){
-                Toast.makeText(getApplicationContext(),"Bienvenido!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Bienvenido!", Toast.LENGTH_SHORT).show();
                 enviar_a_validar();
                 }else {
-                Toast.makeText(getApplicationContext(),"Verifique sus datos!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Verifique sus datos!", Toast.LENGTH_SHORT).show();
                 }
             }
 
