@@ -58,9 +58,6 @@ public interface APIInterface {
     @GET("contenido/ReportarComentario")
     Call<retorno> ReportarComentario(@Query("comentario") int comentario);
 
-    @GET("contenido/PuntuarComentario")
-    Call<retorno> PuntuarComentario(@Query("comentario") int comentario,@Query("usuario") String usuario,@Query("puntuacion") Float puntuacion);
-
     @GET("elemento/verificar")
     Call<retorno> verificarSuscripcion(@Query("email") String email,@Query("id") String id);
 

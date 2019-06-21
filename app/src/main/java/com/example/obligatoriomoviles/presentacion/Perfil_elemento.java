@@ -429,7 +429,7 @@ public class Perfil_elemento extends AppCompatActivity {
     }
 
     public void ReportarComentario(View view) {
-        setContentView(R.layout.lista_comentarios);
+
         LayoutInflater li = LayoutInflater.from(this);
         final View myView = li.inflate(R.layout.lista_comentarios, null);
         TextView idcomentario = myView.findViewById(R.id.idcomentario);
