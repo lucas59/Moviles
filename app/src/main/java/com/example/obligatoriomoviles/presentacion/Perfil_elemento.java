@@ -434,6 +434,7 @@ public class Perfil_elemento extends AppCompatActivity {
         final View myView = li.inflate(R.layout.lista_comentarios, null);
         TextView idcomentario = myView.findViewById(R.id.idcomentario);
         String id = idcomentario.getText().toString();
+
         Integer comentario = Integer.parseInt(id);
         final APIInterface apiService_2 = APICliente.getServidor().create(APIInterface.class);
         Call<retorno> call = apiService_2.ReportarComentario(comentario);
