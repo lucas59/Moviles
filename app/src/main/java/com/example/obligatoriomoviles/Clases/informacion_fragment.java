@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
@@ -233,6 +234,26 @@ public class informacion_fragment extends Fragment {
         }
 
 
+        final View view_2 = inflater.inflate(R.layout.lista_comentarios,container,false);
+        Button boton_punt = view_2.findViewById(R.id.puntuar);
+        boton_punt.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+               PuntuarComentario(getView());
+            }
+        });
+
+        Button boton_rep = view_2.findViewById(R.id.reportar);
+        boton_rep.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                ReportarComentario(getView());
+            }
+        });
 
         ImageButton boton_fav = view.findViewById(R.id.favorito);
         boton_fav.setOnClickListener(new View.OnClickListener()
@@ -240,24 +261,15 @@ public class informacion_fragment extends Fragment {
             @Override
             public void onClick(View v)
             {
-                SharedPreferences prefs = getActivity().getSharedPreferences("session", Context.MODE_PRIVATE);
-                final String email = prefs.getString("sessionCorreo", null);
+                seguirElemento(getView());
+            }
+        });
 
-                Call<retorno> call = apiServidor.seguirElemento(email, identificador, fechaElemento, genero, tituloelemento,tipoElemento);
-                call.enqueue(new Callback<retorno>() {
-                    @Override
-                    public void onResponse(Call<retorno> call, Response<retorno> response) {
-                        if (response.body().getRetorno() == true) {
-                            cambiarEstado();//cambiar el estado de color y mostrar un toast avisando
-
-                            //la llamada devuelve verdadero si se dejo de seguir o si se emprezo a seguir
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<retorno> call, Throwable t) {
-                    }
-                });
+        FloatingActionButton boton_comentar = view.findViewById(R.id.boton_comentar);
+        boton_comentar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Comentar(getView());
             }
         });
         return view;
@@ -444,6 +456,23 @@ public class informacion_fragment extends Fragment {
 
     public void seguirElemento(View view) {
 
+        SharedPreferences prefs = getActivity().getSharedPreferences("session", Context.MODE_PRIVATE);
+        final String email = prefs.getString("sessionCorreo", null);
 
+        Call<retorno> call = apiServidor.seguirElemento(email, identificador, fechaElemento, genero, tituloelemento,tipoElemento);
+        call.enqueue(new Callback<retorno>() {
+            @Override
+            public void onResponse(Call<retorno> call, Response<retorno> response) {
+                if (response.body().getRetorno() == true) {
+                    cambiarEstado();//cambiar el estado de color y mostrar un toast avisando
+
+                    //la llamada devuelve verdadero si se dejo de seguir o si se emprezo a seguir
+                }
+            }
+
+            @Override
+            public void onFailure(Call<retorno> call, Throwable t) {
+            }
+        });
     }
 }
