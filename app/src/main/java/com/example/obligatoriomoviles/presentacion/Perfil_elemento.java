@@ -61,6 +61,7 @@ public class Perfil_elemento extends AppCompatActivity {
     String tituloElemento = null;
     TextView titulo = null;
     ImageButton favorito;
+    TextView idcomentario;
     private String identificador;
     private String fechaElemento;
     private String genero;
@@ -282,6 +283,7 @@ public class Perfil_elemento extends AppCompatActivity {
         recyclerView_comentarios = (RecyclerView) dialog.findViewById(R.id.comentario_lista);
         recyclerView_comentarios.setHasFixedSize(true);
         recyclerView_comentarios.setLayoutManager(new LinearLayoutManager(this));
+        idcomentario = dialog. findViewById(R.id.idcomentario);
         APIInterface apiService_2 = APICliente.getServidor().create(APIInterface.class);
         Call<retorno> call_2 = apiService_2.getComentario(getIntent().getExtras().getString("id"));
 
@@ -430,7 +432,7 @@ public class Perfil_elemento extends AppCompatActivity {
 
     public void ReportarComentario(View view) {
 
-        LayoutInflater li = LayoutInflater.from(this);
+       LayoutInflater li = LayoutInflater.from(this);
         final View myView = li.inflate(R.layout.lista_comentarios, null);
         TextView idcomentario = myView.findViewById(R.id.idcomentario);
         String id = idcomentario.getText().toString();
