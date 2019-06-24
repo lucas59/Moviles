@@ -53,7 +53,7 @@ public class modificar_usuario extends AppCompatActivity {
         imgPerfil = findViewById(R.id.imgPerfil);
 
         if (preferenciasSession.getString("sessionCorreo", "").equals("")) {
-            Toast.makeText(this, "No a iniciado sessión", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "No ha iniciado sessión", Toast.LENGTH_SHORT).show();
             Intent intento = new Intent(this, login.class);
         } else {
 
@@ -98,7 +98,7 @@ public class modificar_usuario extends AppCompatActivity {
         startActivityForResult(intent.createChooser(intent, "Selecciona la aplicación"), 10);
     }
 
-    public void actualizar(View view) throws IOException {
+    public void actualizar(final View view) throws IOException {
         final String nombre = txtNombre.getText().toString();
         final String apellido = txtApellido.getText().toString();
         final int edad = Integer.valueOf(intEdad.getText().toString());
@@ -118,7 +118,7 @@ public class modificar_usuario extends AppCompatActivity {
             public void onResponse(Call<retorno> call, Response<retorno> response) {
 
                 if (response.body().getRetorno()) {
-                    Toast.makeText(getApplicationContext(), "Datos actualizados", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Datos actualizados", Toast.LENGTH_SHORT).show();
                     SharedPreferences preferenciasSession = getSharedPreferences("session", Context.MODE_PRIVATE);
                     final SharedPreferences.Editor editor = preferenciasSession.edit();
 
@@ -145,7 +145,7 @@ public class modificar_usuario extends AppCompatActivity {
                     startActivity(intento);
                     finish();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Verifique sus datos", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Verifique sus datos", Toast.LENGTH_SHORT).show();
                     return;
                 }
             }

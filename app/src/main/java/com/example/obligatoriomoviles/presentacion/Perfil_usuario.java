@@ -114,11 +114,10 @@ public class Perfil_usuario extends AppCompatActivity {
                     Intent intento = new Intent(getApplicationContext(), login.class);
                     startActivity(intento);
                     finish();
-                    Toast.makeText(getApplicationContext(), "Session cerrada!", Toast.LENGTH_LONG).show();
-
+                    Toast.makeText(getApplicationContext(), "Session cerrada!", Toast.LENGTH_SHORT).show();
 
                 } else {
-                    Toast.makeText(getApplicationContext(), "No se puede desactivar!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "No se puede desactivar!", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -186,7 +185,6 @@ public class Perfil_usuario extends AppCompatActivity {
                 finish();
                 return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 

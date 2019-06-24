@@ -45,7 +45,7 @@ public class login extends AppCompatActivity {
 
 
 
-    public void login(View view){
+    public void login(final View view){
         final String email = etEmail.getEditText().getText().toString();
         String pass = etPass.getEditText().getText().toString();
         if(email.equals("") || pass.equals("")){
@@ -72,13 +72,13 @@ public class login extends AppCompatActivity {
                                 editor.putInt("sessionEdad",response.body().getEdad());
                                 editor.putInt("sessionNComentarios",response.body().getNumero_comentario());
                                 editor.commit();
-                                Toast.makeText(getApplicationContext(),"Bienvenido!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Bienvenido!", Toast.LENGTH_SHORT).show();
                                 Intent intento = new Intent(getBaseContext(),Calendario_elementos.class);
                                 intento.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intento);
                                 finish();
                             }else {
-                                Toast.makeText(getApplicationContext(),"Verifique sus datos!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Verifique sus datos!", Toast.LENGTH_SHORT).show();
                             }
                         }
                         @Override
@@ -88,7 +88,7 @@ public class login extends AppCompatActivity {
                     });
 
                 }else {
-                    Toast.makeText(getApplicationContext(),"Verifique sus datos!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Verifique sus datos!", Toast.LENGTH_SHORT).show();
                 }
             }
 

@@ -22,6 +22,9 @@ public interface APIInterface {
     @GET("movie/{id}")
     Call<Cine> getPelicula(@Path("id") String id, @Query("api_key") String api_key, @Query("append_to_response") String filtro, @Query("language") String idioma);
 
+    @GET("movie/{id}/{rec}")
+    Call<Cine> getRecomendaciones_pelicula(@Path("id") String id,@Path("rec") String recomendacion, @Query("api_key") String api_key,  @Query("language") String idioma);
+
     @GET("tv/{id}")
     Call<Cine> getSerie_unica(@Path("id") String id, @Query("api_key") String api_key, @Query("append_to_response") String filtro, @Query("language") String idioma);
 

@@ -28,6 +28,7 @@ public class APICliente {
                     .baseUrl(BASE_URL2)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
+
         }
         return retrofit_peliculas;
     }
