@@ -62,6 +62,7 @@ public class nuevo_usuario2 extends AppCompatActivity {
         }
     }
 
+
     public void subirDatos(View view) throws IOException {
         String nombre = this.txtNombre.getEditText().getText().toString();
         String apellido = this.txtApellido.getEditText().getText().toString();

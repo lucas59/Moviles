@@ -32,6 +32,8 @@ import com.example.obligatoriomoviles.Clases.Cine.Actor;
 import com.example.obligatoriomoviles.Clases.Cine.Actor_adapter;
 import com.example.obligatoriomoviles.Clases.Cine.Cine;
 import com.example.obligatoriomoviles.Clases.Cine.Comentarios_adapter;
+import com.example.obligatoriomoviles.Clases.Comentario;
+import com.example.obligatoriomoviles.Clases.retorno;
 import com.example.obligatoriomoviles.R;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
