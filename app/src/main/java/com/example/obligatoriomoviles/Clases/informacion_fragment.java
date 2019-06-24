@@ -63,6 +63,7 @@ public class informacion_fragment extends Fragment {
     private String tituloelemento;
     private APIInterface apiServidor;
     private Boolean seguir = false;
+    private TextView prueba;
     boolean tipoElemento = Boolean.parseBoolean(null);
     @Nullable
     @Override
@@ -71,6 +72,8 @@ public class informacion_fragment extends Fragment {
         //animación de carga
         final ProgressBar spinner;
         spinner = (ProgressBar) view.findViewById(R.id.barra);
+
+
 
         //Llamado de la API para que retorne el json de la consulta
         APIInterface apiService = APICliente.getPelicula().create(APIInterface.class);
@@ -236,26 +239,6 @@ public class informacion_fragment extends Fragment {
         }
 
 
-        final View view_2 = inflater.inflate(R.layout.lista_comentarios,container,false);
-        Button boton_punt = view_2.findViewById(R.id.puntuar);
-        boton_punt.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-               PuntuarComentario(getView());
-            }
-        });
-
-        Button boton_rep = view_2.findViewById(R.id.reportar);
-        boton_rep.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                ReportarComentario(getView());
-            }
-        });
 
         ImageButton boton_fav = view.findViewById(R.id.favorito);
         boton_fav.setOnClickListener(new View.OnClickListener()
@@ -324,6 +307,7 @@ public class informacion_fragment extends Fragment {
                 }
                 if (!lista_Comentarios.isEmpty()) {
                     Comentarios_adapter adapter = new Comentarios_adapter(getActivity(), lista_Comentarios);
+
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
                     recyclerView_comentarios.setAdapter(adapter);
                     dialog.show();
@@ -403,58 +387,9 @@ public class informacion_fragment extends Fragment {
             this.seguir = true;
         }
     }
-    public void ReportarComentario(View view) {
-        LayoutInflater li = LayoutInflater.from(getActivity());
-        final View myView = li.inflate(R.layout.lista_comentarios, null);
-        TextView idcomentario = myView.findViewById(R.id.idcomentario);
-        String id = idcomentario.getText().toString();
-        Integer comentario = Integer.parseInt(id);
-        final APIInterface apiService_2 = APICliente.getServidor().create(APIInterface.class);
-        Call<retorno> call = apiService_2.ReportarComentario(comentario);
-        call.enqueue(new Callback<retorno>() {
-            @Override
-            public void onResponse(Call<retorno> call, Response<retorno> response) {
-                if (response.body().getRetorno()) {
-                    Toast.makeText(getActivity(), "Comentario reportado", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getActivity(), "Error al reportar comentario", Toast.LENGTH_SHORT).show();
-                }
-            }
 
-            @Override
-            public void onFailure(Call<retorno> call, Throwable t) {
-            }
-        });
-    }
 
-    public void PuntuarComentario(View view) {
-        LayoutInflater li = LayoutInflater.from(getActivity());
-        final View myView = li.inflate(R.layout.lista_comentarios, null);
-        TextView idcomentario = myView.findViewById(R.id.idcomentario);
-        TextView usuario = view.findViewById(R.id.titulo);
-        RatingBar puntuacion = view.findViewById(R.id.puntuacion);
 
-        String id = idcomentario.getText().toString();
-        String Usuario = usuario.getText().toString();
-        Integer comentario = Integer.parseInt(id);
-        final APIInterface apiService_2 = APICliente.getServidor().create(APIInterface.class);
-        Call<retorno> call = apiService_2.PuntuarComentario(comentario, Usuario, puntuacion.getRating());
-        call.enqueue(new Callback<retorno>() {
-            @Override
-            public void onResponse(Call<retorno> call, Response<retorno> response) {
-                if (response.body().getRetorno()) {
-                    Toast.makeText(getActivity(), "Comentario puntuado", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getActivity(), "Error al puntuar comentario", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<retorno> call, Throwable t) {
-
-            }
-        });
-    }
 
     public void seguirElemento(View view) {
 
