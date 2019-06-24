@@ -7,5 +7,6 @@
     <color name="terjeta">#22506B</color>
     <color name="comentario">#3A7393</color>
     <color name="texto">#A0A0A0</color>
+    <color name="blanco">#FAFAFA</color>
     <color name="trans">#00000000</color>
 </resources>

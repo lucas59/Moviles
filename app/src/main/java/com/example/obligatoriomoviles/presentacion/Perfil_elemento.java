@@ -8,18 +8,25 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.ImageButton;
+import android.view.View;
+import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.obligatoriomoviles.API.APICliente;
 import com.example.obligatoriomoviles.API.APIInterface;
 import com.example.obligatoriomoviles.Clases.Cine.Fragment_adapter;
 import com.example.obligatoriomoviles.Clases.informacion_fragment;
 import com.example.obligatoriomoviles.Clases.recomendacion_fragment;
+import com.example.obligatoriomoviles.Clases.retorno;
 import com.example.obligatoriomoviles.R;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Perfil_elemento extends AppCompatActivity {
     //lista de actores

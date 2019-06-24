@@ -16,6 +16,8 @@ public class Comentario {
     private String contenido_id;
     @SerializedName("usuario_correo")
     private String usuario_correo;
+    @SerializedName("nombre")
+    private String nombre;
 
     public Comentario(String texto, String usuario_correo, Integer id2) {
         this.texto = texto;
