@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.obligatoriomoviles.API.APICliente;
@@ -24,12 +25,14 @@ public class NuevoUsuarioActivity extends AppCompatActivity {
 
     private TextInputLayout txtEmail;
     private TextInputLayout txtPass;
+    private ProgressBar spinner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nuevo_usuario);
         this.txtEmail=findViewById(R.id.txtEmail);
         this.txtPass=findViewById(R.id.txtPass);
+        this.spinner = findViewById(R.id.progressBar3);
     }
 
     public void iniciar(View view){
@@ -55,8 +58,9 @@ public class NuevoUsuarioActivity extends AppCompatActivity {
         APIInterface apiService = APICliente.getServidor().create(APIInterface.class);
         Call<retorno> call = apiService.altaUsuario(email,pass);
 
+
+        spinner.setVisibility(View.VISIBLE);
         call.enqueue(new Callback<retorno>() {
-            @Override
             public void onResponse(Call<retorno> call, Response<retorno> response) {
             if(response.body().getRetorno()){
                 Toast.makeText(getApplicationContext(), "Bienvenido!", Toast.LENGTH_SHORT).show();
@@ -64,6 +68,7 @@ public class NuevoUsuarioActivity extends AppCompatActivity {
                 }else {
                 Toast.makeText(getApplicationContext(), "Verifique sus datos!", Toast.LENGTH_SHORT).show();
                 }
+                spinner.setVisibility(View.GONE);
             }
 
             @Override
