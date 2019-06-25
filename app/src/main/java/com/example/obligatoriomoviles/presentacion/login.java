@@ -27,6 +27,7 @@ import retrofit2.Response;
 public class login extends AppCompatActivity {
     private TextInputLayout etEmail;
     private TextInputLayout etPass;
+    private ProgressBar spinner;
 
 
     @Override
@@ -35,6 +36,7 @@ public class login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         etEmail=findViewById(R.id.Email);
         etPass=findViewById(R.id.txtContraseña);
+        spinner = findViewById(R.id.progressBar2);
 
     }
 
@@ -53,7 +55,7 @@ public class login extends AppCompatActivity {
         }
         final APIInterface apiService = APICliente.getServidor().create(APIInterface.class);
         Call<retorno> call = apiService.login(email,pass);
-
+        spinner.setVisibility(View.VISIBLE);
         call.enqueue(new Callback<retorno>() {//verifico que los datos sean correctos
             @Override
             public void onResponse(Call<retorno> call, Response<retorno> response) {
@@ -89,6 +91,7 @@ public class login extends AppCompatActivity {
                 }else {
                     Toast.makeText(getApplicationContext(), "Verifique sus datos!", Toast.LENGTH_SHORT).show();
                 }
+                spinner.setVisibility(View.GONE);
             }
 
             @Override

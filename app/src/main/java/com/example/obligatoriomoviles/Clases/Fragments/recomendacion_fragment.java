@@ -1,22 +1,23 @@
-package com.example.obligatoriomoviles.Clases;
+package com.example.obligatoriomoviles.Clases.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ProgressBar;
 
 import com.example.obligatoriomoviles.API.APICliente;
 import com.example.obligatoriomoviles.API.APIInterface;
 import com.example.obligatoriomoviles.Clases.Cine.Cine;
-import com.example.obligatoriomoviles.Clases.Cine.Cine_adapter;
+import com.example.obligatoriomoviles.Clases.Adapters.recomendaciones_adapter;
 import com.example.obligatoriomoviles.R;
-import com.example.obligatoriomoviles.presentacion.Calendario_elementos;
 import com.example.obligatoriomoviles.presentacion.Perfil_elemento;
 
 import java.text.DateFormat;
@@ -31,22 +32,23 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Peliculas_fragment extends Fragment {
-    RecyclerView recyclerView;
+public class recomendacion_fragment extends Fragment {
+    GridView grilla;
     Call<Cine> call;
     List<Cine> lista_peliculas;
 
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-       final View view = inflater.inflate(R.layout.fragment_lista_contenido,container,false);
-        recyclerView = view.findViewById(R.id.Lista_calendario);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        APIInterface apiService = APICliente.getCalendario().create(APIInterface.class);
-        call = apiService.getImagen("popularity.desc", 2019, "en-US", "0d81ceeb977ab515fd9f844377688c5a");
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        final View view = inflater.inflate(R.layout.fragment_lista_grupos,container,false);
+        grilla = view.findViewById(R.id.lista_grupos);
+
+        APIInterface apiService = APICliente.getPelicula().create(APIInterface.class);
+         call = apiService.getRecomendaciones_pelicula(getActivity().getIntent().getExtras().getString("id"), "recommendations", "0d81ceeb977ab515fd9f844377688c5a", "es");
+
         lista_peliculas = new ArrayList<>();
         final ProgressBar spinner;
-        spinner = view.findViewById(R.id.progressBar);
+        spinner = view.findViewById(R.id.barra2);
         spinner.setVisibility(View.VISIBLE);
         call.enqueue(new Callback<Cine>() {
             public void onResponse(Call<Cine> call, Response<Cine> response) {
@@ -57,20 +59,8 @@ public class Peliculas_fragment extends Fragment {
                     ));
                 }
                 //creando adapter recyclerview
-                Cine_adapter adapter = new Cine_adapter(getActivity().getApplicationContext(), lista_peliculas);
-                adapter.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //Enviar al la actividad de perfil elemento el ID
-                        Intent i = new Intent(getActivity().getApplicationContext(), Perfil_elemento.class);
-                        i.putExtra("id", lista_peliculas.get(recyclerView.getChildAdapterPosition(v)).getId());
-                        i.putExtra("fecha", lista_peliculas.get(recyclerView.getChildAdapterPosition(v)).getFecha());
-                        i.putExtra("genero", lista_peliculas.get(recyclerView.getChildAdapterPosition(v)).getPoster_path());
-                        i.putExtra("titulo_elemento", lista_peliculas.get(recyclerView.getChildAdapterPosition(v)).getOriginal_title());
-                        i.putExtra("tipo", "pelicula");
-                        startActivity(i);
-                    }
-                });
+                recomendaciones_adapter adapter = new recomendaciones_adapter(getActivity().getApplicationContext(), lista_peliculas);
+
                 Collections.sort(lista_peliculas, new Comparator<Cine>() {
                     DateFormat f = new SimpleDateFormat("yyyy-MM-dd");
                     int res;
@@ -85,7 +75,19 @@ public class Peliculas_fragment extends Fragment {
                     }
                 });
                 //setear adapter al recyclerview
-                recyclerView.setAdapter(adapter);
+                grilla.setAdapter(adapter);
+                grilla.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent i = new Intent(getActivity().getApplicationContext(), Perfil_elemento.class);
+                        i.putExtra("id", lista_peliculas.get(position).getId());
+                        i.putExtra("fecha", lista_peliculas.get(position).getFecha());
+                        i.putExtra("genero", lista_peliculas.get(position).getPoster_path());
+                        i.putExtra("titulo_elemento", lista_peliculas.get(position).getOriginal_title());
+                        i.putExtra("tipo", "pelicula");
+                        startActivity(i);
+                    }
+                });
 
             }
 
@@ -96,6 +98,6 @@ public class Peliculas_fragment extends Fragment {
             }
         });
         spinner.setVisibility(View.GONE);
-       return view;
+         return view;
     }
 }

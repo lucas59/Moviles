@@ -13,8 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".presentacion.modificar_usuario"></activity>
-
+        <activity android:name=".presentacion.Perfil_capitulo"></activity>
+        <activity android:name=".presentacion.modificar_usuario" />
         <activity android:name=".presentacion.nuevo_usuario2" />
         <activity
             android:name=".presentacion.Slider"

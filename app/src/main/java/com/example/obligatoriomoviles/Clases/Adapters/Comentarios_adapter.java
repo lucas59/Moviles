@@ -1,4 +1,4 @@
-package com.example.obligatoriomoviles.Clases.Cine;
+package com.example.obligatoriomoviles.Clases.Adapters;
 
 import android.content.Context;
 import android.content.Intent;

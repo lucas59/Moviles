@@ -27,9 +27,11 @@ import com.example.obligatoriomoviles.Clases.recomendacion_fragment;
 import com.example.obligatoriomoviles.Clases.retorno;
 import com.example.obligatoriomoviles.R;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import com.example.obligatoriomoviles.Clases.Adapters.Fragment_adapter;
+import com.example.obligatoriomoviles.Clases.Fragments.Temporadas_fragment;
+import com.example.obligatoriomoviles.Clases.Adapters.informacion_fragment;
+import com.example.obligatoriomoviles.Clases.Fragments.recomendacion_fragment;
+import com.example.obligatoriomoviles.R;
 
 public class Perfil_elemento extends AppCompatActivity {
     //lista de actores
@@ -69,6 +71,7 @@ public class Perfil_elemento extends AppCompatActivity {
 
         } else {
             adapter.addFragment(new informacion_fragment(), "Información");
+            adapter.addFragment(new Temporadas_fragment(), "Temporadas");
         }
         viewPager.setAdapter(adapter);
         tabLayout.setTabTextColors(Color.parseColor("#727272"), Color.parseColor("#ffffff"));

@@ -45,16 +45,13 @@ public class Menu_principal extends AppCompatActivity {
     };
 
     private long backPressedTime;
-    private Toast toastsalir;
 
     @Override
     public void onBackPressed() {
         if(backPressedTime + 2000 > System.currentTimeMillis()){
-            toastsalir.cancel();
             super.onBackPressed();
             return;
         } else {
-       toastsalir.show();
             Toast.makeText(getApplicationContext(), "Vuelve a presionar el botón atrás para salir", Toast.LENGTH_SHORT).show();
         }
         backPressedTime = System.currentTimeMillis();

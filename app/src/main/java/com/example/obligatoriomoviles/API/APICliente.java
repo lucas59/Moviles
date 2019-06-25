@@ -1,5 +1,7 @@
 package com.example.obligatoriomoviles.API;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -34,9 +36,14 @@ public class APICliente {
     }
     public static Retrofit getServidor() {
         if (retrofit_servidor==null) {
+            OkHttpClient.Builder okhttp = new OkHttpClient.Builder();
+            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+            okhttp.addInterceptor(logging);
             retrofit_servidor = new Retrofit.Builder()
                     .baseUrl(base_servidor)
                     .addConverterFactory(GsonConverterFactory.create())
+                    .client(okhttp.build())
                     .build();
         }
         return retrofit_servidor;

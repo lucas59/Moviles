@@ -1,4 +1,4 @@
-package com.example.obligatoriomoviles.Clases;
+package com.example.obligatoriomoviles.Clases.Adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

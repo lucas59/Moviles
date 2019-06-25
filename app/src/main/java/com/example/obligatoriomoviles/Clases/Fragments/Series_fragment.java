@@ -1,4 +1,4 @@
-package com.example.obligatoriomoviles.Clases;
+package com.example.obligatoriomoviles.Clases.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,9 +14,8 @@ import android.widget.ProgressBar;
 import com.example.obligatoriomoviles.API.APICliente;
 import com.example.obligatoriomoviles.API.APIInterface;
 import com.example.obligatoriomoviles.Clases.Cine.Cine;
-import com.example.obligatoriomoviles.Clases.Cine.Cine_adapter;
+import com.example.obligatoriomoviles.Clases.Adapters.Cine_adapter;
 import com.example.obligatoriomoviles.R;
-import com.example.obligatoriomoviles.presentacion.Calendario_elementos;
 import com.example.obligatoriomoviles.presentacion.Perfil_elemento;
 
 
@@ -70,6 +69,7 @@ public class Series_fragment extends Fragment {
 
                 //setear adapter al recyclerview
                 recyclerView.setAdapter(adapter);
+                spinner.setVisibility(View.GONE);
             }
 
             @Override
@@ -78,7 +78,7 @@ public class Series_fragment extends Fragment {
                 Log.d("LoginActivity", t.getMessage() + t.getStackTrace().toString());
             }
         });
-        spinner.setVisibility(View.GONE);
+
         return view;
     }
 }
