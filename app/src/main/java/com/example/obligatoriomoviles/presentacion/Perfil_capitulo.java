@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.obligatoriomoviles.API.APICliente;
 import com.example.obligatoriomoviles.API.APIInterface;
@@ -26,13 +27,18 @@ public class Perfil_capitulo extends AppCompatActivity {
         call.enqueue(new Callback<Capitulo>() {
             @Override
             public void onResponse(Call<Capitulo> call, Response<Capitulo> response) {
-                TextView titulo = findViewById(R.id.titulo);
-                TextView sinopsis = findViewById(R.id.sinopsis);
-                ImageView fondo = findViewById(R.id.imagen_fondo);
-                String fondo_imagen = "https://image.tmdb.org/t/p/w500" + response.body().getImagen();
-                Picasso.get().load(fondo_imagen).fit().centerCrop().into(fondo);
-                titulo.setText(response.body().getNombre());
-                sinopsis.setText(response.body().getSinopsis());
+                if(response.isSuccessful()) {
+                    TextView titulo = findViewById(R.id.titulo);
+                    TextView sinopsis = findViewById(R.id.sinopsis);
+                    ImageView fondo = findViewById(R.id.imagen_fondo);
+                    String fondo_imagen = "https://image.tmdb.org/t/p/w500" + response.body().getImagen();
+                    Picasso.get().load(fondo_imagen).fit().centerCrop().into(fondo);
+                    titulo.setText(response.body().getNombre());
+                    sinopsis.setText(response.body().getSinopsis());
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Serie no Agregada", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
