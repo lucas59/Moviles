@@ -8,34 +8,19 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ProgressBar;
 
-import com.example.obligatoriomoviles.API.APICliente;
-import com.example.obligatoriomoviles.API.APIInterface;
 import com.example.obligatoriomoviles.Clases.Cine.Cine;
-import com.example.obligatoriomoviles.Clases.Cine.Cine_adapter;
-import com.example.obligatoriomoviles.Clases.Cine.Fragment_adapter;
-import com.example.obligatoriomoviles.Clases.Peliculas_fragment;
-import com.example.obligatoriomoviles.Clases.Series_fragment;
+import com.example.obligatoriomoviles.Clases.Adapters.Fragment_adapter;
+import com.example.obligatoriomoviles.Clases.Fragments.Peliculas_fragment;
+import com.example.obligatoriomoviles.Clases.Fragments.Series_fragment;
 import com.example.obligatoriomoviles.R;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class Calendario_elementos extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.obligatoriomoviles.Clases;
+package com.example.obligatoriomoviles.Clases.Adapters;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -8,7 +8,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -23,16 +22,13 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.obligatoriomoviles.API.APICliente;
 import com.example.obligatoriomoviles.API.APIInterface;
 import com.example.obligatoriomoviles.Clases.Cine.Actor;
-import com.example.obligatoriomoviles.Clases.Cine.Actor_adapter;
 import com.example.obligatoriomoviles.Clases.Cine.Cine;
-import com.example.obligatoriomoviles.Clases.Cine.Comentarios_adapter;
 import com.example.obligatoriomoviles.Clases.Comentario;
 import com.example.obligatoriomoviles.Clases.retorno;
 import com.example.obligatoriomoviles.R;
@@ -339,7 +335,6 @@ public class informacion_fragment extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
                 if (!txtcomentario.getText().toString().isEmpty()) {
                     if (email != null) {
-
                         final APIInterface apiService_2 = APICliente.getServidor().create(APIInterface.class);
                         String comentario = txtcomentario.getText().toString();
                         Integer id = Integer.parseInt(getActivity().getIntent().getExtras().getString("id"));

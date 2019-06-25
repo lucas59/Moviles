@@ -1,4 +1,4 @@
-package com.example.obligatoriomoviles.Clases;
+package com.example.obligatoriomoviles.Clases.Adapters;
 
 import android.app.Activity;
 import android.content.Context;

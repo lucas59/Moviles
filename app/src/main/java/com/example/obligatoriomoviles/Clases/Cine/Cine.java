@@ -21,7 +21,7 @@ public class Cine {
     @SerializedName("results")
     private List<Cine> lista_elementos;
     @SerializedName("seasons")
-    private List<Series> lista_temporadas;
+    private List<Temporadas> lista_temporadas;
     @SerializedName("vote_average")
     private String nota;
     @SerializedName("overview")
@@ -88,6 +88,10 @@ public class Cine {
     public String getOriginal_title() {
 
         return original_title;
+    }
+
+    public List<Temporadas> getLista_temporadas() {
+        return lista_temporadas;
     }
 
     public String getPoster_path() {
