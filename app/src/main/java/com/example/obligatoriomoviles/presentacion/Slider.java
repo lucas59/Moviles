@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.obligatoriomoviles.Clases.Slider_Adapter;
+import com.example.obligatoriomoviles.Clases.Adapters.Slider_Adapter;
 import com.example.obligatoriomoviles.R;
 
 public class Slider extends AppCompatActivity {
