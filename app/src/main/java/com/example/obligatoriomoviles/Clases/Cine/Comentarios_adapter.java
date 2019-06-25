@@ -1,6 +1,7 @@
 package com.example.obligatoriomoviles.Clases.Cine;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,9 @@ import com.example.obligatoriomoviles.API.APIInterface;
 import com.example.obligatoriomoviles.Clases.Comentario;
 import com.example.obligatoriomoviles.Clases.retorno;
 import com.example.obligatoriomoviles.R;
+import com.example.obligatoriomoviles.presentacion.Calendario_elementos;
+import com.example.obligatoriomoviles.presentacion.Menu_principal;
+import com.example.obligatoriomoviles.presentacion.Perfil_elemento;
 
 import java.util.List;
 
@@ -72,6 +76,7 @@ public class Comentarios_adapter extends RecyclerView.Adapter<Comentarios_adapte
                     public void onResponse(Call<retorno> call, Response<retorno> response) {
                         if (response.body().getRetorno()) {
                             Toast.makeText(mCtx, "Comentario puntuado", Toast.LENGTH_SHORT).show();
+
                         } else {
                             Toast.makeText(mCtx, "Error al puntuar comentario", Toast.LENGTH_SHORT).show();
                         }
@@ -99,6 +104,8 @@ public class Comentarios_adapter extends RecyclerView.Adapter<Comentarios_adapte
                     public void onResponse(Call<retorno> call, Response<retorno> response) {
                         if (response.body().getRetorno()) {
                             Toast.makeText(mCtx, "Comentario reportado", Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(mCtx, Perfil_elemento.class);
+                            mCtx.startActivity(i);
                         } else {
                             Toast.makeText(mCtx, "Error al reportar comentario", Toast.LENGTH_SHORT).show();
                         }

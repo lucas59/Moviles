@@ -73,9 +73,8 @@ public class login extends AppCompatActivity {
                                 editor.putInt("sessionNComentarios",response.body().getNumero_comentario());
                                 editor.commit();
                                 Toast.makeText(getApplicationContext(), "Bienvenido!", Toast.LENGTH_SHORT).show();
-                                Intent intento = new Intent(getBaseContext(),Calendario_elementos.class);
-                                intento.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                startActivity(intento);
+                                Intent intent = new Intent(getApplicationContext(),login.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 finish();
                             }else {
                                 Toast.makeText(getApplicationContext(), "Verifique sus datos!", Toast.LENGTH_SHORT).show();
