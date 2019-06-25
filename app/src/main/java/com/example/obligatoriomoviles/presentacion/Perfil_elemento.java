@@ -21,9 +21,6 @@ import android.widget.Toast;
 
 import com.example.obligatoriomoviles.API.APICliente;
 import com.example.obligatoriomoviles.API.APIInterface;
-import com.example.obligatoriomoviles.Clases.Cine.Fragment_adapter;
-import com.example.obligatoriomoviles.Clases.informacion_fragment;
-import com.example.obligatoriomoviles.Clases.recomendacion_fragment;
 import com.example.obligatoriomoviles.Clases.retorno;
 import com.example.obligatoriomoviles.R;
 
