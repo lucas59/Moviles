@@ -1,5 +1,7 @@
 package com.example.obligatoriomoviles.API;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -11,7 +13,7 @@ public class APICliente {
     private static Retrofit retrofit_peliculas = null;
     private static Retrofit retrofit_servidor = null;
     private static final String BASE_URL2 = "http://api.themoviedb.org/3/";
-    private static final String base_servidor = "http://192.168.20.38/ServidorMovil/public/";
+    private static final String base_servidor = "http://192.168.1.45/ServidorMovil/public/";
     public static Retrofit getCalendario() {
         if (retrofit==null) {
             retrofit = new Retrofit.Builder()
@@ -34,9 +36,14 @@ public class APICliente {
     }
     public static Retrofit getServidor() {
         if (retrofit_servidor==null) {
+            OkHttpClient.Builder okhttp = new OkHttpClient.Builder();
+            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+            okhttp.addInterceptor(logging);
             retrofit_servidor = new Retrofit.Builder()
                     .baseUrl(base_servidor)
                     .addConverterFactory(GsonConverterFactory.create())
+                    .client(okhttp.build())
                     .build();
         }
         return retrofit_servidor;
