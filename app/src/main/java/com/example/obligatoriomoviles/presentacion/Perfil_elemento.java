@@ -13,7 +13,7 @@ import android.view.MenuItem;
 
 import com.example.obligatoriomoviles.Clases.Adapters.Fragment_adapter;
 import com.example.obligatoriomoviles.Clases.Fragments.Temporadas_fragment;
-import com.example.obligatoriomoviles.Clases.Adapters.informacion_fragment;
+import com.example.obligatoriomoviles.Clases.Fragments.informacion_fragment;
 import com.example.obligatoriomoviles.Clases.Fragments.recomendacion_fragment;
 import com.example.obligatoriomoviles.R;
 

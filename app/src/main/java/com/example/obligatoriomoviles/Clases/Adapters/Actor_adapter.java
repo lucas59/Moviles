@@ -79,7 +79,7 @@ public class Actor_adapter extends RecyclerView.Adapter<Actor_adapter.ProductVie
 
     class ProductViewHolder extends RecyclerView.ViewHolder {
 
-        TextView textViewTitulo, textViewPuntaje, textViewID, textViewFecha;
+        TextView textViewTitulo, textViewPuntaje;
         ImageView imageView;
 
         public ProductViewHolder(View itemView) {

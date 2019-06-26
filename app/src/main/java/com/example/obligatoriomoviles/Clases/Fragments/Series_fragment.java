@@ -69,7 +69,6 @@ public class Series_fragment extends Fragment {
 
                 //setear adapter al recyclerview
                 recyclerView.setAdapter(adapter);
-                spinner.setVisibility(View.GONE);
             }
 
             @Override
@@ -78,7 +77,7 @@ public class Series_fragment extends Fragment {
                 Log.d("LoginActivity", t.getMessage() + t.getStackTrace().toString());
             }
         });
-
+        spinner.setVisibility(View.GONE);
         return view;
     }
 }

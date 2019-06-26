@@ -1,4 +1,4 @@
-package com.example.obligatoriomoviles.Clases.Adapters;
+package com.example.obligatoriomoviles.Clases.Fragments;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -27,6 +27,8 @@ import android.widget.Toast;
 
 import com.example.obligatoriomoviles.API.APICliente;
 import com.example.obligatoriomoviles.API.APIInterface;
+import com.example.obligatoriomoviles.Clases.Adapters.Actor_adapter;
+import com.example.obligatoriomoviles.Clases.Adapters.Comentarios_adapter;
 import com.example.obligatoriomoviles.Clases.Cine.Actor;
 import com.example.obligatoriomoviles.Clases.Cine.Cine;
 import com.example.obligatoriomoviles.Clases.Comentario;
@@ -68,9 +70,6 @@ public class informacion_fragment extends Fragment {
         //animación de carga
         final ProgressBar spinner;
         spinner = (ProgressBar) view.findViewById(R.id.barra);
-
-
-
         //Llamado de la API para que retorne el json de la consulta
         APIInterface apiService = APICliente.getPelicula().create(APIInterface.class);
         Call<Cine> call = apiService.getPelicula(getActivity().getIntent().getExtras().getString("id"), "0d81ceeb977ab515fd9f844377688c5a", "credits", "es");
