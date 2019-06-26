@@ -80,7 +80,7 @@ public class informacion_fragment extends Fragment {
         APIInterface apiCliente = APICliente.getServidor().create(APIInterface.class);
         this.apiServidor = apiCliente;
         //mostraar la lista de actores
-        recyclerView = (RecyclerView) view.findViewById(R.id.Actores);
+        recyclerView = (RecyclerView) view.findViewById(R.id.Actores_lista);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         if (getActivity().getIntent().getExtras().getString("tipo").toString().compareTo("serie") != 0) {//pelicula
@@ -104,7 +104,7 @@ public class informacion_fragment extends Fragment {
                     String fondo = "https://image.tmdb.org/t/p/w500" + response.body().getBackdrop_path();
                     String poster = "https://image.tmdb.org/t/p/w500" + response.body().getPoster_path();
                     LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-                    RecyclerView myList = (RecyclerView) view.findViewById(R.id.Actores);
+                    RecyclerView myList = (RecyclerView) view.findViewById(R.id.Actores_lista);
                     myList.setLayoutManager(layoutManager);
                     //traer el ImageView y el textview del layout
                     ImageView fondo_view = (ImageView) view.findViewById(R.id.imagen_fondo);
@@ -158,7 +158,7 @@ public class informacion_fragment extends Fragment {
                     String fondo = "https://image.tmdb.org/t/p/w500" + response.body().getBackdrop_path();
                     String poster = "https://image.tmdb.org/t/p/w500" + response.body().getPoster_path();
                     LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-                    RecyclerView myList = (RecyclerView) view.findViewById(R.id.Actores);
+                    RecyclerView myList = (RecyclerView) view.findViewById(R.id.Actores_lista);
                     myList.setLayoutManager(layoutManager);
                     //traer el ImageView y el textview del layout
                     ImageView fondo_view = (ImageView) view.findViewById(R.id.imagen_fondo);

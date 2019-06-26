@@ -17,11 +17,17 @@ public interface APIInterface {
     @GET("movie/")
     Call<Cine> getImagen(@Query("sort_by") String sort_by, @Query("year") Integer año, @Query("language") String lenguaje, @Query("api_key") String key);
 
+
     @GET("tv/")
     Call<Cine> getSerie(@Query("sort_by") String sort_by, @Query("year") Integer año, @Query("language") String lenguaje, @Query("api_key") String key);
 
     @GET("movie/{id}")
     Call<Cine> getPelicula(@Path("id") String id, @Query("api_key") String api_key, @Query("append_to_response") String filtro, @Query("language") String idioma);
+
+
+    @GET("movie/popular")
+    Call<Cine> getPeliculaPolulares(@Query("api_key") String api_key, @Query("language") String idioma);
+
 
     @GET("tv/{id}/season/{temp}/episode/{cap}")
     Call<Capitulo> getCapitulo(@Path("id") String id, @Path("temp") Integer temporada, @Path("cap") Integer capitulo , @Query("api_key") String api_key, @Query("language") String idioma);
@@ -65,9 +71,6 @@ public interface APIInterface {
 
     @GET("contenido/ReportarComentario")
     Call<retorno> ReportarComentario(@Query("comentario") int comentario);
-
-    @GET("contenido/PuntuarComentario")
-    Call<retorno> ReportarComentario(@Query("comentario") int comentario,@Query("usuario") String usuario,@Query("puntuacion") Float puntuacion);
 
     @GET("elemento/verificar")
     Call<retorno> verificarSuscripcion(@Query("email") String email,@Query("id") String id);

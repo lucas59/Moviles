@@ -1,6 +1,7 @@
 package com.example.obligatoriomoviles.Clases.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,10 +13,10 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.example.obligatoriomoviles.API.APICliente;
 import com.example.obligatoriomoviles.API.APIInterface;
 import com.example.obligatoriomoviles.Clases.Comentario;
+import com.example.obligatoriomoviles.Clases.DatosPerfilElemento;
 import com.example.obligatoriomoviles.Clases.retorno;
 import com.example.obligatoriomoviles.R;
 
@@ -61,7 +62,6 @@ public class Comentarios_adapter extends RecyclerView.Adapter<Comentarios_adapte
                 TextView idcomentario = view.findViewById(R.id.idcomentario);
                 TextView usuario = view.findViewById(R.id.titulo);
                 RatingBar puntuacion = view.findViewById(R.id.puntuacion);
-
                 String id = idcomentario.getText().toString();
                 String Usuario = usuario.getText().toString();
                 Integer comentario = Integer.parseInt(id);
@@ -72,6 +72,7 @@ public class Comentarios_adapter extends RecyclerView.Adapter<Comentarios_adapte
                     public void onResponse(Call<retorno> call, Response<retorno> response) {
                         if (response.body().getRetorno()) {
                             Toast.makeText(mCtx, "Comentario puntuado", Toast.LENGTH_SHORT).show();
+
                         } else {
                             Toast.makeText(mCtx, "Error al puntuar comentario", Toast.LENGTH_SHORT).show();
                         }
@@ -99,6 +100,13 @@ public class Comentarios_adapter extends RecyclerView.Adapter<Comentarios_adapte
                     public void onResponse(Call<retorno> call, Response<retorno> response) {
                         if (response.body().getRetorno()) {
                             Toast.makeText(mCtx, "Comentario reportado", Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(mCtx, mCtx.getClass());
+                            i.putExtra("id", DatosPerfilElemento.id);
+                            i.putExtra("fecha", DatosPerfilElemento.fecha);
+                            i.putExtra("genero", DatosPerfilElemento.poster);
+                            i.putExtra("titulo_elemento",DatosPerfilElemento.originalTitle);
+                            i.putExtra("tipo", "pelicula");
+                            mCtx.startActivity(i);
                         } else {
                             Toast.makeText(mCtx, "Error al reportar comentario", Toast.LENGTH_SHORT).show();
                         }

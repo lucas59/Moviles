@@ -13,8 +13,9 @@ import android.widget.ProgressBar;
 
 import com.example.obligatoriomoviles.API.APICliente;
 import com.example.obligatoriomoviles.API.APIInterface;
-import com.example.obligatoriomoviles.Clases.Cine.Cine;
 import com.example.obligatoriomoviles.Clases.Adapters.Cine_adapter;
+import com.example.obligatoriomoviles.Clases.Cine.Cine;
+import com.example.obligatoriomoviles.Clases.DatosPerfilElemento;
 import com.example.obligatoriomoviles.R;
 import com.example.obligatoriomoviles.presentacion.Perfil_elemento;
 
@@ -62,6 +63,11 @@ public class Peliculas_fragment extends Fragment {
                     public void onClick(View v) {
                         //Enviar al la actividad de perfil elemento el ID
                         Intent i = new Intent(getActivity().getApplicationContext(), Perfil_elemento.class);
+                        DatosPerfilElemento dpe=new DatosPerfilElemento();
+                        dpe.setOriginalTitle(lista_peliculas.get(recyclerView.getChildAdapterPosition(v)).getOriginal_title());
+                        dpe.setPoster(lista_peliculas.get(recyclerView.getChildAdapterPosition(v)).getPoster_path());
+                        dpe.setId(lista_peliculas.get(recyclerView.getChildAdapterPosition(v)).getId());
+                        dpe.setFecha(lista_peliculas.get(recyclerView.getChildAdapterPosition(v)).getFecha());
                         i.putExtra("id", lista_peliculas.get(recyclerView.getChildAdapterPosition(v)).getId());
                         i.putExtra("fecha", lista_peliculas.get(recyclerView.getChildAdapterPosition(v)).getFecha());
                         i.putExtra("genero", lista_peliculas.get(recyclerView.getChildAdapterPosition(v)).getPoster_path());

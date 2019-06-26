@@ -70,10 +70,11 @@ public class nuevo_usuario2 extends AppCompatActivity {
         if(nombre.equals("") ||apellido.equals("")){
             return;
         }
-
-        Bitmap bm =  MediaStore.Images.Media.getBitmap(this.getContentResolver(),this.foto);
-        String base64 = ImageUtil.convert(bm);
-
+        String base64="";
+if(this.foto!= null) {
+    Bitmap bm = MediaStore.Images.Media.getBitmap(this.getContentResolver(), this.foto);
+   base64 = ImageUtil.convert(bm);
+}
 
         SharedPreferences preferences = getSharedPreferences("temporales", Context.MODE_PRIVATE);
         String token =  preferences.getString("tokenActual","");

@@ -2,22 +2,45 @@ package com.example.obligatoriomoviles.presentacion;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
+import com.example.obligatoriomoviles.API.APIInterface;
 import com.example.obligatoriomoviles.Clases.Adapters.Fragment_adapter;
+import com.example.obligatoriomoviles.Clases.Fragments.Temporadas_fragment;
 import com.example.obligatoriomoviles.Clases.Fragments.Temporadas_fragment;
 import com.example.obligatoriomoviles.Clases.Fragments.informacion_fragment;
 import com.example.obligatoriomoviles.Clases.Fragments.recomendacion_fragment;
 import com.example.obligatoriomoviles.R;
 
 public class Perfil_elemento extends AppCompatActivity {
+    //lista de actores
+    RecyclerView recyclerView;
+    //boton de comentarios
+    private Button dialogBtn;
+    //lista de comentarios
+    RecyclerView recyclerView_comentarios;
+    String tituloElemento = null;
+    TextView titulo = null;
+    ImageButton favorito;
+    TextView idcomentario;
+    private String identificador;
+    private String fechaElemento;
+    private String genero;
+    private String tituloelemento;
+    private APIInterface apiServidor;
+    private Boolean seguir = false;
+    boolean tipoElemento = Boolean.parseBoolean(null);
 
     private Fragment_adapter adapter;
     private TabLayout tabLayout;
