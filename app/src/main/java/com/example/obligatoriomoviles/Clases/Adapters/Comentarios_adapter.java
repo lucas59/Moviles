@@ -1,5 +1,6 @@
 package com.example.obligatoriomoviles.Clases.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -106,6 +107,7 @@ public class Comentarios_adapter extends RecyclerView.Adapter<Comentarios_adapte
                             i.putExtra("genero", DatosPerfilElemento.poster);
                             i.putExtra("titulo_elemento",DatosPerfilElemento.originalTitle);
                             i.putExtra("tipo", "pelicula");
+                            ((Activity) mCtx).finish();
                             mCtx.startActivity(i);
                         } else {
                             Toast.makeText(mCtx, "Error al reportar comentario", Toast.LENGTH_SHORT).show();

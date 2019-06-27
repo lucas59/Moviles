@@ -1,5 +1,6 @@
 package com.example.obligatoriomoviles.presentacion;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -84,6 +85,7 @@ public class Perfil_capitulo extends AppCompatActivity {
                     recyclerView.setAdapter(adapter);
                 }
                 else{
+                    Perfil_capitulo.this.finish();
                     Toast.makeText(getApplicationContext(), "Serie no Agregada", Toast.LENGTH_SHORT).show();
                 }
             }

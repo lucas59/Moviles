@@ -77,10 +77,6 @@ public class Calendario_elementos extends AppCompatActivity {
                     //finish();
                     return true;
                 case R.id.navigation_calendario:
-                    i = new Intent(getApplicationContext(), Calendario_elementos.class);
-                    startActivity(i);
-                    overridePendingTransition(R.anim.infade, R.anim.outfade);
-                    finish();
                     return true;
 
             }
