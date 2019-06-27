@@ -32,7 +32,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/poster"
+            android:id="@+id/imagen_fondo"
             android:layout_width="89dp"
             android:layout_height="131dp"
             android:layout_marginStart="44dp"

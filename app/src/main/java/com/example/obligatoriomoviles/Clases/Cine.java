@@ -1,8 +1,6 @@
-package com.example.obligatoriomoviles.Clases.Cine;
+package com.example.obligatoriomoviles.Clases;
 
 
-import com.example.obligatoriomoviles.Clases.Series;
-import com.example.obligatoriomoviles.Clases.usuario;
 import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
 
@@ -34,6 +32,18 @@ public class Cine {
     private JsonObject creditos;
     @SerializedName("profile_path")
     private String profile_path;
+    @SerializedName("key")
+    private String video;
+    @SerializedName("first_air_date")
+    private String fecha_serie;
+
+    public String getFecha_serie() {
+        return fecha_serie;
+    }
+
+    public String getVideo() {
+        return video;
+    }
 
     public JsonObject getCreditos() {
         return creditos;

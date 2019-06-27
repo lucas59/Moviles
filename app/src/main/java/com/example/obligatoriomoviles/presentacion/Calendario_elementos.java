@@ -11,7 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.obligatoriomoviles.Clases.Cine.Cine;
+import com.example.obligatoriomoviles.Clases.Cine;
 import com.example.obligatoriomoviles.Clases.Adapters.Fragment_adapter;
 import com.example.obligatoriomoviles.Clases.Fragments.Peliculas_fragment;
 import com.example.obligatoriomoviles.Clases.Fragments.Series_fragment;
@@ -28,8 +28,6 @@ public class Calendario_elementos extends AppCompatActivity {
     List<Cine> lista_peliculas;
 
     //el recyclerview
-    Call<Cine> call;
-    Call<Cine> call_series;
     private Fragment_adapter adapter;
     private TabLayout tabLayout;
     private ViewPager viewPager;

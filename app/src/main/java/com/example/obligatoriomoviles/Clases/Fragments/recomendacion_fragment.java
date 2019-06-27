@@ -15,7 +15,7 @@ import android.widget.ProgressBar;
 
 import com.example.obligatoriomoviles.API.APICliente;
 import com.example.obligatoriomoviles.API.APIInterface;
-import com.example.obligatoriomoviles.Clases.Cine.Cine;
+import com.example.obligatoriomoviles.Clases.Cine;
 import com.example.obligatoriomoviles.Clases.Adapters.recomendaciones_adapter;
 import com.example.obligatoriomoviles.R;
 import com.example.obligatoriomoviles.presentacion.Perfil_elemento;

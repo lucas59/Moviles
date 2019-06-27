@@ -1,6 +1,6 @@
 package com.example.obligatoriomoviles.controladores;
 
-import com.example.obligatoriomoviles.Clases.Cine.Cine;
+import com.example.obligatoriomoviles.Clases.Cine;
 
 public class ControladorElemento{
     private static final ControladorElemento ourInstance = new ControladorElemento();

@@ -1,4 +1,4 @@
-package com.example.obligatoriomoviles.Clases.Cine;
+package com.example.obligatoriomoviles.Clases;
 
 import com.google.gson.annotations.SerializedName;
 

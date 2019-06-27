@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.example.obligatoriomoviles.API.APICliente;
 import com.example.obligatoriomoviles.API.APIInterface;
 import com.example.obligatoriomoviles.Clases.Adapters.generalAdapters;
-import com.example.obligatoriomoviles.Clases.Cine.Cine;
+import com.example.obligatoriomoviles.Clases.Cine;
 import com.example.obligatoriomoviles.R;
 
 import java.util.ArrayList;
@@ -81,12 +81,12 @@ public class Menu_principal extends AppCompatActivity {
         BottomNavigationView navigationView = (BottomNavigationView) findViewById(R.id.nav_view);
         navigationView.getMenu().getItem(0).setChecked(true);
         getSupportActionBar().setTitle("IView");
-        listaPeliculasPolulares=findViewById(R.id.Actores_lista);
+        listaPeliculasPolulares=findViewById(R.id.lista_actores);
         listPeliculasPolulares= new ArrayList<>();
         listaPeliculasPolulares.setHasFixedSize(true);
         listaPeliculasPolulares.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
-        RecyclerView myList = (RecyclerView) findViewById(R.id.Actores_lista);
+        RecyclerView myList = (RecyclerView) findViewById(R.id.lista_actores);
         myList.setLayoutManager(layoutManager);
 
         //**********************************************************************

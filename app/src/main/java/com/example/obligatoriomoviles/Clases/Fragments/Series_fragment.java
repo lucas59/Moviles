@@ -13,7 +13,7 @@ import android.widget.ProgressBar;
 
 import com.example.obligatoriomoviles.API.APICliente;
 import com.example.obligatoriomoviles.API.APIInterface;
-import com.example.obligatoriomoviles.Clases.Cine.Cine;
+import com.example.obligatoriomoviles.Clases.Cine;
 import com.example.obligatoriomoviles.Clases.Adapters.Cine_adapter;
 import com.example.obligatoriomoviles.R;
 import com.example.obligatoriomoviles.presentacion.Perfil_elemento;
@@ -52,7 +52,7 @@ public class Series_fragment extends Fragment {
                     ));
                 }
                 //creando adapter recyclerview
-                Cine_adapter adapter = new Cine_adapter(getActivity().getApplicationContext(), lista_peliculas);
+                Cine_adapter adapter = new Cine_adapter(getActivity(), lista_peliculas);
                 adapter.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -61,7 +61,7 @@ public class Series_fragment extends Fragment {
                         i.putExtra("id", lista_peliculas.get(recyclerView.getChildAdapterPosition(v)).getId());
                         i.putExtra("fecha", lista_peliculas.get(recyclerView.getChildAdapterPosition(v)).getFecha());
                         i.putExtra("genero", lista_peliculas.get(recyclerView.getChildAdapterPosition(v)).getPoster_path());
-                        i.putExtra("titulo_elemento", lista_peliculas.get(recyclerView.getChildAdapterPosition(v)).getOriginal_title());
+                        i.putExtra("titulo_elemento", lista_peliculas.get(recyclerView.getChildAdapterPosition(v)).getOriginal_name());
                         i.putExtra("tipo", "serie");
                         startActivity(i);
                     }
@@ -69,6 +69,7 @@ public class Series_fragment extends Fragment {
 
                 //setear adapter al recyclerview
                 recyclerView.setAdapter(adapter);
+                spinner.setVisibility(View.GONE);
             }
 
             @Override
@@ -77,7 +78,7 @@ public class Series_fragment extends Fragment {
                 Log.d("LoginActivity", t.getMessage() + t.getStackTrace().toString());
             }
         });
-        spinner.setVisibility(View.GONE);
+
         return view;
     }
 }

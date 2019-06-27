@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-import com.example.obligatoriomoviles.Clases.Cine.Cine;
+import com.example.obligatoriomoviles.Clases.Cine;
 import com.example.obligatoriomoviles.R;
 import com.squareup.picasso.Picasso;
 
@@ -78,7 +78,7 @@ public class Cine_adapter extends RecyclerView.Adapter<Cine_adapter.ProductViewH
 
     class ProductViewHolder extends RecyclerView.ViewHolder {
 
-        TextView textViewTitulo, textViewPuntaje, textViewID, textViewFecha;
+        TextView textViewTitulo,  textViewID, textViewFecha;
         ImageView imageView;
 
         public ProductViewHolder(View itemView) {

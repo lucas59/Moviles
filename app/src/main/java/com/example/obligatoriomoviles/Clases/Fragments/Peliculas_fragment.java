@@ -14,7 +14,7 @@ import android.widget.ProgressBar;
 import com.example.obligatoriomoviles.API.APICliente;
 import com.example.obligatoriomoviles.API.APIInterface;
 import com.example.obligatoriomoviles.Clases.Adapters.Cine_adapter;
-import com.example.obligatoriomoviles.Clases.Cine.Cine;
+import com.example.obligatoriomoviles.Clases.Cine;
 import com.example.obligatoriomoviles.Clases.DatosPerfilElemento;
 import com.example.obligatoriomoviles.R;
 import com.example.obligatoriomoviles.presentacion.Perfil_elemento;
@@ -57,7 +57,7 @@ public class Peliculas_fragment extends Fragment {
                     ));
                 }
                 //creando adapter recyclerview
-                Cine_adapter adapter = new Cine_adapter(getActivity().getApplicationContext(), lista_peliculas);
+                Cine_adapter adapter = new Cine_adapter(getActivity(), lista_peliculas);
                 adapter.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

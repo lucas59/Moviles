@@ -1,6 +1,5 @@
 package com.example.obligatoriomoviles.Clases;
 
-import com.example.obligatoriomoviles.Clases.Cine.Cine;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;

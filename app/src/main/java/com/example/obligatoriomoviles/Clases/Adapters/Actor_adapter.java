@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-import com.example.obligatoriomoviles.Clases.Cine.Actor;
+import com.example.obligatoriomoviles.Clases.Actor;
 import com.example.obligatoriomoviles.R;
 import com.squareup.picasso.Picasso;
 
@@ -51,11 +51,12 @@ public class Actor_adapter extends RecyclerView.Adapter<Actor_adapter.ProductVie
         Actor product = actoresList.get(position);
 
         //binding the data with the viewholder views
-        String fondo = "https://image.tmdb.org/t/p/w500" + product.getImagen().replace("\"","");
-        holder.textViewTitulo.setText(product.getNombre().replace("\"",""));
-        holder.textViewPuntaje.setText(product.getPersonaje().replace("\"",""));
-
-        Picasso.get().load(fondo).fit().centerCrop().into(holder.imageView);
+        if(product.getImagen() != null) {
+            String fondo = "https://image.tmdb.org/t/p/w500" + product.getImagen().replace("\"", "");
+            Picasso.get().load(fondo).fit().centerCrop().into(holder.imageView);
+        }
+        holder.textViewTitulo.setText(product.getNombre().replace("\"", ""));
+        holder.textViewPuntaje.setText(product.getPersonaje().replace("\"", ""));
 
     }
 

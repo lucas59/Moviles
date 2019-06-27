@@ -11,8 +11,6 @@ import android.widget.TextView;
 import com.example.obligatoriomoviles.R;
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -74,7 +72,7 @@ public class capitulos_adapter extends BaseExpandableListAdapter {
         String imagen_poster = (String) getImagen(groupPosition);
         convertView = LayoutInflater.from(context).inflate(R.layout.card_temporadas,null);
         TextView tvGrupo = convertView.findViewById(R.id.titulo);
-        ImageView imagen = convertView.findViewById(R.id.poster);
+        ImageView imagen = convertView.findViewById(R.id.imagen_fondo);
         tvGrupo.setText(tituloCategoria);
         String fondo_imagen = "https://image.tmdb.org/t/p/w500" + imagen_poster;
         Picasso.get().load(fondo_imagen).fit().centerCrop().into(imagen);

@@ -24,23 +24,6 @@ import com.example.obligatoriomoviles.Clases.Fragments.recomendacion_fragment;
 import com.example.obligatoriomoviles.R;
 
 public class Perfil_elemento extends AppCompatActivity {
-    //lista de actores
-    RecyclerView recyclerView;
-    //boton de comentarios
-    private Button dialogBtn;
-    //lista de comentarios
-    RecyclerView recyclerView_comentarios;
-    String tituloElemento = null;
-    TextView titulo = null;
-    ImageButton favorito;
-    TextView idcomentario;
-    private String identificador;
-    private String fechaElemento;
-    private String genero;
-    private String tituloelemento;
-    private APIInterface apiServidor;
-    private Boolean seguir = false;
-    boolean tipoElemento = Boolean.parseBoolean(null);
 
     private Fragment_adapter adapter;
     private TabLayout tabLayout;

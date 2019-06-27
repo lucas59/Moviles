@@ -1,7 +1,7 @@
 package com.example.obligatoriomoviles.API;
 
-import com.example.obligatoriomoviles.Clases.Cine.Capitulo;
-import com.example.obligatoriomoviles.Clases.Cine.Cine;
+import com.example.obligatoriomoviles.Clases.Capitulo;
+import com.example.obligatoriomoviles.Clases.Cine;
 import com.example.obligatoriomoviles.Clases.retorno;
 import com.example.obligatoriomoviles.Clases.usuario;
 
@@ -24,6 +24,11 @@ public interface APIInterface {
     @GET("movie/{id}")
     Call<Cine> getPelicula(@Path("id") String id, @Query("api_key") String api_key, @Query("append_to_response") String filtro, @Query("language") String idioma);
 
+    @GET("movie/{id}/videos")
+    Call<Cine> getPelicula_video(@Path("id") String id, @Query("api_key") String api_key, @Query("append_to_response") String filtro, @Query("language") String idioma);
+
+    @GET("tv/{id}/videos")
+    Call<Cine> getSerie_video(@Path("id") String id, @Query("api_key") String api_key, @Query("append_to_response") String filtro, @Query("language") String idioma);
 
     @GET("movie/popular")
     Call<Cine> getPeliculaPolulares(@Query("api_key") String api_key, @Query("language") String idioma);
@@ -64,10 +69,13 @@ public interface APIInterface {
 
 
     @GET("contenido/comentario")
-    Call<retorno> SetComentario(@Query("comentario") String comentario, @Query("capitulo_id") Integer capitulo, @Query("contenido_id") Integer contenido, @Query("usuario") String usuario, @Query("fecha") String fecha, @Query("genero") String genero, @Query("titulo_elemento") String titulo_elemento);
+    Call<retorno> SetComentario(@Query("comentario") String comentario, @Query("serie") Integer serie,@Query("temporada") Integer temporada,@Query("capitulo") Integer capitulo,@Query("capitulo_id") Integer capitulo_id,@Query("contenido_id") Integer contenido, @Query("usuario") String usuario, @Query("fecha") String fecha, @Query("genero") String genero, @Query("titulo_elemento") String titulo_elemento);
 
     @GET("contenido/lista_comentario")
     Call<retorno> getComentario(@Query("id") String id);
+
+    @GET("contenido/lista_comentarioSerie")
+    Call<retorno> getComentarioSerie(@Query("id") Integer id);
 
     @GET("contenido/ReportarComentario")
     Call<retorno> ReportarComentario(@Query("comentario") int comentario);

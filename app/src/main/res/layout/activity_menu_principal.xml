@@ -21,7 +21,7 @@
         app:menu="@menu/bottom_nav_menu" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/Actores_lista"
+        android:id="@+id/lista_actores"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
