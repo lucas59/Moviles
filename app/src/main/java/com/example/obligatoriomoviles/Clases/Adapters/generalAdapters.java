@@ -53,6 +53,7 @@ public class generalAdapters extends RecyclerView.Adapter<generalAdapters.Produc
 
         //binding the data with the viewholder views
         String fondo = "https://image.tmdb.org/t/p/w500" + pelicula.getPoster_path().replace("\"","");
+
         holder.textViewTitulo2.setText(pelicula.getOriginal_title().replace("\"",""));
 
         Picasso.get().load(fondo).fit().centerCrop().into(holder.imageView2);
