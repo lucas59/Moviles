@@ -9,6 +9,8 @@ public class usuario {
     @SerializedName("id")
     private int id;
 
+    @SerializedName("numero")
+    private Integer numerosContenido;
 
     @SerializedName("foto")
     private String foto;
@@ -25,7 +27,8 @@ public class usuario {
     @SerializedName("edad")
     private int edad;
 
-
+    @SerializedName("Numero_contenido")
+    private Integer nContenido;
 
     @SerializedName("Numero_comentario")
     private int Numero_comentario;
@@ -60,6 +63,10 @@ public class usuario {
         this.apellido = apellido;
     }
 
+    public Integer getnContenido() {
+        return nContenido;
+    }
+
     public String getCorreo() {
         return correo;
     }
@@ -82,6 +89,10 @@ public class usuario {
 
     public int getNumero_comentario() {
         return Numero_comentario;
+    }
+
+    public Integer getNumerosContenido() {
+        return numerosContenido;
     }
 
     public String getContrasenia() {

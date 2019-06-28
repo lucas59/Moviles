@@ -13,7 +13,7 @@ public class APICliente {
     private static Retrofit retrofit_peliculas = null;
     private static Retrofit retrofit_servidor = null;
     private static final String BASE_URL2 = "http://api.themoviedb.org/3/";
-    private static final String base_servidor = "http://192.168.25.30/ServidorMovil/public/";
+    private static final String base_servidor = "http://192.168.1.45/ServidorMovil/public/";
     public static Retrofit getCalendario() {
         if (retrofit==null) {
             retrofit = new Retrofit.Builder()

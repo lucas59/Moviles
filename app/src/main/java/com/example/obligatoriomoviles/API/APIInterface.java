@@ -83,6 +83,8 @@ public interface APIInterface {
     @GET("elemento/verificar")
     Call<retorno> verificarSuscripcion(@Query("email") String email,@Query("id") String id);
 
+    @GET("contenido/contenido_num")
+    Call<usuario> getNumeroContenidoUsuario(@Query("id") String correo);
 
     @GET("elemento/seguir")
     Call<retorno>seguirElemento(@Query("email") String email, @Query("id") String contenido, @Query("fecha") String fecha, @Query("genero") String genero, @Query("titulo") String titulo,@Query("tipo") boolean tipo );

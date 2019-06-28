@@ -53,9 +53,14 @@ public class Perfil_usuario extends AppCompatActivity {
                 public void onResponse(Call<usuario> call, Response<usuario> response) {
                     final String nombre = preferences.getString("sessionNombre", null);
                     final int comentarios = response.body().getNumero_comentario();
+
                     TextView nombre_t = (TextView) findViewById(R.id.Nombre);
                     TextView comentarios_t = (TextView) findViewById(R.id.NComentarios);
+                    final int elementos = response.body().getnContenido();
+                    TextView visionado_t = (TextView) findViewById(R.id.visionado_numero);
+                    visionado_t.setText(String.valueOf(elementos));
                     nombre_t.setText(nombre);
+
                     comentarios_t.setText(String.valueOf(comentarios));
                     String foto = preferences.getString("sessionFoto", null);
                     if (!foto.equals("")) {
@@ -74,118 +79,115 @@ public class Perfil_usuario extends AppCompatActivity {
 
             });
 
-
-
-
         }
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Moviles");
-    }
-
-    @Override
-    public void onBackPressed() {
-        // do something on back.
-        Intent intento = new Intent(getApplicationContext(), Menu_principal.class);
-        startActivity(intento);
-        finish();
-    }
-
-    public void desactivarCuenta(View view) {
-        SharedPreferences preferences = getSharedPreferences("session", Context.MODE_PRIVATE);
-        String correo = preferences.getString("sessionCorreo", "");
-
-        final APIInterface apiService = APICliente.getServidor().create(APIInterface.class);
-        Call<retorno> call = apiService.desactivarUsuario(correo);
-
-        call.enqueue(new Callback<retorno>() {//verifico que los datos sean correctos
-            @Override
-            public void onResponse(Call<retorno> call, Response<retorno> response) {
-                if (response.body().getRetorno()) {
-                    SharedPreferences session = getSharedPreferences("session", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = session.edit();
-                    editor.clear();
-                    editor.commit();
-                    Intent intento = new Intent(getApplicationContext(), login.class);
-                    startActivity(intento);
-                    finish();
-                    Toast.makeText(getApplicationContext(), "Session cerrada!", Toast.LENGTH_SHORT).show();
-
-                } else {
-                    Toast.makeText(getApplicationContext(), "No se puede desactivar!", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<retorno> call, Throwable t) {
-
-            }
-        });
-    }
-
-    public void Cerrar_sesion(View view) {
-        SharedPreferences preferences = getSharedPreferences("session", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("sessionCorreo", null);
-        editor.putString("sessionNombre", null);
-        editor.putString("sessionApellido", null);
-        editor.putInt("sessionEdad", 0);
-        editor.commit();
-        Intent i = new Intent(getApplicationContext(), login.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(i);
-        finish();
-    }
-
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle("Moviles");
+        }
 
         @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    Intent i = new Intent(getApplicationContext(), Menu_principal.class);
-                    startActivity(i);
-                    overridePendingTransition(R.anim.infade, R.anim.outfade);
-                    finish();
-                    return true;
-                case R.id.navigation_notificacion:
-                    //     i = new Intent(Menu_principal.this, Perfil_elemento.class);
-                    //     startActivity(i);
-                    //finish();
-                    return true;
-                case R.id.navigation_calendario:
-                    i = new Intent(getApplicationContext(), Calendario_elementos.class);
-                    startActivity(i);
-                    overridePendingTransition(R.anim.infade, R.anim.outfade);
-                    finish();
-                    return true;
+        public void onBackPressed () {
+            // do something on back.
+            Intent intento = new Intent(getApplicationContext(), Menu_principal.class);
+            startActivity(intento);
+            finish();
+        }
+
+        public void desactivarCuenta (View view){
+            SharedPreferences preferences = getSharedPreferences("session", Context.MODE_PRIVATE);
+            String correo = preferences.getString("sessionCorreo", "");
+
+            final APIInterface apiService = APICliente.getServidor().create(APIInterface.class);
+            Call<retorno> call = apiService.desactivarUsuario(correo);
+
+            call.enqueue(new Callback<retorno>() {//verifico que los datos sean correctos
+                @Override
+                public void onResponse(Call<retorno> call, Response<retorno> response) {
+                    if (response.body().getRetorno()) {
+                        SharedPreferences session = getSharedPreferences("session", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = session.edit();
+                        editor.clear();
+                        editor.commit();
+                        Intent intento = new Intent(getApplicationContext(), login.class);
+                        startActivity(intento);
+                        finish();
+                        Toast.makeText(getApplicationContext(), "Session cerrada!", Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        Toast.makeText(getApplicationContext(), "No se puede desactivar!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<retorno> call, Throwable t) {
+
+                }
+            });
+        }
+
+        public void Cerrar_sesion (View view){
+            SharedPreferences preferences = getSharedPreferences("session", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString("sessionCorreo", null);
+            editor.putString("sessionNombre", null);
+            editor.putString("sessionApellido", null);
+            editor.putInt("sessionEdad", 0);
+            editor.commit();
+            Intent i = new Intent(getApplicationContext(), login.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
+            finish();
+        }
+
+        private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+                = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.navigation_home:
+                        Intent i = new Intent(getApplicationContext(), Menu_principal.class);
+                        startActivity(i);
+                        overridePendingTransition(R.anim.infade, R.anim.outfade);
+                        finish();
+                        return true;
+                    case R.id.navigation_notificacion:
+                        //     i = new Intent(Menu_principal.this, Perfil_elemento.class);
+                        //     startActivity(i);
+                        //finish();
+                        return true;
+                    case R.id.navigation_calendario:
+                        i = new Intent(getApplicationContext(), Calendario_elementos.class);
+                        startActivity(i);
+                        overridePendingTransition(R.anim.infade, R.anim.outfade);
+                        finish();
+                        return true;
 
 
+                }
+                return false;
             }
-            return false;
+        };
+
+        @Override
+        public boolean onCreateOptionsMenu (Menu menu){
+            return true;
         }
-    };
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        return true;
-    }
 
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
+        @Override
+        public boolean onOptionsItemSelected (MenuItem item){
+            switch (item.getItemId()) {
+                case android.R.id.home:
+                    finish();
+                    return true;
+            }
+            return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
+
+        public void editarPerfil (View view){
+            Intent intento = new Intent(this, modificar_usuario.class);
+            startActivity(intento);
+        }
+
+
     }
-
-    public void editarPerfil(View view) {
-        Intent intento = new Intent(this, modificar_usuario.class);
-        startActivity(intento);
-    }
-
-
-}
