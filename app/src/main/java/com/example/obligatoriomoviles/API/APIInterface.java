@@ -2,6 +2,7 @@ package com.example.obligatoriomoviles.API;
 
 import com.example.obligatoriomoviles.Clases.Capitulo;
 import com.example.obligatoriomoviles.Clases.Cine;
+import com.example.obligatoriomoviles.Clases.Series;
 import com.example.obligatoriomoviles.Clases.retorno;
 import com.example.obligatoriomoviles.Clases.usuario;
 
@@ -32,6 +33,14 @@ public interface APIInterface {
 
     @GET("movie/popular")
     Call<Cine> getPeliculaPolulares(@Query("api_key") String api_key, @Query("language") String idioma);
+
+    @GET("tv/popular")
+    Call<Cine> getSeriesPolulares(@Query("api_key") String api_key, @Query("language") String idioma);
+
+    @GET("movie/upcoming")
+    Call<Cine> getEstrenos(@Query("api_key") String api_key, @Query("language") String idioma);
+
+
 
 
     @GET("tv/{id}/season/{temp}/episode/{cap}")
