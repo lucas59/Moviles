@@ -44,6 +44,7 @@ public class nuevo_usuario2 extends AppCompatActivity {
         this.txtApellido=findViewById(R.id.txtApellido);
         this.txtEdad=findViewById(R.id.txtEdad);
         this.img=findViewById(R.id.imgView);
+        getSupportActionBar().setTitle("MTV Show");
     }
 
     public void subirFoto(View view){

@@ -58,7 +58,7 @@ public class Perfil_elemento extends AppCompatActivity {
         navigationView.getMenu().getItem(2).setChecked(true);
         //setear el menu de navegación de abajo
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Moviles");
+        getSupportActionBar().setTitle("MTV Show");
 
     }
 

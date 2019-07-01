@@ -89,7 +89,7 @@ public class Menu_principal extends AppCompatActivity {
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         BottomNavigationView navigationView = (BottomNavigationView) findViewById(R.id.nav_view);
         navigationView.getMenu().getItem(0).setChecked(true);
-        getSupportActionBar().setTitle("IView");
+        getSupportActionBar().setTitle("MTV Show");
 
         listaPeliculasPolulares=findViewById(R.id.lista_actores);
         listPeliculasPolulares= new ArrayList<>();

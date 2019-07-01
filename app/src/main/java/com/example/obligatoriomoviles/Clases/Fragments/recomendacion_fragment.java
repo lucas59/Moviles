@@ -52,28 +52,23 @@ public class recomendacion_fragment extends Fragment {
         spinner.setVisibility(View.VISIBLE);
         call.enqueue(new Callback<Cine>() {
             public void onResponse(Call<Cine> call, Response<Cine> response) {
-
-                for (Cine post : response.body().getData()) {
-                    lista_peliculas.add(new Cine(
-                            post.getOriginal_title(), post.getNota(), post.getPoster_path(), post.getId(),post.getFecha()
-                    ));
+                if(response.body().getData().size() >= 9) {
+                    for (int i = 0; i < 9; i++) {
+                        lista_peliculas.add(new Cine(
+                                response.body().getData().get(i).getOriginal_title(), response.body().getData().get(i).getNota(), response.body().getData().get(i).getPoster_path(), response.body().getData().get(i).getId(), response.body().getData().get(i).getFecha()
+                        ));
+                    }
+                }
+                else{
+                    for (int i = 0; i < response.body().getData().size(); i++) {
+                        lista_peliculas.add(new Cine(
+                                response.body().getData().get(i).getOriginal_title(), response.body().getData().get(i).getNota(), response.body().getData().get(i).getPoster_path(), response.body().getData().get(i).getId(), response.body().getData().get(i).getFecha()
+                        ));
+                    }
                 }
                 //creando adapter recyclerview
                 recomendaciones_adapter adapter = new recomendaciones_adapter(getActivity().getApplicationContext(), lista_peliculas);
 
-                Collections.sort(lista_peliculas, new Comparator<Cine>() {
-                    DateFormat f = new SimpleDateFormat("yyyy-MM-dd");
-                    int res;
-                    @Override
-                    public int compare(Cine o1, Cine o2) {
-                        try {
-                            res = f.parse(o2.getFecha()).compareTo(f.parse(o1.getFecha()));
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-                        return res;
-                    }
-                });
                 //setear adapter al recyclerview
                 grilla.setAdapter(adapter);
                 grilla.setOnItemClickListener(new AdapterView.OnItemClickListener() {

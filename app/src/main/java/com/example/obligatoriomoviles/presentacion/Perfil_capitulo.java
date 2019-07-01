@@ -103,7 +103,7 @@ public class Perfil_capitulo extends AppCompatActivity {
             }
         });
 
-
+        getSupportActionBar().setTitle("MTV Show");
     }
 
     public void showDialog() {

@@ -29,6 +29,7 @@ public class ValidarCuentaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_validar_cuenta);
         et1=findViewById(R.id.txtCodigo);
+        getSupportActionBar().setTitle("MTV Show");
     }
 
     public  void validarCuenta(View view){

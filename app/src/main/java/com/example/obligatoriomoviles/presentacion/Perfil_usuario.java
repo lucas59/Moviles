@@ -81,7 +81,7 @@ public class Perfil_usuario extends AppCompatActivity {
 
         }
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle("Moviles");
+        getSupportActionBar().setTitle("MTV Show");
         }
 
         @Override

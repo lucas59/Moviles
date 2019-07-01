@@ -79,6 +79,7 @@ public class modificar_usuario extends AppCompatActivity {
                 }
             });
         }
+        getSupportActionBar().setTitle("MTV Show");
     }
 
     @Override
