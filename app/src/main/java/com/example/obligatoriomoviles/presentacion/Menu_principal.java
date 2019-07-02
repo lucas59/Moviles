@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -213,7 +214,11 @@ public class Menu_principal extends AppCompatActivity {
     }
 
 
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_principal, menu);
+        return true;
+    }
     @Override
             public boolean onOptionsItemSelected(MenuItem item) {
                 switch (item.getItemId()) {
@@ -230,8 +235,6 @@ public class Menu_principal extends AppCompatActivity {
                 overridePendingTransition(R.anim.infade,R.anim.outfade);
                 return true;
             default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
                 return super.onOptionsItemSelected(item);
 
         }

@@ -20,8 +20,6 @@ import com.example.obligatoriomoviles.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-
 public class Calendario_elementos extends AppCompatActivity {
 
     //lista de peliculas
@@ -86,7 +84,6 @@ public class Calendario_elementos extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_principal, menu);
         return true;
     }
@@ -108,8 +105,6 @@ public class Calendario_elementos extends AppCompatActivity {
                 overridePendingTransition(R.anim.infade, R.anim.outfade);
                 return true;
             default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
                 return super.onOptionsItemSelected(item);
 
         }

@@ -86,10 +86,8 @@ public class Perfil_usuario extends AppCompatActivity {
 
         @Override
         public void onBackPressed () {
-            // do something on back.
             Intent intento = new Intent(getApplicationContext(), Menu_principal.class);
             startActivity(intento);
-            finish();
         }
 
         public void desactivarCuenta (View view){
@@ -161,8 +159,6 @@ public class Perfil_usuario extends AppCompatActivity {
                         overridePendingTransition(R.anim.infade, R.anim.outfade);
                         finish();
                         return true;
-
-
                 }
                 return false;
             }
@@ -178,8 +174,9 @@ public class Perfil_usuario extends AppCompatActivity {
         public boolean onOptionsItemSelected (MenuItem item){
             switch (item.getItemId()) {
                 case android.R.id.home:
+                    Intent intento = new Intent(this, Menu_principal.class);
+                    startActivity(intento);
                     finish();
-                    return true;
             }
             return super.onOptionsItemSelected(item);
         }
