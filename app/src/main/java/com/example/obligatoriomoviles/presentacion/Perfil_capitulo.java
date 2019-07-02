@@ -222,8 +222,6 @@ public class Perfil_capitulo extends AppCompatActivity {
                 overridePendingTransition(R.anim.infade, R.anim.outfade);
                 return true;
             default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
                 return super.onOptionsItemSelected(item);
 
         }

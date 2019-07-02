@@ -28,22 +28,17 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * Created by Belal on 10/18/2017.
- */
+
 
 
 public class Comentarios_adapter extends RecyclerView.Adapter<Comentarios_adapter.ProductViewHolder> implements View.OnClickListener {
 
 
-    //this context we will use to inflate the layout
     private Context mCtx;
     private View.OnClickListener listener;
 
-    //we are storing all the products in a list
     private List<Comentario> productList;
 
-    //getting the context and product list with constructor
     public Comentarios_adapter(Context mCtx, List<Comentario> productList) {
         this.mCtx = mCtx;
         this.productList = productList;
@@ -52,7 +47,6 @@ public class Comentarios_adapter extends RecyclerView.Adapter<Comentarios_adapte
 
     @Override
     public ProductViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        //inflating and returning our view holder
         LayoutInflater inflater = LayoutInflater.from(mCtx);
         final View view = inflater.inflate(R.layout.lista_comentarios, null);
         view.setOnClickListener(this);

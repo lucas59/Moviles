@@ -15,9 +15,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-/**
- * Created by Belal on 10/18/2017.
- */
 
 
 public class Actor_adapter extends RecyclerView.Adapter<Actor_adapter.ProductViewHolder> implements View.OnClickListener {

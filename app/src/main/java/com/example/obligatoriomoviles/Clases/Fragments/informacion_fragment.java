@@ -346,7 +346,6 @@ public class informacion_fragment extends Fragment {
 
     public void showDialog(Activity activity) {
         final Dialog dialog = new Dialog(activity);
-        // dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.comentarios);
         Button btndialog = (Button) dialog.findViewById(R.id.salir);

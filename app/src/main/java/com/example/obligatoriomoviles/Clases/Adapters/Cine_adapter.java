@@ -16,22 +16,15 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-/**
- * Created by Belal on 10/18/2017.
- */
-
 
 public class Cine_adapter extends RecyclerView.Adapter<Cine_adapter.ProductViewHolder> implements View.OnClickListener {
 
 
-    //this context we will use to inflate the layout
     private Context mCtx;
     private View.OnClickListener listener;
 
-    //we are storing all the products in a list
     private List<Cine> productList;
 
-    //getting the context and product list with constructor
     public Cine_adapter(Context mCtx, List<Cine> productList) {
         this.mCtx = mCtx;
         this.productList = productList;
@@ -39,7 +32,6 @@ public class Cine_adapter extends RecyclerView.Adapter<Cine_adapter.ProductViewH
 
     @Override
     public ProductViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        //inflating and returning our view holder
         LayoutInflater inflater = LayoutInflater.from(mCtx);
         View view = inflater.inflate(R.layout.lista_calendario, null);
         view.setOnClickListener(this);
@@ -48,9 +40,7 @@ public class Cine_adapter extends RecyclerView.Adapter<Cine_adapter.ProductViewH
 
     @Override
     public void onBindViewHolder(ProductViewHolder holder, int position) {
-        //getting the product of the specified position
         Cine product = productList.get(position);
-        //binding the data with the viewholder views
         String fondo = "https://image.tmdb.org/t/p/w500" + product.getPoster_path();
         if (product.getOriginal_name() != null) {
             holder.textViewTitulo.setText(product.getOriginal_name());

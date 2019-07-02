@@ -15,22 +15,17 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-/**
- * Created by Belal on 10/18/2017.
- */
+
 
 
 public class generalAdapters extends RecyclerView.Adapter<generalAdapters.ProductViewHolder> implements View.OnClickListener {
 
 
-    //this context we will use to inflate the layout
     private Context mCtx;
     private View.OnClickListener listener;
 
-    //we are storing all the products in a list
     private List<Cine> lista;
 
-    //getting the context and product list with constructor
     public generalAdapters(Context mCtx, List<Cine> lista) {
         this.mCtx = mCtx;
         this.lista = lista;
@@ -48,10 +43,8 @@ public class generalAdapters extends RecyclerView.Adapter<generalAdapters.Produc
 
     @Override
     public void onBindViewHolder(ProductViewHolder holder, int position) {
-        //getting the product of the specified position
         Cine pelicula = lista.get(position);
 
-        //binding the data with the viewholder views
         String fondo = "https://image.tmdb.org/t/p/w500" + pelicula.getPoster_path().replace("\"","");
 
         holder.textViewTitulo2.setText(pelicula.getOriginal_title().replace("\"",""));
