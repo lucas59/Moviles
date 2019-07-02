@@ -2,6 +2,8 @@ package com.example.obligatoriomoviles.Clases;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class Comentario {
 
     @SerializedName("id")
@@ -18,13 +20,30 @@ public class Comentario {
     private String usuario_correo;
     @SerializedName("nombre")
     private String nombre;
+    @SerializedName("puntuaciones")
+    private List<retorno> puntuaciones;
+    @SerializedName("puntuacion")
+    private Float puntuacion;
+    @SerializedName("total")
+    private Float total_puntuaciones;
 
-    public Comentario(String texto, String usuario_correo, Integer id2) {
+    public Float getTotal_puntuaciones() {
+        return total_puntuaciones;
+    }
+    public Comentario(String texto, String usuario_correo, Integer id2,Float puntaje) {
         this.texto = texto;
         this.usuario_correo = usuario_correo;
         this.id=id2;
+        this.puntuacion = puntaje;
     }
 
+    public List<retorno> getPuntuaciones() {
+        return puntuaciones;
+    }
+
+    public Float getPuntuacion() {
+        return puntuacion;
+    }
     public Integer getId() {
         return id;
     }

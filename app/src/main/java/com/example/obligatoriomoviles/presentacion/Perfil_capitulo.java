@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,6 +52,7 @@ public class Perfil_capitulo extends AppCompatActivity {
         setContentView(R.layout.activity_capitulo_perfil);
         APIInterface apiService = APICliente.getPelicula().create(APIInterface.class);
         Call<Capitulo> call = apiService.getCapitulo(getIntent().getExtras().getString("id"), getIntent().getExtras().getInt("temporada"), getIntent().getExtras().getInt("capitulo"), "0d81ceeb977ab515fd9f844377688c5a", "es");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         recyclerView = (RecyclerView) findViewById(R.id.lista_actores);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -132,7 +135,7 @@ public class Perfil_capitulo extends AppCompatActivity {
 
                 for (Comentario post : response.body().getLista_comentarios()) {
                     lista_Comentarios.add(new Comentario(
-                            post.getTexto(), post.getUsuario_correo(), post.getId()));
+                            post.getTexto(), post.getUsuario_correo(), post.getId(),null));
                 }
                 if (!lista_Comentarios.isEmpty()) {
                     Comentarios_adapter adapter = new Comentarios_adapter(getApplicationContext(), lista_Comentarios);
@@ -203,5 +206,27 @@ public class Perfil_capitulo extends AppCompatActivity {
         builder.setView(mView);
         Dialog dialog = builder.create();
         dialog.show();
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+
+        switch (item.getItemId()) {
+            case R.id.perfil:
+                Intent i = new Intent(getApplicationContext(), Perfil_usuario.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.infade, R.anim.outfade);
+                return true;
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
+
     }
 }

@@ -2,6 +2,7 @@ package com.example.obligatoriomoviles.API;
 
 import com.example.obligatoriomoviles.Clases.Capitulo;
 import com.example.obligatoriomoviles.Clases.Cine;
+import com.example.obligatoriomoviles.Clases.Comentario;
 import com.example.obligatoriomoviles.Clases.Series;
 import com.example.obligatoriomoviles.Clases.retorno;
 import com.example.obligatoriomoviles.Clases.usuario;
@@ -62,6 +63,8 @@ public interface APIInterface {
     @FormUrlEncoded
     Call <retorno> altaUsuario2(@Field("nombre") String nombre, @Field("apellido") String apellido, @Field("edad") int edad, @Field("foto") String img, @Field("token") String token);
 
+    @GET("contenido/puntuacion_comentario")
+    Call <Comentario> getPuntuaciones(@Query("id_comentario") Integer comentario,@Query("id_persona") String persona);
 
     @GET("validacion/{token}")
     Call <retorno> validarCuenta(@Path("token") String codigo);

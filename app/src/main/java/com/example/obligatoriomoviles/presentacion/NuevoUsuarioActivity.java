@@ -33,7 +33,6 @@ public class NuevoUsuarioActivity extends AppCompatActivity {
         this.txtEmail=findViewById(R.id.txtEmail);
         this.txtPass=findViewById(R.id.txtPass);
         this.spinner = findViewById(R.id.progressBar3);
-        getSupportActionBar().setTitle("MTV Show");
     }
 
     public void iniciar(View view){

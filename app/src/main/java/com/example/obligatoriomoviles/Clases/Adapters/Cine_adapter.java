@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
@@ -51,7 +52,11 @@ public class Cine_adapter extends RecyclerView.Adapter<Cine_adapter.ProductViewH
         Cine product = productList.get(position);
         //binding the data with the viewholder views
         String fondo = "https://image.tmdb.org/t/p/w500" + product.getPoster_path();
-        holder.textViewTitulo.setText(product.getOriginal_title());
+        if (product.getOriginal_name() != null) {
+            holder.textViewTitulo.setText(product.getOriginal_name());
+        } else {
+            holder.textViewTitulo.setText(product.getOriginal_title());
+        }
         holder.textViewID.setText(product.getId());
         holder.textViewFecha.setText(product.getFecha());
         Picasso.get().load(fondo).fit().centerCrop().into(holder.imageView);
@@ -64,13 +69,13 @@ public class Cine_adapter extends RecyclerView.Adapter<Cine_adapter.ProductViewH
         return productList.size();
     }
 
-    public void setOnClickListener(View.OnClickListener listener2){
+    public void setOnClickListener(View.OnClickListener listener2) {
         this.listener = listener2;
     }
 
     @Override
     public void onClick(View v) {
-        if(listener != null){
+        if (listener != null) {
             listener.onClick(v);
         }
     }
@@ -78,7 +83,7 @@ public class Cine_adapter extends RecyclerView.Adapter<Cine_adapter.ProductViewH
 
     class ProductViewHolder extends RecyclerView.ViewHolder {
 
-        TextView textViewTitulo,  textViewID, textViewFecha;
+        TextView textViewTitulo, textViewID, textViewFecha;
         ImageView imageView;
 
         public ProductViewHolder(View itemView) {

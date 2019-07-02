@@ -71,7 +71,7 @@ public class informacion_fragment extends Fragment {
     String fondo_imagen;
     VideoView vid;
     MediaController m;
-
+     int puntuaciones;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -151,6 +151,8 @@ public class informacion_fragment extends Fragment {
                 @Override
                 public void onResponse(Call<Cine> call, Response<Cine> response) {
                     WebView displayVideo = (WebView) view.findViewById(R.id.video);
+                    displayVideo.getSettings().setDomStorageEnabled(true);
+                    displayVideo.setLayerType(View.LAYER_TYPE_HARDWARE, null);
                     ImageView fondo_view = (ImageView) view.findViewById(R.id.imagen_fondo_info);
                     if (!response.body().getData().isEmpty()) {
                         displayVideo.setVisibility(View.VISIBLE);
@@ -209,7 +211,6 @@ public class informacion_fragment extends Fragment {
                     TextView valor = (TextView) view.findViewById(R.id.valor);
                     ProgressBar votos = (ProgressBar) view.findViewById(R.id.votos);
                     //Setear información en los elementos
-
                     fechaElemento = response.body().getFecha();
                     tituloElemento = (response.body().getOriginal_title());
                     Button comentarios = view.findViewById(R.id.boton_comentarios);
@@ -358,23 +359,19 @@ public class informacion_fragment extends Fragment {
         recyclerView_comentarios = (RecyclerView) dialog.findViewById(R.id.comentario_lista);
         recyclerView_comentarios.setHasFixedSize(true);
         recyclerView_comentarios.setLayoutManager(new LinearLayoutManager(getActivity()));
-        APIInterface apiService_2 = APICliente.getServidor().create(APIInterface.class);
+        final APIInterface apiService_2 = APICliente.getServidor().create(APIInterface.class);
         Call<retorno> call_2 = apiService_2.getComentario(getActivity().getIntent().getExtras().getString("id"));
-
         call_2.enqueue(new Callback<retorno>() {
             @Override
-            public void onResponse(Call<retorno> call, Response<retorno> response) {
+            public void onResponse(Call<retorno> call, final Response<retorno> response) {
                 final List<Comentario> lista_Comentarios;
                 lista_Comentarios = new ArrayList<>();
-
-                for (Comentario post : response.body().getLista_comentarios()) {
+                for (final Comentario post : response.body().getLista_comentarios()) {
                     lista_Comentarios.add(new Comentario(
-                            post.getTexto(), post.getUsuario_correo(), post.getId()));
+                            post.getTexto(), post.getUsuario_correo(), post.getId(), post.getTotal_puntuaciones()));
                 }
                 if (!lista_Comentarios.isEmpty()) {
                     Comentarios_adapter adapter = new Comentarios_adapter(getActivity(), lista_Comentarios);
-
-                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
                     recyclerView_comentarios.setAdapter(adapter);
                     dialog.show();
                 } else {
@@ -461,15 +458,14 @@ public class informacion_fragment extends Fragment {
         call.enqueue(new Callback<retorno>() {
             @Override
             public void onResponse(Call<retorno> call, Response<retorno> response) {
-                if(response.isSuccessful()) {
+                if (response.isSuccessful()) {
                     if (response.body().getRetorno() == true) {
                         cambiarEstado();//cambiar el estado de color y mostrar un toast avisando
 
                         //la llamada devuelve verdadero si se dejo de seguir o si se emprezo a seguir
                     }
-                }
-                else{
-                    Toast.makeText(getActivity(),"Espere un momento",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getActivity(), "Espere un momento", Toast.LENGTH_SHORT).show();
                 }
             }
 

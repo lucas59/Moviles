@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">IView</string>
+    <string name="app_name">MTV Show</string>
     <string name="title_activity_ingresar">Ingresar</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Contraseña</string>

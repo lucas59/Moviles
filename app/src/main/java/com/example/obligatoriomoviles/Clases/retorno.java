@@ -15,6 +15,13 @@ public class retorno {
     private List<Cine> lista_elementos;
     @SerializedName("Comentarios")
     private List<Comentario> lista_comentarios;
+    @SerializedName("puntuacion")
+    private Integer puntuacion;
+
+
+    public Integer getPuntuacion() {
+        return puntuacion;
+    }
 
     public Boolean getRetorno() {
         return retorno;

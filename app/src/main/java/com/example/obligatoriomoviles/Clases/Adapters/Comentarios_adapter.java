@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -101,14 +102,6 @@ public class Comentarios_adapter extends RecyclerView.Adapter<Comentarios_adapte
                     public void onResponse(Call<retorno> call, Response<retorno> response) {
                         if (response.body().getRetorno()) {
                             Toast.makeText(mCtx, "Comentario reportado", Toast.LENGTH_SHORT).show();
-                            Intent i = new Intent(mCtx, mCtx.getClass());
-                            i.putExtra("id", DatosPerfilElemento.id);
-                            i.putExtra("fecha", DatosPerfilElemento.fecha);
-                            i.putExtra("genero", DatosPerfilElemento.poster);
-                            i.putExtra("titulo_elemento",DatosPerfilElemento.originalTitle);
-                            i.putExtra("tipo", "pelicula");
-                            ((Activity) mCtx).finish();
-                            mCtx.startActivity(i);
                         } else {
                             Toast.makeText(mCtx, "Error al reportar comentario", Toast.LENGTH_SHORT).show();
                         }
@@ -133,7 +126,8 @@ public class Comentarios_adapter extends RecyclerView.Adapter<Comentarios_adapte
         holder.imageView.setImageResource(R.drawable.user);
         holder.textViewNombre.setText(product.getUsuario_correo());
         holder.textViewidcomentario.setText(product.getId().toString());
-        
+        holder.textViewpuntos.setText(String.valueOf(product.getPuntuacion()));
+     //   holder.puntaje.setProgress((int) Float.parseFloat(product.getPuntuacion().toString()));
 
     }
 
@@ -157,9 +151,9 @@ public class Comentarios_adapter extends RecyclerView.Adapter<Comentarios_adapte
 
     class ProductViewHolder extends RecyclerView.ViewHolder {
 
-        TextView textViewComentario, textViewNombre, textViewidcomentario,textViewNombreReal;
+        TextView textViewComentario, textViewNombre, textViewidcomentario,textViewNombreReal,textViewpuntos;
         ImageView imageView;
-
+       // ProgressBar puntaje;
         public ProductViewHolder(View itemView) {
             super(itemView);
             textViewComentario = itemView.findViewById(R.id.comentario);
@@ -167,6 +161,8 @@ public class Comentarios_adapter extends RecyclerView.Adapter<Comentarios_adapte
             textViewNombre = itemView.findViewById(R.id.titulo);
             textViewidcomentario = itemView.findViewById(R.id.idcomentario);
             textViewNombreReal = itemView.findViewById(R.id.nombre);
+            textViewpuntos = itemView.findViewById(R.id.puntuaciones);
+           // puntaje = (ProgressBar) itemView.findViewById(R.id.votos);
         }
     }
 }
