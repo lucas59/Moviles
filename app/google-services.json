@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "203852065618",
+    "firebase_url": "https://mtv-show.firebaseio.com",
+    "project_id": "mtv-show",
+    "storage_bucket": "mtv-show.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:203852065618:android:6d93196349d2cdbb",
+        "android_client_info": {
+          "package_name": "com.example.obligatoriomoviles"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "203852065618-5dsjecpks8o2pmsh5eenq7clvviiopp9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.obligatoriomoviles",
+            "certificate_hash": "739f741ba3c5c62eeae6de8f34b04d2a7ef116f1"
+          }
+        },
+        {
+          "client_id": "203852065618-quopka5d2e48q29n4icfc151ej5fe3pp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJRqZpZr0Wz85FBd-1ZTpBg98VZUtjhpg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "203852065618-quopka5d2e48q29n4icfc151ej5fe3pp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

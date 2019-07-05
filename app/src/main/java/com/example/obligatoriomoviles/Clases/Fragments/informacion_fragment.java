@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -99,7 +100,7 @@ public class informacion_fragment extends Fragment {
             this.tipoElemento = true;
             call.enqueue(new Callback<Cine>() {
                 @Override
-                public void onResponse(Call<Cine> call, Response<Cine> response) {
+                public void onResponse(Call<Cine> call, final Response<Cine> response) {
                     spinner.setVisibility(View.VISIBLE);
                     JsonObject creditos = response.body().getCreditos();
                     JsonArray casts = creditos.get("cast").getAsJsonArray();
@@ -134,7 +135,16 @@ public class informacion_fragment extends Fragment {
                     sinopsis.setText(response.body().getSinopsis());
                     votos.setProgress((int) Float.parseFloat(response.body().getNota()));
                     valor.setText(response.body().getNota());
-
+                    view.findViewById(R.id.compartir).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent i = new Intent(Intent.ACTION_SEND);
+                            i.setType("text/plain");
+                            String shareBody = "https://www.themoviedb.org/movie/" + response.body().getId();
+                            i.putExtra(Intent.EXTRA_TEXT,shareBody);
+                            startActivity(i.createChooser(i,"Compartir con: "));
+                        }
+                    });
                     //quitar animación de carga
                     spinner.setVisibility(View.GONE);
                 }
@@ -143,9 +153,9 @@ public class informacion_fragment extends Fragment {
                 public void onFailure(Call<Cine> call, Throwable t) {
 
                 }
-
-
             });
+
+
 
             call_video.enqueue(new Callback<Cine>() {
                 @Override
@@ -182,7 +192,7 @@ public class informacion_fragment extends Fragment {
             this.tipoElemento = false;
             call_serie.enqueue(new Callback<Cine>() {
                 @Override
-                public void onResponse(Call<Cine> call, Response<Cine> response) {
+                public void onResponse(Call<Cine> call, final Response<Cine> response) {
                     spinner.setVisibility(View.VISIBLE);
                     JsonObject creditos = response.body().getCreditos();
                     JsonArray casts = creditos.get("cast").getAsJsonArray();
@@ -196,7 +206,7 @@ public class informacion_fragment extends Fragment {
                     Actor_adapter adapter = new Actor_adapter(getActivity(), actores);
                     recyclerView.setAdapter(adapter);
                     //Setear fondo y poster del elemento
-                    String fondo = "https://image.tmdb.org/t/p/w500" + response.body().getBackdrop_path();
+                    final String fondo = "https://image.tmdb.org/t/p/w500" + response.body().getBackdrop_path();
                     String poster = "https://image.tmdb.org/t/p/w500" + response.body().getPoster_path();
                     LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
                     RecyclerView myList = (RecyclerView) view.findViewById(R.id.lista_actores);
@@ -218,6 +228,17 @@ public class informacion_fragment extends Fragment {
                     titulo.setText(response.body().getOriginal_name());
                     Picasso.get().load(fondo).fit().centerCrop().into(fondo_view);
                     Picasso.get().load(poster).into(poster_view);
+
+                    view.findViewById(R.id.compartir).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent i = new Intent(Intent.ACTION_SEND);
+                            i.setType("text/plain");
+                            String shareBody = "https://www.themoviedb.org/tv/" + response.body().getId();
+                            i.putExtra(Intent.EXTRA_TEXT,shareBody);
+                            startActivity(i.createChooser(i,"Compartir con: "));
+                        }
+                    });
 
                     fecha.setText("Estreno: " + response.body().getFecha_serie());
                     sinopsis.setText(response.body().getSinopsis());
