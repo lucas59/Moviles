@@ -19,7 +19,12 @@ import com.example.obligatoriomoviles.R;
 import com.example.obligatoriomoviles.presentacion.Perfil_elemento;
 
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import retrofit2.Call;
@@ -48,9 +53,10 @@ public class Series_fragment extends Fragment {
 
                 for (Cine post : response.body().getData()) {
                     lista_peliculas.add(new Cine(
-                            post.getOriginal_name(), post.getNota(), post.getPoster_path(), post.getId(),post.getFecha()
+                            post.getOriginal_name(), post.getNota(), post.getPoster_path(), post.getId(),post.getFecha_serie()
                     ));
                 }
+
                 //creando adapter recyclerview
                 Cine_adapter adapter = new Cine_adapter(getActivity(), lista_peliculas);
                 adapter.setOnClickListener(new View.OnClickListener() {
@@ -59,14 +65,26 @@ public class Series_fragment extends Fragment {
                         //Enviar al la actividad de perfil elemento el ID
                         Intent i = new Intent(getActivity().getApplicationContext(), Perfil_elemento.class);
                         i.putExtra("id", lista_peliculas.get(recyclerView.getChildAdapterPosition(v)).getId());
-                        i.putExtra("fecha", lista_peliculas.get(recyclerView.getChildAdapterPosition(v)).getFecha());
+                        i.putExtra("fecha", lista_peliculas.get(recyclerView.getChildAdapterPosition(v)).getFecha_serie());
                         i.putExtra("genero", lista_peliculas.get(recyclerView.getChildAdapterPosition(v)).getPoster_path());
                         i.putExtra("titulo_elemento", lista_peliculas.get(recyclerView.getChildAdapterPosition(v)).getOriginal_name());
                         i.putExtra("tipo", "serie");
                         startActivity(i);
                     }
                 });
-
+                Collections.sort(lista_peliculas, new Comparator<Cine>() {
+                    DateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+                    int res;
+                    @Override
+                    public int compare(Cine o1, Cine o2) {
+                        try {
+                            res = f.parse(o2.getFecha()).compareTo(f.parse(o1.getFecha()));
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        return res;
+                    }
+                });
                 //setear adapter al recyclerview
                 recyclerView.setAdapter(adapter);
                 spinner.setVisibility(View.GONE);
