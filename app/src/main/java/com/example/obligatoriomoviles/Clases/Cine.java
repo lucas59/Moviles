@@ -36,6 +36,12 @@ public class Cine {
     private String video;
     @SerializedName("first_air_date")
     private String fecha_serie;
+    @SerializedName("sigue_id")
+    private Integer id_sigue;
+
+    public Integer getId_sigue() {
+        return id_sigue;
+    }
 
     public String getFecha_serie() {
         return fecha_serie;

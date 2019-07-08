@@ -53,8 +53,8 @@ public class Menu_principal extends AppCompatActivity {
                     finish();
                     return true;
                 case R.id.navigation_notificacion:
-              //     i = new Intent(Menu_principal.this, Perfil_elemento.class);
-               //     startActivity(i);
+                     i = new Intent(Menu_principal.this, Notificaciones.class);
+                    startActivity(i);
                     return true;
                 case R.id.navigation_calendario:
                     i = new Intent(getApplicationContext(), Calendario_elementos.class);

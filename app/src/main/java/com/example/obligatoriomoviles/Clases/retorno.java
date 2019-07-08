@@ -17,7 +17,12 @@ public class retorno {
     private List<Comentario> lista_comentarios;
     @SerializedName("puntuacion")
     private Integer puntuacion;
+    @SerializedName("peliculas")
+    private List<Cine> peliculas;
 
+    public List<Cine> getPeliculas() {
+        return peliculas;
+    }
 
     public Integer getPuntuacion() {
         return puntuacion;

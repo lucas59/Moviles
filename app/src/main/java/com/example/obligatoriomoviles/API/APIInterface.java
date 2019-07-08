@@ -86,6 +86,9 @@ public interface APIInterface {
     @GET("contenido/lista_comentario")
     Call<retorno> getComentario(@Query("id") String id);
 
+    @GET("contenido/lista_notificaciones")
+    Call<retorno> getNotificaciones(@Query("usuario_id") String id);
+
     @GET("contenido/lista_comentarioSerie")
     Call<retorno> getComentarioSerie(@Query("id") Integer id);
 
@@ -97,6 +100,9 @@ public interface APIInterface {
 
     @GET("contenido/contenido_num")
     Call<usuario> getNumeroContenidoUsuario(@Query("id") String correo);
+
+    @GET("contenido/lista_elementosusuario_peli")
+    Call<retorno> getLista_peliculas(@Query("id") String correo);
 
     @GET("elemento/seguir")
     Call<retorno>seguirElemento(@Query("email") String email, @Query("id") String contenido, @Query("fecha") String fecha, @Query("genero") String genero, @Query("titulo") String titulo,@Query("tipo") boolean tipo );

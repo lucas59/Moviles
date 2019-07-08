@@ -120,8 +120,8 @@ public class Comentarios_adapter extends RecyclerView.Adapter<Comentarios_adapte
         holder.imageView.setImageResource(R.drawable.user);
         holder.textViewNombre.setText(product.getUsuario_correo());
         holder.textViewidcomentario.setText(product.getId().toString());
-        holder.textViewpuntos.setText(String.valueOf(product.getPuntuacion()));
-     //   holder.puntaje.setProgress((int) Float.parseFloat(product.getPuntuacion().toString()));
+        holder.textViewpuntos.setText("4.5");
+        holder.puntaje.setProgress((int) Float.parseFloat("4.5"));
 
     }
 
@@ -147,7 +147,7 @@ public class Comentarios_adapter extends RecyclerView.Adapter<Comentarios_adapte
 
         TextView textViewComentario, textViewNombre, textViewidcomentario,textViewNombreReal,textViewpuntos;
         ImageView imageView;
-       // ProgressBar puntaje;
+        ProgressBar puntaje;
         public ProductViewHolder(View itemView) {
             super(itemView);
             textViewComentario = itemView.findViewById(R.id.comentario);
@@ -156,7 +156,7 @@ public class Comentarios_adapter extends RecyclerView.Adapter<Comentarios_adapte
             textViewidcomentario = itemView.findViewById(R.id.idcomentario);
             textViewNombreReal = itemView.findViewById(R.id.nombre);
             textViewpuntos = itemView.findViewById(R.id.puntuaciones);
-           // puntaje = (ProgressBar) itemView.findViewById(R.id.votos);
+            puntaje = (ProgressBar) itemView.findViewById(R.id.votos);
         }
     }
 }

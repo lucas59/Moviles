@@ -26,6 +26,7 @@ public class Comentario {
     private Float puntuacion;
     @SerializedName("total")
     private Float total_puntuaciones;
+    private String foto;
 
     public Float getTotal_puntuaciones() {
         return total_puntuaciones;
@@ -35,6 +36,18 @@ public class Comentario {
         this.usuario_correo = usuario_correo;
         this.id=id2;
         this.puntuacion = puntaje;
+    }
+
+    public Comentario(){
+
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
+    public String getFoto() {
+        return foto;
     }
 
     public List<retorno> getPuntuaciones() {
@@ -68,5 +81,43 @@ public class Comentario {
         return usuario_correo;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
+    public void setTexto(String texto) {
+        this.texto = texto;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public void setCapitulo_id(String capitulo_id) {
+        this.capitulo_id = capitulo_id;
+    }
+
+    public void setContenido_id(String contenido_id) {
+        this.contenido_id = contenido_id;
+    }
+
+    public void setUsuario_correo(String usuario_correo) {
+        this.usuario_correo = usuario_correo;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setPuntuaciones(List<retorno> puntuaciones) {
+        this.puntuaciones = puntuaciones;
+    }
+
+    public void setPuntuacion(Float puntuacion) {
+        this.puntuacion = puntuacion;
+    }
+
+    public void setTotal_puntuaciones(Float total_puntuaciones) {
+        this.total_puntuaciones = total_puntuaciones;
+    }
 }
